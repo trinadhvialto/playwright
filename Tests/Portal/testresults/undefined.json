@@ -1,0 +1,132 @@
+{
+  "config": {
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 12000000,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {},
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "/Palywright/Tests/AdminPortal/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "name": "",
+        "testDir": "/Palywright/Tests/AdminPortal",
+        "testIgnore": [],
+        "testMatch": [
+          "**/?(*.)@(spec|test).*"
+        ],
+        "timeout": 660000
+      }
+    ],
+    "reporter": [
+      [
+        "dot",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "testresults/undefined.json"
+        }
+      ],
+      [
+        "junit",
+        {
+          "outputFile": "testresults/undefined-junit-xml.xml"
+        }
+      ],
+      [
+        "c:\\Palywright\\Tests\\AdminPortal\\customReportGenerator.js",
+        {
+          "environment": "windows 10+ chrome"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 15000
+    },
+    "rootDir": "c:/Palywright/Tests/AdminPortal",
+    "quiet": false,
+    "shard": null,
+    "updateSnapshots": "missing",
+    "version": "1.25.2",
+    "workers": 1,
+    "webServer": null,
+    "_watchMode": false,
+    "_webServers": [],
+    "_globalOutputDir": "c:\\Palywright\\Tests\\AdminPortal",
+    "_configDir": "c:\\Palywright\\Tests\\AdminPortal",
+    "_testGroupsCount": 1,
+    "_workerIsolation": "isolate-pools"
+  },
+  "suites": [
+    {
+      "title": "tests\\api\\L1_user\\post_add_connected_devices.spec.js",
+      "file": "tests/api/L1_user/post_add_connected_devices.spec.js",
+      "line": 0,
+      "column": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Add Connected Devices API for L1 user",
+          "file": "tests/api/L1_user/post_add_connected_devices.spec.js",
+          "line": 19,
+          "column": 6,
+          "specs": [
+            {
+              "title": "L1 user should add a new device with all device Types @353696 @124751 @310324 @307789 @353699",
+              "ok": false,
+              "tags": [
+                "353696",
+                "124751",
+                "310324",
+                "307789",
+                "353699"
+              ],
+              "tests": [
+                {
+                  "timeout": 660000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectName": "",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "failed",
+                      "duration": 2,
+                      "error": {
+                        "message": "The first argument must be of type string or an instance of Buffer, ArrayBuffer, or Array or an Array-like Object. Received undefined",
+                        "stack": "TypeError: The first argument must be of type string or an instance of Buffer, ArrayBuffer, or Array or an Array-like Object. Received undefined\n    at Function.generateSasToken (c:\\Palywright\\Tests\\AdminPortal\\utils\\token_generators.js:26:55)\n    at c:\\Palywright\\Tests\\AdminPortal\\tests\\api\\L1_user\\post_add_connected_devices.spec.js:22:42"
+                      },
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "attachments": [],
+                      "errorLocation": {
+                        "file": "c:\\Palywright\\Tests\\AdminPortal\\tests\\api\\L1_user\\post_add_connected_devices.spec.js",
+                        "column": 42,
+                        "line": 22
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "file": "tests/api/L1_user/post_add_connected_devices.spec.js",
+              "line": 61,
+              "column": 5
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": []
+}

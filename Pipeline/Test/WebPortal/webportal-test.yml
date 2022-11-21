@@ -1,0 +1,498 @@
+parameters:
+  - name: apitesttypes
+    type: object
+    default:
+      - general
+      - L1_user
+      - regular_user
+
+  - name: uitesttypes
+    type: object
+    default:
+      - general
+      - L1_user
+      - regular_user
+
+  - name: streamingtests
+    type: object
+    default:
+      - L1_user
+      - regular_user
+
+  - name: uistreamingtests
+    type: object
+    default:
+      - L1_user
+      - regular_user
+
+  - name: multilanglocales
+    type: object
+    default:
+      - $(adminPortalEnglishLanguage)
+      - $(adminPortalSpanishLanguage)
+      - $(adminPortalDutchLanguage)
+
+  - name: service_conn
+    type: string
+    default: ""
+
+steps:
+  - task: DownloadPipelineArtifact@2
+    displayName: "Download environment artifact"
+    inputs:
+      artifact: "environment"
+
+  - powershell: |
+      $filePath = Join-Path -Path $env:PIPELINE_WORKSPACE -ChildPath "environment.json"
+      $json = Get-Content $filePath | Out-String | ConvertFrom-Json
+
+      foreach($prop in $json.psobject.properties) {
+        echo $prop.Name $prop.Value
+        Write-Host("##vso[task.setvariable variable=$($prop.Name);isOutput=true]$($prop.Value)")
+      }
+    name: getBuildVariables
+    displayName: "Set build variables"
+
+  - task: DownloadPipelineArtifact@2
+    displayName: "Download integration tests pipeline artifact"
+    inputs:
+      artifact: connmodule-integrationtests-$(getBuildVariables.artifactVersion)
+
+  - task: ExtractFiles@1
+    displayName: "Extract pipeline artifacts"
+    inputs:
+      archiveFilePatterns: |
+        $(Pipeline.Workspace)/connmodule-integrationtests-$(getBuildVariables.artifactVersion).zip
+      cleanDestinationFolder: false
+
+  - task: Npm@1
+    displayName: "npm install"
+    inputs:
+      command: ci
+      workingDir: "$(System.DefaultWorkingDirectory)/integrationtests/Tests/AdminPortal"
+      verbose: false
+
+  - task: AzurePowerShell@5
+    displayName: "Fetch Admin function host code"
+    name: fetchadminfunctionhostcode
+    inputs:
+      azureSubscription: ${{ parameters.service_conn }}
+      ScriptType: InlineScript
+      Inline: |
+        $iotHubKeys =  Get-AzIotHubKey -ResourceGroupName $(rgName) -Name "$(subscriptionPrefix)-conm-$(targetEnvironment)-$(locationShortcut)-iothub-aih"
+        $iotHubOwnerKey = $iotHubKeys | where-object {$_.KeyName -like "iothubowner"}
+        $iothubPolicyKey = $iotHubOwnerKey.Primarykey
+        $logStorageAccountKey = (Get-AzStorageAccountKey -ResourceGroupName $(rgName) -Name "$(subscriptionPrefix)conm$(targetEnvironment)$(locationShortcut)cmlogssa").value[0]
+        $licenseStorageAccountKey = (Get-AzStorageAccountKey -ResourceGroupName $(rgName) -Name "$(subscriptionPrefix)conm$(targetEnvironment)$(locationShortcut)cmpkgsa").value[0]
+        $backupStorageAccountKey = (Get-AzStorageAccountKey -ResourceGroupName $(rgName) -Name "$(subscriptionPrefix)conm$(targetEnvironment)$(locationShortcut)backupsa").value[0]
+        $apimHostName = ((Get-AzApiManagement -ResourceGroupName $(rgName) -Name $(apimName)).ProxyCustomHostnameConfiguration | Where-Object -FilterScript {$_.DefaultSslBinding -EQ 'True'}).Hostname
+        $apimContext = New-AzApiManagementContext -ResourceGroupName $(rgName) -ServiceName $(apimName)
+        $adminapiSubscriptionId = "admin-ui"
+        $apimSubscriptionKey = (Get-AzApiManagementSubscriptionKey -Context $apimContext -SubscriptionId $adminapiSubscriptionId).PrimaryKey
+        $isCustomHostEnabledTest= "$(isCustomHostEnabled)"
+        echo $isCustomHostEnabledTest
+        if($isCustomHostEnabledTest -eq "true") { 
+        $apimbaseUrl="https://$(customDomain)"
+        $adminWebAppBaseUrl="https://$(customDomain)/"  }
+        else {
+        $frontdoorHostName = (Get-AzFrontDoorCdnEndpoint -EndpointName $(frontdoorName) -ProfileName $(frontdoorName) -ResourceGroupName $(rgName)).HostName
+        $apimbaseUrl = "https://$frontdoorHostName"         
+        $adminWebAppBaseUrl = "https://$frontdoorHostName/"  }
+        $reportapiSubscriptionId = "report-management"
+        $reportapiapimSubscriptionKey = (Get-AzApiManagementSubscriptionKey -Context $apimContext -SubscriptionId $reportapiSubscriptionId).PrimaryKey
+        $deviceactivationapiSubscriptionId = "device-activation"
+        $deviceactivationapimSubscriptionKey = (Get-AzApiManagementSubscriptionKey -Context $apimContext -SubscriptionId $deviceactivationapiSubscriptionId).PrimaryKey
+        Write-Host "##vso[task.setvariable variable=iothubPolicyKey]$iothubPolicyKey"
+        Write-Host "##vso[task.setvariable variable=logStorageAccountKey]$logStorageAccountKey"
+        Write-Host "##vso[task.setvariable variable=licenseStorageAccountKey]$licenseStorageAccountKey"
+        Write-Host "##vso[task.setvariable variable=backupStorageAccountKey]$backupStorageAccountKey"
+        Write-Host "##vso[task.setvariable variable=apimbaseUrl]$apimbaseUrl"
+        Write-Host "##vso[task.setvariable variable=apimSubscriptionKey]$apimSubscriptionKey"
+        Write-Host "##vso[task.setvariable variable=reportApiSubscriptionKey]$reportapiapimSubscriptionKey"
+        Write-Host "##vso[task.setvariable variable=deviceactivationapimSubscriptionKey]$deviceactivationapimSubscriptionKey"        
+        Write-Host "##vso[task.setvariable variable=adminWebAppBaseUrl]$adminWebAppBaseUrl"
+      azurePowerShellVersion: LatestVersion
+
+  - task: AzurePowerShell@5
+    displayName: "Set Service User Credentials"
+    name: SetServiceUserCredentials
+    inputs:
+      azureSubscription: ${{ parameters.service_conn }}
+      ScriptType: InlineScript
+      Inline: |
+        $testenv = $Env:targetEnvironment
+        $l1UserName = "$Env:zeissTestUserId"
+        $l1UserPassword = "$Env:zeissTestPwd"
+        $usePrL1creds = "$Env:usePrL1Credentials"       
+        $browser="$Env:browser"
+        $dayOfWeek=(get-date).DayOfWeek.value__
+        if((($testenv -eq "dev") -and ($dayOfWeek -le 3)) -or $usePrL1creds) { 
+        $l1UserName = "$(zeissCMProvL1UserId)"
+        $l1UserPassword = "$(zeissCMProvL1UserPwd)"        
+        $regularUserHypervDeviceId="$(proxyDeviceId)"}
+        Write-Host "##vso[task.setvariable variable=l1username]$l1UserName"        
+        Write-Host "##vso[task.setvariable variable=l1userpassword]$l1UserPassword"
+      azurePowerShellVersion: LatestVersion
+
+  - script: "npx playwright install"
+    displayName: "Browser Installation"
+    workingDirectory: "$(System.DefaultWorkingDirectory)/integrationtests/Tests/AdminPortal"
+
+  - ${{ each testtype in parameters.streamingtests }}:
+      - script: "npx playwright test tests/api/streaming/${{ testType }}/*"
+        condition: eq(variables['isStreamingEnabled'], 'true')
+        env:
+          env: $(targetEnvironment)
+          apimSubscriptionKey: $(apimSubscriptionKey)
+          reportApiSubscriptionKey: $(reportApiSubscriptionKey)
+          deviceactivationapimSubscriptionKey: $(deviceactivationapimSubscriptionKey)
+          testFailureRetryCount: $(retryCount)
+          forbidOnly: "true"
+          apimBaseURL: $(apimbaseUrl)
+          adminAppBaseURL: $(adminWebAppBaseUrl)
+          username: $(l1username)
+          password: $(l1userpassword)
+          subscription: $(subscriptionPrefix)
+          locationshortcut: $(locationShortcut)
+          iotHubPolicyKey: $(iothubPolicyKey)
+          logStorageAccountKey: $(logStorageAccountKey)
+          licenseStorageAccountKey: $(licenseStorageAccountKey)
+          tenantId: $(tenantId)
+          servicePrincipalClientId: $(spClientAppId)
+          servicePrincipalClientSecret: $(spClientSecret)
+          regularuser: $(zeissRegularUserId)
+          regularuserpassword: $(zeissRegularuserPwd)
+          cmprovuser1: $(zeissCMProvUserId)
+          cmprovpassword: $(zeissCMProvUserPwd)
+          cmprovuserl1: $(zeissCMProvL1UserId)
+          cmprovpasswordl1: $(zeissCMProvL1UserPwd)
+          serviceuser: $(zeissTestUserId)
+          serviceuserpassword: $(zeissTestPwd)
+          isDeviceProvisionEnabled: $(isDeviceProvisionTestsEnabled)
+          backupStorageAccountKey: $(backupStorageAccountKey)
+          locale: $(adminPortalEnglishLanguage)
+          customReportName: "${{ testType }}-api-streaming-results"
+          regularUserHypervDeviceId: $(regularUserHypervDeviceId)
+          serviceUserHypervDeviceId: $(serviceUserHypervDeviceId)
+          proxyDeviceId: $(proxyDeviceId)
+          activationKeyHypervDeviceId: $(activationKeyHypervDeviceId)
+          blackDuckToken: $(blackDuckToken)
+          blackDuckAuthUrl: $(blackDuckAuthUrl)
+          blackDuckPkgsUrl: $(blackDuckPkgsUrl)
+          isStreamingEnabled: $(isStreamingEnabled)
+          browser: $(browser)
+          aduUpdateStatus: $(aduUpdateStatus)
+          updateType: $(updateType)
+          updateVersion: $(updateVersion)
+        displayName: "${{ testType }} api streaming Integration Tests"
+        workingDirectory: "$(System.DefaultWorkingDirectory)/integrationtests/Tests/AdminPortal"
+
+  - ${{ each testtype in parameters.apitesttypes }}:
+      - script: "npx playwright test tests/api/${{ testType }}/*"
+        condition: always()
+        env:
+          env: $(targetEnvironment)
+          apimSubscriptionKey: $(apimSubscriptionKey)
+          reportApiSubscriptionKey: $(reportApiSubscriptionKey)
+          deviceactivationapimSubscriptionKey: $(deviceactivationapimSubscriptionKey)
+          testFailureRetryCount: $(retryCount)
+          forbidOnly: "true"
+          apimBaseURL: $(apimbaseUrl)
+          adminAppBaseURL: $(adminWebAppBaseUrl)
+          username: $(l1username)
+          password: $(l1userpassword)
+          subscription: $(subscriptionPrefix)
+          locationshortcut: $(locationShortcut)
+          iotHubPolicyKey: $(iothubPolicyKey)
+          logStorageAccountKey: $(logStorageAccountKey)
+          licenseStorageAccountKey: $(licenseStorageAccountKey)
+          tenantId: $(tenantId)
+          servicePrincipalClientId: $(spClientAppId)
+          servicePrincipalClientSecret: $(spClientSecret)
+          regularuser: $(zeissRegularUserId)
+          regularuserpassword: $(zeissRegularuserPwd)
+          cmprovuser1: $(zeissCMProvUserId)
+          cmprovpassword: $(zeissCMProvUserPwd)
+          cmprovuserl1: $(zeissCMProvL1UserId)
+          cmprovpasswordl1: $(zeissCMProvL1UserPwd)
+          serviceuser: $(zeissTestUserId)
+          serviceuserpassword: $(zeissTestPwd)
+          isDeviceProvisionEnabled: $(isDeviceProvisionTestsEnabled)
+          backupStorageAccountKey: $(backupStorageAccountKey)
+          locale: $(adminPortalEnglishLanguage)
+          customReportName: "${{ testType }}-api-results"
+          regularUserHypervDeviceId: $(regularUserHypervDeviceId)
+          serviceUserHypervDeviceId: $(serviceUserHypervDeviceId)
+          proxyDeviceId: $(proxyDeviceId)
+          activationKeyHypervDeviceId: $(activationKeyHypervDeviceId)
+          blackDuckToken: $(blackDuckToken)
+          blackDuckAuthUrl: $(blackDuckAuthUrl)
+          blackDuckPkgsUrl: $(blackDuckPkgsUrl)
+          browser: $(browser)
+          aduUpdateStatus: $(aduUpdateStatus)
+          updateType: $(updateType)
+          updateVersion: $(updateVersion)
+        displayName: "${{ testType }} API Integration Test"
+        workingDirectory: "$(System.DefaultWorkingDirectory)/integrationtests/Tests/AdminPortal"
+
+  - ${{ each locale in parameters.multilanglocales }}:
+      - script: "npx playwright test tests/ui/multi_lang/*"
+        condition: always()
+        env:
+          env: $(targetEnvironment)
+          apimSubscriptionKey: $(apimSubscriptionKey)
+          reportApiSubscriptionKey: $(reportApiSubscriptionKey)
+          deviceactivationapimSubscriptionKey: $(deviceactivationapimSubscriptionKey)
+          testFailureRetryCount: $(retryCount)
+          forbidOnly: "true"
+          apimBaseURL: $(apimbaseUrl)
+          adminAppBaseURL: $(adminWebAppBaseUrl)
+          username: $(l1username)
+          password: $(l1userpassword)
+          subscription: $(subscriptionPrefix)
+          locationshortcut: $(locationShortcut)
+          iotHubPolicyKey: $(iothubPolicyKey)
+          logStorageAccountKey: $(logStorageAccountKey)
+          licenseStorageAccountKey: $(licenseStorageAccountKey)
+          tenantId: $(tenantId)
+          servicePrincipalClientId: $(spClientAppId)
+          servicePrincipalClientSecret: $(spClientSecret)
+          regularuser: $(zeissRegularUserId)
+          regularuserpassword: $(zeissRegularuserPwd)
+          cmprovuser1: $(zeissCMProvUserId)
+          cmprovpassword: $(zeissCMProvUserPwd)
+          cmprovuserl1: $(zeissCMProvL1UserId)
+          cmprovpasswordl1: $(zeissCMProvL1UserPwd)
+          backupStorageAccountKey: $(backupStorageAccountKey)
+          locale: ${{ locale }}
+          customReportName: "multilang-${{ locale }}-results"
+          regularUserHypervDeviceId: $(regularUserHypervDeviceId)
+          serviceUserHypervDeviceId: $(serviceUserHypervDeviceId)
+          proxyDeviceId: $(proxyDeviceId)
+          activationKeyHypervDeviceId: $(activationKeyHypervDeviceId)
+          blackDuckToken: $(blackDuckToken)
+          blackDuckAuthUrl: $(blackDuckAuthUrl)
+          blackDuckPkgsUrl: $(blackDuckPkgsUrl)
+          browser: $(browser)
+        displayName: "${{ locale }} multi-Language Web UI Integration Test"
+        workingDirectory: "$(System.DefaultWorkingDirectory)/integrationtests/Tests/AdminPortal"
+
+  - ${{ each testtype in parameters.uitesttypes }}:
+      - script: "npx playwright test tests/ui/${{ testtype }}/*"
+        condition: always()
+        env:
+          env: $(targetEnvironment)
+          apimSubscriptionKey: $(apimSubscriptionKey)
+          reportApiSubscriptionKey: $(reportApiSubscriptionKey)
+          deviceactivationapimSubscriptionKey: $(deviceactivationapimSubscriptionKey)
+          testFailureRetryCount: $(retryCount)
+          browser: $(browser)
+          forbidOnly: "true"
+          apimBaseURL: $(apimbaseUrl)
+          adminAppBaseURL: $(adminWebAppBaseUrl)
+          username: $(l1username)
+          password: $(l1userpassword)
+          subscription: $(subscriptionPrefix)
+          locationshortcut: $(locationShortcut)
+          iotHubPolicyKey: $(iothubPolicyKey)
+          logStorageAccountKey: $(logStorageAccountKey)
+          licenseStorageAccountKey: $(licenseStorageAccountKey)
+          tenantId: $(tenantId)
+          servicePrincipalClientId: $(spClientAppId)
+          servicePrincipalClientSecret: $(spClientSecret)
+          regularuser: $(zeissRegularUserId)
+          regularuserpassword: $(zeissRegularuserPwd)
+          cmprovuser1: $(zeissCMProvUserId)
+          cmprovpassword: $(zeissCMProvUserPwd)
+          cmprovuserl1: $(zeissCMProvL1UserId)
+          cmprovpasswordl1: $(zeissCMProvL1UserPwd)
+          serviceuser: $(zeissTestUserId)
+          serviceuserpassword: $(zeissTestPwd)
+          isDeviceProvisionEnabled: $(isDeviceProvisionTestsEnabled)
+          backupStorageAccountKey: $(backupStorageAccountKey)
+          locale: $(adminPortalEnglishLanguage)
+          customReportName: "${{ testType }}-ui-results"
+          regularUserHypervDeviceId: $(regularUserHypervDeviceId)
+          serviceUserHypervDeviceId: $(serviceUserHypervDeviceId)
+          proxyDeviceId: $(proxyDeviceId)
+          activationKeyHypervDeviceId: $(activationKeyHypervDeviceId)
+          blackDuckToken: $(blackDuckToken)
+          blackDuckAuthUrl: $(blackDuckAuthUrl)
+          blackDuckPkgsUrl: $(blackDuckPkgsUrl)
+          aduUpdateStatus: $(aduUpdateStatus)
+          updateType: $(updateType)
+          updateVersion: $(updateVersion)
+        displayName: "${{ testType }} UI Integration Test"
+        workingDirectory: "$(System.DefaultWorkingDirectory)/integrationtests/Tests/AdminPortal"
+
+  - ${{ each testtype in parameters.uistreamingtests }}:
+      - script: "npx playwright test tests/ui/streaming/${{ testType }}/*"
+        condition: eq(variables['isStreamingEnabled'], 'true')
+        env:
+          env: $(targetEnvironment)
+          apimSubscriptionKey: $(apimSubscriptionKey)
+          reportApiSubscriptionKey: $(reportApiSubscriptionKey)
+          deviceactivationapimSubscriptionKey: $(deviceactivationapimSubscriptionKey)
+          testFailureRetryCount: $(retryCount)
+          forbidOnly: "true"
+          apimBaseURL: $(apimbaseUrl)
+          adminAppBaseURL: $(adminWebAppBaseUrl)
+          username: $(l1username)
+          password: $(l1userpassword)
+          subscription: $(subscriptionPrefix)
+          locationshortcut: $(locationShortcut)
+          iotHubPolicyKey: $(iothubPolicyKey)
+          logStorageAccountKey: $(logStorageAccountKey)
+          licenseStorageAccountKey: $(licenseStorageAccountKey)
+          tenantId: $(tenantId)
+          servicePrincipalClientId: $(spClientAppId)
+          servicePrincipalClientSecret: $(spClientSecret)
+          regularuser: $(zeissRegularUserId)
+          regularuserpassword: $(zeissRegularuserPwd)
+          cmprovuser1: $(zeissCMProvUserId)
+          cmprovpassword: $(zeissCMProvUserPwd)
+          cmprovuserl1: $(zeissCMProvL1UserId)
+          cmprovpasswordl1: $(zeissCMProvL1UserPwd)
+          serviceuser: $(zeissTestUserId)
+          serviceuserpassword: $(zeissTestPwd)
+          isDeviceProvisionEnabled: $(isDeviceProvisionTestsEnabled)
+          backupStorageAccountKey: $(backupStorageAccountKey)
+          locale: $(adminPortalEnglishLanguage)
+          customReportName: "${{ testType }}-ui-streaming-results"
+          regularUserHypervDeviceId: $(regularUserHypervDeviceId)
+          serviceUserHypervDeviceId: $(serviceUserHypervDeviceId)
+          proxyDeviceId: $(proxyDeviceId)
+          activationKeyHypervDeviceId: $(activationKeyHypervDeviceId)
+          blackDuckToken: $(blackDuckToken)
+          blackDuckAuthUrl: $(blackDuckAuthUrl)
+          blackDuckPkgsUrl: $(blackDuckPkgsUrl)
+          isStreamingEnabled: $(isStreamingEnabled)
+          browser: $(browser)          
+        displayName: "${{ testType }} UI streaming Integration Tests"
+        workingDirectory: "$(System.DefaultWorkingDirectory)/integrationtests/Tests/AdminPortal"
+
+  - ${{ each testtype in parameters.apitesttypes }}:
+      - task: ArchiveFiles@2
+        displayName: "Create zip with generated admin ${{ testtype }} api test report json"
+        condition: |
+          or (
+              eq(variables['Build.SourceBranch'], 'refs/heads/main'),
+              eq(variables['isCreateTestCasesInAdo'], 'true')
+          )
+        inputs:
+          rootFolderOrFile: "$(System.DefaultWorkingDirectory)/integrationtests/Tests/AdminPortal/testresults/TESTS-${{ testtype }}-api-results.json"
+          includeRootFolder: false
+          archiveType: zip
+          archiveFile: "$(Build.ArtifactStagingDirectory)/connmodule-adminportal${{ testtype }}apiinttestreports-$(regionSc)-$(getBuildVariables.artifactVersion).zip"
+          replaceExistingArchive: true
+
+  - ${{ each testtype in parameters.uitesttypes }}:
+      - task: ArchiveFiles@2
+        displayName: "Create zip with generated ${{ testtype }} admin ui test report json"
+        condition: |
+          or (
+             eq(variables['Build.SourceBranch'], 'refs/heads/main'),
+             eq(variables['isCreateTestCasesInAdo'], 'true')
+            )
+        inputs:
+          rootFolderOrFile: "$(System.DefaultWorkingDirectory)/integrationtests/Tests/AdminPortal/testresults/TESTS-${{ testtype }}-ui-results.json"
+          includeRootFolder: false
+          archiveType: zip
+          archiveFile: "$(Build.ArtifactStagingDirectory)/connmodule-adminportal${{ testtype }}uiinttestreports-$(regionSc)-$(getBuildVariables.artifactVersion).zip"
+          replaceExistingArchive: true
+
+  - ${{ each locale in parameters.multilanglocales }}:
+      - task: ArchiveFiles@2
+        displayName: "Create zip with generated Admin Web UI multi-Language(${{ locale }}) test report json"
+        condition: |
+          or (
+              eq(variables['Build.SourceBranch'], 'refs/heads/main'),
+              eq(variables['isCreateTestCasesInAdo'], 'true')
+             )
+        inputs:
+          rootFolderOrFile: "$(System.DefaultWorkingDirectory)/integrationtests/Tests/AdminPortal/testresults/TESTS-multilang-${{ locale }}-results.json"
+          includeRootFolder: false
+          archiveType: zip
+          archiveFile: "$(Build.ArtifactStagingDirectory)/connmodule-adminportal${{ locale }}langtestreports-$(regionSc)-$(getBuildVariables.artifactVersion).zip"
+          replaceExistingArchive: true
+
+  - ${{ each testtype in parameters.streamingtests }}:
+      - task: ArchiveFiles@2
+        displayName: "Create zip with generated ${{ testtype }} admin streaming api test report json"
+        condition: |
+          and (
+                eq(variables['isStreamingEnabled'], 'true'),
+                or (
+                    eq(variables['Build.SourceBranch'], 'refs/heads/main'),
+                    eq(variables['isCreateTestCasesInAdo'], 'true')
+                    )
+              )
+        inputs:
+          rootFolderOrFile: "$(System.DefaultWorkingDirectory)/integrationtests/Tests/AdminPortal/testresults/TESTS-${{ testtype }}-api-streaming-results.json"
+          includeRootFolder: false
+          archiveType: zip
+          archiveFile: "$(Build.ArtifactStagingDirectory)/connmodule-adminportal${{ testtype }}apistreaminginttestreports-$(regionSc)-$(getBuildVariables.artifactVersion).zip"
+          replaceExistingArchive: true
+
+  - ${{ each testtype in parameters.uistreamingtests }}:
+      - task: ArchiveFiles@2
+        displayName: "Create zip with generated ${{ testtype }} admin streaming ui test report json"
+        condition: |
+          and (
+                eq(variables['isStreamingEnabled'], 'true'),
+                or (
+                    eq(variables['Build.SourceBranch'], 'refs/heads/main'),
+                    eq(variables['isCreateTestCasesInAdo'], 'true')
+                    )
+              )
+        inputs:
+          rootFolderOrFile: "$(System.DefaultWorkingDirectory)/integrationtests/Tests/AdminPortal/testresults/TESTS-${{ testtype }}-ui-streaming-results.json"
+          includeRootFolder: false
+          archiveType: zip
+          archiveFile: "$(Build.ArtifactStagingDirectory)/connmodule-adminportal${{ testtype }}uistreaminginttestreports-$(regionSc)-$(getBuildVariables.artifactVersion).zip"
+          replaceExistingArchive: true
+
+  - task: ArchiveFiles@2
+    displayName: "Create zip with generated Admin Web UI screenshots"
+    condition: |
+      or (
+          eq(variables['Build.SourceBranch'], 'refs/heads/main'),
+          eq(variables['isPublishScreenshots'], 'true')
+        )
+    inputs:
+      rootFolderOrFile: "$(System.DefaultWorkingDirectory)/integrationtests/Tests/AdminPortal/test-results"
+      includeRootFolder: true
+      archiveType: zip
+      archiveFile: "$(Build.ArtifactStagingDirectory)/connmodule-adminportal-screenshots-$(regionSc)-$(getBuildVariables.artifactVersion).zip"
+      replaceExistingArchive: true
+
+  - task: PublishPipelineArtifact@1
+    condition: |
+      or (
+          eq(variables['Build.SourceBranch'], 'refs/heads/main'),
+          eq(variables['isPublishScreenshots'], 'true')
+      )
+    displayName: "Publish Pipeline artifact admin portal screenshots"
+    inputs:
+      path: "$(Build.ArtifactStagingDirectory)"
+      artifact: "connmodule-adminportal-screenshots-$(regionSc)-$(getBuildVariables.artifactVersion)"
+
+  - task: PublishPipelineArtifact@1
+    condition: |
+      or (
+          eq(variables['Build.SourceBranch'], 'refs/heads/main'),
+          eq(variables['isCreateTestCasesInAdo'], 'true')
+      )
+    displayName: "Publish Pipeline artifact admin portal integration reports"
+    inputs:
+      path: "$(Build.ArtifactStagingDirectory)"
+      artifact: "connmodule-adminportalinttestreports-$(regionSc)-$(getBuildVariables.artifactVersion)"
+
+  - task: PublishTestResults@2
+    displayName: "Publish Admin Portal Integration test results"
+    condition: succeededOrFailed()
+    inputs:
+      searchFolder: "$(System.DefaultWorkingDirectory)/integrationtests/Tests/AdminPortal/testresults"
+      testRunTitle: "ConnectivityMdule-AdminPortal-$(Build.SourceBranchName)-$(regionSc)-IntegrationTests"
+      testResultsFormat: JUnit
+      testResultsFiles: "**/*-junit-xml.xml"

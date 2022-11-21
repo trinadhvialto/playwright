@@ -1,0 +1,20 @@
+steps:
+  - task: CopyFiles@2
+    displayName: 'Copy integration test files to artifact staging directory'
+    inputs:
+      contents: |
+        **/integrationtests/Tests/**
+        **/toolintegrations/traceability/scripts/**
+      targetFolder: '$(Build.BinariesDirectory)'
+
+  - task: ArchiveFiles@2
+    displayName: 'Create zip archive with integration test files'
+    inputs:
+      includeRootFolder: false
+      archiveFile: '$(Build.ArtifactStagingDirectory)/connmodule-integrationtests-$(artifactVersion).zip'
+
+  - task: PublishPipelineArtifact@1
+    displayName: 'Publish Pipeline artifact'
+    inputs:
+      path: '$(Build.ArtifactStagingDirectory)'
+      artifact: 'connmodule-integrationtests-$(artifactVersion)'

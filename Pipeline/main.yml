@@ -1,0 +1,364 @@
+name: 'INTEGRATIONTESTS_$(SourceBranchName)_$(Date:yyyyMMdd)$(Rev:.r)'
+variables:
+  environmentFileName: 'environment.json'
+  vmImage: 'ubuntu-latest'
+  vmImageWindows: 'windows-latest'
+  euLocation: 'West Europe'
+
+
+stages:
+  - stage: BUILD
+    jobs:
+      - job: InitBuild
+        pool:
+          vmImage: $(vmImage)
+        steps:
+          - template: Build/init-build.yml
+
+      - job: PackageInfraAndIntegrationTestsConfig
+        dependsOn: InitBuild
+        pool:
+          vmImage: $(vmImage)
+        variables:
+          artifactVersion: $[ dependencies.InitBuild.outputs['getArtifactVersion.artifactVersion'] ]
+        steps:
+          - template: Build/package-tests-config.yml
+
+  - stage: DEV_TEST
+    dependsOn:
+      - BUILD
+    variables:
+      - name: targetEnvironment
+        value: dev
+      - name: regionSc
+        value: eu
+      - name: browser
+        value: $(browserName)
+      - name: locationShortcut
+        value: $(euLocationShortcut)
+      - name: subscriptionPrefix
+        value: $(dev_subscription_prefix)
+      - name: testVmRg
+        value: $(dev_subscription_prefix)-conm-$(targetEnvironment)-$(euLocationShortcut)-vmfactory-rg
+      - name: proxyVmRg
+        value: $(dev_subscription_prefix)-conm-$(targetEnvironment)-$(euLocationShortcut)-proxy-rg
+      - name: apimName
+        value: $(dev_subscription_prefix)-conm-$(targetEnvironment)-$(euLocationShortcut)-apimanageservice-apim
+      - name: adminWebAppName
+        value: $(dev_subscription_prefix)conm$(targetEnvironment)$(euLocationShortcut)cmmanagementapp
+      - name: frontdoorName
+        value: $(dev_subscription_prefix)-conm-$(targetEnvironment)-$(euLocationShortcut)-frontdoor-fd
+      - name: rgName
+        value: $(dev_subscription_prefix)-conm-$(targetEnvironment)-$(euLocationShortcut)-resources-rg
+      - name: testVm
+        value: $(dev_subscription_prefix)conm$(targetEnvironment)$(euLocationShortcut)vmtestdevice
+      - name: testServiceUserVm
+        value: $(dev_subscription_prefix)conm$(targetEnvironment)$(euLocationShortcut)automatedtestserviceuservm
+      - name: testRegularUserVm
+        value: $(dev_subscription_prefix)conm$(targetEnvironment)$(euLocationShortcut)vmregularuserinttest
+      - name: testProxyVm
+        value: $(dev_subscription_prefix)conm$(targetEnvironment)$(euLocationShortcut)vmwindowsclient
+      - name: vialtoTestUserId
+        value: $(dev_vialtotest_userid)
+      - name: vialtoTestPwd
+        value: $(dev_vialtotest_pwd)
+      - name: vialtoRegularUserId
+        value: $(dev_vialtoregular_userid)
+      - name: vialtoRegularuserPwd
+        value: $(dev_vialtoregularuser_pwd)
+      - name: tenantId
+        value: $(dev_sp_tenantid)
+      - name: spClientAppId
+        value: $(dev_sp_clientid)
+      - name: spClientSecret
+        value: $(dev_sp_secret)
+      - name: regularUserHypervDeviceId
+        value: $(dev_hypervtest_deviceid)
+      - name: serviceUserHypervDeviceId
+        value: $(dev_serviceuser_hypervtest_deviceid)
+      - name: blackDuckToken
+        value: $(dev_blackduck_token)
+      - name: blackDuckAuthUrl
+        value: $(dev_blackduck_auth_url)
+      - name: blackDuckPkgsUrl
+        value: $(dev_blackduck_pkgs_url)
+      - name: isCreateTestCasesInAdo
+        value: $(dev_is_createtestcases_in_ado)
+      - name: isPublishScreenshots
+        value: $(dev_is_publish_screenshots)
+      - name: isDeviceProvisionTestsEnabled
+        value: $(dev_is_run_deviceprovisiongtests)
+      - name: vialtoCMProvUserId
+        value: $(dev_vialtocmprovuser_userid)
+      - name: vialtoCMProvUserPwd
+        value: $(dev_vialtocmprovuser_pwd)
+      - name: vialtoCMProvL1UserId
+        value: $(dev_vialtocmprovl1user_userid)
+      - name: vialtoCMProvL1UserPwd
+        value: $(dev_vialtocmprovl1user_pwd)
+      - name: installerStorageAccountName
+        value: $(dev_subscription_prefix)conm$(targetEnvironment)$(euLocationShortcut)cmpkgsa
+      - name: installerEnvironment
+        value: $(targetEnvironment)
+      - name: installerVersion
+        value: $(dev_installerversion)
+      - name: testInstallerAutomationVm
+        value: $(dev_subscription_prefix)conm$(targetEnvironment)$(euLocationShortcut)vminstallerautomation
+      - name: isRunInstallerGuiAutomation
+        value: $(dev_is_runinstallerguiautomation)
+      - name: subscriptionId
+        value: $(dev_subscriptionId)
+      - name: logsSaRg
+        value: $(dev_subscription_prefix)-conm-$(targetEnvironment)-$(euLocationShortcut)-sa-rg
+      - name: logsStorageAccount
+        value: $(dev_subscription_prefix)conmgen$(euLocationShortcut)inslogssa
+      - name: retryCount
+        value: $(dev_retry_count)
+      - name: usePrL1Credentials
+        value: $(dev_usePrL1Credentials)
+      - name: allowedInstallerVersions
+        value: $(dev_allowedInstallerVersions)
+      - name: isCustomHostEnabled
+        value: $(dev_is_customhost_enabled)
+      - name: isStreamingEnabled
+        value: $(dev_is_streaming_enabled)
+      - name: aduUpdateStatus
+        value: $(dev_is_aduUpdate_enabled)
+      - name: updateType
+        value: $(dev_update_type)
+      - name: updateVersion
+        value: $(dev_update_version)
+      - group: connectivitymodule-integrationtest
+    condition: |
+      and (
+         succeeded('BUILD'),
+         ne(variables['Build.SourceBranch'],'refs/heads/main'),
+         ne(variables['Build.SourceBranch'],'refs/heads/release/current')
+      )
+    jobs:
+      - job: StartTestVM
+        pool:
+          vmImage: $(vmImage)
+        steps:
+          - checkout: none
+          - template: Test/TestDevice/start-vm.yml
+            parameters:
+              service_conn: $(dev_service_connection)
+
+      
+
+      - job: WebPortal
+        dependsOn: StartTestVM
+        condition: succeeded()
+        timeoutInMinutes: 800
+        pool:
+          vmImage: $(vmImageWindows)
+          demands: npm
+        steps:
+          - checkout: none
+          - template: Test/WebPortal/webPortal-test.yml
+            parameters:
+              service_conn: $(dev_service_connection)  
+
+     
+      - job: StopTestVM
+        pool:
+          vmImage: $(vmImage)
+        dependsOn: WebPortal
+        condition: always()
+        steps:
+          - checkout: none
+          - template: Test/TestDevice/stop-vm.yml
+            parameters:
+              service_conn: $(dev_service_connection)
+
+      - job: PublishTestCasesToADO
+        condition: |
+          and (
+            succeededOrFailed(),
+            or (
+                eq(variables['Build.SourceBranch'], 'refs/heads/main'),
+                eq(variables['dev_is_createtestcases_in_ado'], 'true')
+            )
+          )
+        displayName: 'Publish Test Cases to ADO'
+        dependsOn: StopTestVM
+        pool:
+          vmImage: $(vmImage)
+        steps:
+          - template: Test/PublishToADO/publish-test-results-as-ado-test-cases.yml
+
+  - stage: QA_TEST
+    dependsOn:
+      - BUILD
+    variables:
+      - name: targetEnvironment
+        value: qa
+      - name: regionSc
+        value: eu
+      - name: browser
+        value: $(browserName)
+      - name: locationShortcut
+        value: $(euLocationShortcut)
+      - name: subscriptionPrefix
+        value: $(qa_subscription_prefix)
+      - name: testVmRg
+        value: $(qa_subscription_prefix)-conm-$(targetEnvironment)-$(euLocationShortcut)-vmfactory-rg
+      - name: proxyVmRg
+        value: $(qa_subscription_prefix)-conm-$(targetEnvironment)-$(euLocationShortcut)-vmfactory-rg
+      - name: apimName
+        value: $(qa_subscription_prefix)-conm-$(targetEnvironment)-$(euLocationShortcut)-apimanageservice-apim
+      - name: adminWebAppName
+        value: $(qa_subscription_prefix)conm$(targetEnvironment)$(euLocationShortcut)cmmanagementapp
+      - name: frontdoorName
+        value: $(qa_subscription_prefix)-conm-$(targetEnvironment)-$(euLocationShortcut)-frontdoor-fd
+      - name: rgName
+        value: $(qa_subscription_prefix)-conm-$(targetEnvironment)-$(euLocationShortcut)-resources-rg
+      - name: testVm
+        value: $(qa_subscription_prefix)conm$(targetEnvironment)$(euLocationShortcut)vmtestdevice
+      - name: testServiceUserVm
+        value: $(qa_subscription_prefix)conm$(targetEnvironment)$(euLocationShortcut)vmserviceuserinttest
+      - name: testRegularUserVm
+        value: $(qa_subscription_prefix)conm$(targetEnvironment)$(euLocationShortcut)vmregularuserinttest
+      - name: testProxyVm
+        value: $(qa_subscription_prefix)conm$(targetEnvironment)$(euLocationShortcut)proxyvm
+      - name: vialtoTestUserId
+        value: $(qa_vialtotest_userid)
+      - name: vialtoTestPwd
+        value: $(qa_vialtotest_pwd)
+      - name: vialtoRegularUserId
+        value: $(qa_vialtoregular_userid)
+      - name: vialtoRegularuserPwd
+        value: $(qa_vialtoregularuser_pwd)
+      - name: tenantId
+        value: $(qa_sp_tenantid)
+      - name: spClientAppId
+        value: $(qa_sp_clientid)
+      - name: spClientSecret
+        value: $(qa_sp_secret)
+      - name: regularUserHypervDeviceId
+        value: $(qa_hypervtest_deviceid)
+      - name: serviceUserHypervDeviceId
+        value: $(qa_serviceuser_hypervtest_deviceid)
+      - name: proxyDeviceId
+        value: $(qa_proxytest_deviceid)
+      - name: activationKeyHypervDeviceId
+        value: $(qa_activationkeytest_hyperv_deviceid)
+      - name: blackDuckToken
+        value: $(qa_blackduck_token)
+      - name: blackDuckAuthUrl
+        value: $(qa_blackduck_auth_url)
+      - name: blackDuckPkgsUrl
+        value: $(qa_blackduck_pkgs_url)
+      - name: isCreateTestCasesInAdo
+        value: $(qa_is_createtestcases_in_ado)
+      - name: isPublishScreenshots
+        value: $(qa_is_publish_screenshots)
+      - name: isDeviceProvisionTestsEnabled
+        value: $(qa_is_run_deviceprovisiongtests)
+      - name: vialtoCMProvUserId
+        value: $(qa_vialtocmprovuser_userid)
+      - name: vialtoCMProvUserPwd
+        value: $(qa_vialtocmprovuser_pwd)
+      - name: vialtoCMProvL1UserId
+        value: $(qa_vialtocmprovl1user_userid)
+      - name: vialtoCMProvL1UserPwd
+        value: $(qa_vialtocmprovl1user_pwd)
+      - name: installerStorageAccountName
+        value: $(qa_subscription_prefix)conm$(targetEnvironment)$(euLocationShortcut)cmpkgsa
+      - name: installerEnvironment
+        value: $(targetEnvironment)
+      - name: installerVersion
+        value: $(qa_installerversion)
+      - name: testInstallerAutomationVm
+        value: $(qa_subscription_prefix)conm$(targetEnvironment)$(euLocationShortcut)vminstallerautomation
+      - name: isRunInstallerGuiAutomation
+        value: $(qa_is_runinstallerguiautomation)
+      - name: subscriptionId
+        value: $(qa_subscriptionId)
+      - name: logsSaRg
+        value: $(qa_subscription_prefix)-conm-$(targetEnvironment)-$(euLocationShortcut)-sa-rg
+      - name: logsStorageAccount
+        value: $(qa_subscription_prefix)conmgen$(euLocationShortcut)inslogssa
+      - name: retryCount
+        value: $(qa_retry_count)
+      - name: usePrL1Credentials
+        value: $(qa_usePrL1Credentials)
+      - name: isCustomHostEnabled
+        value: $(qa_is_customhost_enabled)
+      - name: isStreamingEnabled
+        value: $(qa_is_streaming_enabled)
+      - name: aduUpdateStatus
+        value: $(qa_is_aduUpdate_enabled)
+      - name: updateType
+        value: $(qa_update_type)
+      - name: updateVersion
+        value: $(qa_update_version)
+      - name: allowedInstallerVersions
+        value: $(qa_allowedInstallerVersions)
+      - name: proxyServerUrl
+        value: $(qa_proxy_url)
+      - group: connectivitymodule-integrationtest
+    condition: |
+      and (
+        succeeded(),
+        eq(variables['is_runtests_qa'],'true'),
+        eq(variables['Build.SourceBranch'],'refs/heads/develop')
+      )
+    jobs:
+      - job: StartTestVM
+        pool:
+          vmImage: $(vmImage)
+        steps:
+          - checkout: none
+          - template: Test/TestDevice/start-vm.yml
+            parameters:
+              service_conn: $(dev_service_connection)
+
+      
+
+      - job: WebPortal
+        dependsOn: StartTestVM
+        condition: succeeded()
+        timeoutInMinutes: 360
+        pool:
+          vmImage: $(vmImageWindows)
+          demands: npm
+        steps:
+          - checkout: none
+          - template: Test/WebPortal/webPortal-test.yml
+            parameters:
+              service_conn: $(dev_service_connection)  
+
+    
+      - job: StopTestVM
+        pool:
+          vmImage: $(vmImage)
+        dependsOn: WebPortal
+        condition: always()
+        steps:
+          - checkout: none
+          - template: Test/TestDevice/stop-vm.yml
+            parameters:
+              service_conn: $(dev_service_connection)
+
+      - job: PublishTestCasesToADO
+        condition: |
+          and (
+            succeededOrFailed(),
+            or (
+                eq(variables['Build.SourceBranch'], 'refs/heads/main'),
+                eq(variables['qa_is_createtestcases_in_ado'], 'true')
+            )
+          )
+        displayName: 'Publish Test Cases to ADO'
+        dependsOn: StopTestVM
+        pool:
+          vmImage: $(vmImage)
+        steps:
+          - template: Test/PublishToADO/publish-test-results-as-ado-test-cases.yml
+
+  
+          
+
+                

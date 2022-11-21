@@ -1,0 +1,25 @@
+steps:
+- bash: |
+      version="$(echo "$(Build.BuildNumber)" | tr '[:upper:]' '[:lower:]')"
+      echo "##vso[task.setvariable variable=artifactVersion;isOutput=true]$version"
+  name: getArtifactVersion
+  displayName: 'Get artifact version'
+  env:
+      DIRECTORY: $(Build.ArtifactStagingDirectory)
+
+- powershell: |
+      $json = [PSCustomObject]@{ 
+        artifactVersion = $env:GETARTIFACTVERSION_ARTIFACTVERSION
+      }
+
+      New-Item -Path $env:BUILD_ARTIFACTSTAGINGDIRECTORY -Name "environment" -ItemType "directory"
+      $filePath = [IO.Path]::Combine($env:BUILD_ARTIFACTSTAGINGDIRECTORY, "environment", "environment.json")
+      $json | ConvertTo-Json | Out-File $filePath
+  name: getBuildVariables
+  displayName: 'Set build variables'
+
+- task: PublishPipelineArtifact@1
+  displayName: 'Publish Pipeline artifact'
+  inputs:
+      path: '$(Build.ArtifactStagingDirectory)/environment'
+      artifact: 'environment'

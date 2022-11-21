@@ -1,0 +1,13 @@
+steps:
+  - task: AzureCLI@1
+    displayName: 'Azure CLI to stop test VM'
+    inputs:
+      azureSubscription: ${{ parameters.service_conn }}
+      ScriptType: bash
+      scriptLocation: inlineScript
+      inlineScript: |
+          az vm start -g $(testVmRg) -n $(testInstallerAutomationVm)
+          az vm start -g $(testVmRg) -n $(testVm)
+          az vm start -g $(testVmRg) -n $(testServiceUserVm)
+          az vm start -g $(testVmRg) -n $(testRegularUserVm)
+          az vm start -g $(proxyVmRg) -n $(testProxyVm)
