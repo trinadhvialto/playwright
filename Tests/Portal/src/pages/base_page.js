@@ -17,12 +17,19 @@ exports.BasePage = class BasePage {
         var usernameElement = 'id=' + OR.locators.loginPage.usernameInput
         await this.waitTillElementIsVisible(usernameElement)
         await this.page.locator('id=' + OR.locators.loginPage.usernameInput).fill(username);
-        await this.page.locator('id=' + OR.locators.loginPage.passwordInput).fill(password);
-        await this.page.locator('id=' + OR.locators.loginPage.signInButton).click();
-        var userButton = 'id=' + OR.locators.homePage.userButton;
-        await this.waitTillElementIsVisible(userButton)
-        var loadSpinner = 'xpath=' + OR.locators.customerListPage.loadSpinner
-        await this.waitTillElementIsInvisible(loadSpinner)
+
+                await this.page.locator('id=' + OR.locators.loginPage.signInButton).click();
+
+        // await this.page.locator('id=' + OR.locators.loginPage.passwordInput).fill(password);
+
+
+        // Click input[name="ctl00\$phCenter\$txtEMAIL"]
+   
+        // await this.page.locator('id=' + OR.locators.loginPage.signInButton).click();
+        // var userButton = 'id=' + OR.locators.homePage.userButton;
+        // await this.waitTillElementIsVisible(userButton)
+        // var loadSpinner = 'xpath=' + OR.locators.customerListPage.loadSpinner
+        // await this.waitTillElementIsInvisible(loadSpinner)
         await this.page.waitForTimeout(10000);
 
     }

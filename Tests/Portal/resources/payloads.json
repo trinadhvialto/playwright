@@ -1,0 +1,16 @@
+{
+    "payloads": {
+       "CreateUser_TC001": {
+            "name": "morpheus",
+            "job": "leader"
+        }  ,
+        "CreateUser_TC002": {
+            "name": "morpheus",
+            "job": "leader"
+        }    
+    },"createUser_TC003": {
+        "name": "morpheus",
+        "job": "leader"
+    }    
+
+    }

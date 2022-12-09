@@ -1,4 +1,4 @@
-const { TokenGenerators } = require('../../utils/token_generators.js');
+const { TokenGenerators } = require('../utils/token_generators.js');
 
 exports.ApiHelper = class ApiHelper {
 

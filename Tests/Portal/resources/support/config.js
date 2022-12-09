@@ -6,17 +6,17 @@ const { devices } = require('@playwright/test');
 const config = {
   forbidOnly: !!process.env.forbidOnly,
   workers: 2,// workers will be take from Pipeline variable given by user
-  retries: 1,
+  retries: Number(process.env.testFailureRetryCount),
   
   use: {
     trace: 'on-first-retry',
-    actionTimeout: 5 * 5000,
+    actionTimeout: 5 * 1000,
     navigationTimeout: 60 * 1000,
     screenshot: 'only-on-failure',
     video : 'retain-on-failure',
     locale: process.env.locale,
     headless: false,    
-    // browserName: 'chromium',
+    browserName: 'chromium',
     channel: process.env.browser,
     viewport: null,
        launchOptions: {
@@ -33,21 +33,21 @@ const config = {
 
 
   
-  projects: [
-    {
-      name: 'chromium',
+  // projects: [
+  //   {
+  //     name: 'chromium',
       
-      use: { ...devices['Desktop Chrome'] },
-    },
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
-  ],
+  //     use: { ...devices['Desktop Chrome'] },
+  //   },
+  //   {
+  //     name: 'firefox',
+  //     use: { ...devices['Desktop Firefox'] },
+  //   },
+  //   {
+  //     name: 'webkit',
+  //     use: { ...devices['Desktop Safari'] },
+  //   },
+  // ],
   globalTimeout: 120 * 100 * 1000,
   timeout: 11 * 60 * 1000,
   expect: {

@@ -1,0 +1,5 @@
+Tests/Portal/allure-report/*
+Tests/Portal/allure-results/*
+Tests/Portal/node_modules/*
+Tests/Portal/testresults/*
+Tests/Portal/testresults/undefined.json
