@@ -1,7 +1,7 @@
-const { TokenGenerators } = require('./token_generators.js')
+import { TokenGenerators } from './token_generators'
 
 exports.KeyVaultMethods = class KeyVaultMethods{
-    static async getSecrets(secretName){
+    static async getSecrets(secretName: any){
         var keyvault = `${process.env.subscription}conm${process.env.env}${process.env.locationshortcut}securekv`
         var token = await TokenGenerators.generateKeyVaultAccessToken();
         var config = {  

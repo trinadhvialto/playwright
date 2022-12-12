@@ -1,7 +1,7 @@
 // const cosmosClient = require("@azure/cosmos").CosmosClient;
 const sql = require('mssql');
 
-exports.TestData = class TestData {
+export class TestData {
 
     static async sqlDBConnection() {
         var server = process.env.subscription + "-conm-" + process.env.env + "-" + process.env.locationshortcut + "-sqlserver-dbs.database.windows.net"

@@ -1,9 +1,9 @@
 var DOMParser = require('xmldom').DOMParser;
-var xmlToJson = require('./xmlToJson.js');
+import { XmlToJson } from './xmlToJson';
 var CryptoJS = require('crypto-js');
-const { TokenGenerators } = require('./token_generators.js')
-exports.AzureStorageMethods = class AzureStorageMethods{
-    static async getblobs(storageAccount,containerName,storageAccountKey, apiMethodName,blobFilterName=""){
+import { TokenGenerators } from './token_generators'
+export class AzureStorageMethods{
+    static async getblobs(storageAccount: any,containerName: any,storageAccountKey: any, apiMethodName: string,blobFilterName=""){
         var header_date = new Date().toUTCString();
         var apiMethod = apiMethodName.toUpperCase();
         
@@ -21,7 +21,7 @@ exports.AzureStorageMethods = class AzureStorageMethods{
 
         // Construct CanonicalizedResource
         const canonicalResourceParts = [`/${storageAccount}${url.pathname}`];
-        const canonicalQueryNames = [];
+        const canonicalQueryNames: string[] = [];
         url.searchParams.forEach(function(value, key) {
             canonicalQueryNames.push(key.toLowerCase());
         });
@@ -53,7 +53,7 @@ exports.AzureStorageMethods = class AzureStorageMethods{
         var response = await TokenGenerators.request(config); 
         var apiData = response.data 
         var XmlNode = new DOMParser().parseFromString(apiData, 'text/xml');     
-        var jsonObj = await xmlToJson(XmlNode);
+        var jsonObj = await XmlToJson.xmlToJson(XmlNode);
         var blobs = jsonObj.EnumerationResults.Blobs.Blob;
         var newBlobs = [];
         if (blobs.length) {

@@ -1,9 +1,9 @@
-var crypto = require('crypto')
-var qs = require('qs');
-const { default: axios } = require('axios');
+import crypto from 'crypto'
+import qs from 'qs';
+import axios, { AxiosRequestConfig } from 'axios';
 
-exports.TokenGenerators = class TokenGenerators {
-    static async request(config) {
+export class TokenGenerators {
+    static async request(config: AxiosRequestConfig<any>) {
         try {
             process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
             var response = await axios(config);
@@ -14,7 +14,7 @@ exports.TokenGenerators = class TokenGenerators {
 
     }
 
-    static async generateSasToken(resourceUri, signingKey, policyName, expiresInMins) {
+    static async generateSasToken(resourceUri: string | number | boolean, signingKey: WithImplicitCoercion<string> | { [Symbol.toPrimitive](hint: "string"): string; }, policyName: string, expiresInMins: number) {
         resourceUri = encodeURIComponent(resourceUri);
 
         // Set expiration in seconds
@@ -33,7 +33,7 @@ exports.TokenGenerators = class TokenGenerators {
         return token;
     };
 
-    static async generateAuthToken(userType) {
+    static async generateAuthToken(userType: string) {
 
         var hostName = 'id-ip-stage.zeiss.com';
         var username, password;
@@ -72,7 +72,7 @@ exports.TokenGenerators = class TokenGenerators {
         return tokenresponse.data.id_token
     }
 
-    static async generateKeyVaultAccessToken(keyvault) {
+    static async generateKeyVaultAccessToken(keyvault: any) {
         var config = {
             method: 'POST',
             url: `https://login.microsoftonline.com/${process.env.tenantId}/oauth2/v2.0/token`,

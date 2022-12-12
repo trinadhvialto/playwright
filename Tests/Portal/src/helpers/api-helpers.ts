@@ -1,8 +1,8 @@
-const { TokenGenerators } = require('../utils/token_generators.js');
+import { TokenGenerators } from '../utils/token_generators';
 
-exports.ApiHelper = class ApiHelper {
+export class ApiHelper {
 
-    static async post(url, header, payload) {
+    static async post(url: any, header: any, payload: any) {
         var config = {
             method: 'post',
             url: url,
@@ -14,7 +14,7 @@ exports.ApiHelper = class ApiHelper {
         return response;
     }
 
-    static async get(url, header) {
+    static async get(url: any, header: any) {
         var config = {
             method: 'GET',
             url: url,
@@ -25,7 +25,7 @@ exports.ApiHelper = class ApiHelper {
         return response;
     }
 
-    static async put(url, header, payload) {
+    static async put(url: any, header: any, payload: any) {
         var config = {
             method: 'put',
             url: url,

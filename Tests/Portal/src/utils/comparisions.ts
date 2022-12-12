@@ -1,7 +1,7 @@
-var _ = require('lodash');
+import _ from 'lodash';
 // var underscore = require('underscore');
-exports.Comparisions = class Comparisions{
-  static async compareObjects(actualObj, expectedObj) {
+export class Comparisions{
+  static async compareObjects(actualObj: string, expectedObj: string) {
     var same;
     console.log("Actual Obj: "+actualObj+" and Expected Obj: "+expectedObj)
     same = _.isEqual(actualObj, expectedObj);
@@ -9,7 +9,7 @@ exports.Comparisions = class Comparisions{
     return same;
   };
 
-  static async compareUnorderedJSONObjects(actualObj, expectedObj){
+  static async compareUnorderedJSONObjects(actualObj: { [x: string]: any; }, expectedObj: { [x: string]: any; }){
     var Keydata = Object.keys(expectedObj)
     var result = new Array();
     var boolean;

@@ -1,8 +1,10 @@
 var OR = require('../../resources/OR.json');
+import { UIHelper } from '../helpers/ui-helpers';
 
-exports.BasePage = class BasePage {
+export class BasePage {
+    page: any;
 
-    constructor(page) {
+    constructor(page: any) {
         this.page = page;
     }
 
@@ -15,7 +17,7 @@ exports.BasePage = class BasePage {
 
         console.log("Test is executing with user:- " + username);
         var usernameElement = 'id=' + OR.locators.loginPage.usernameInput
-        await this.waitTillElementIsVisible(usernameElement)
+        await UIHelper.waitTillElementIsVisible(usernameElement)
         await this.page.locator('id=' + OR.locators.loginPage.usernameInput).fill(username);
 
                 await this.page.locator('id=' + OR.locators.loginPage.signInButton).click();
