@@ -72,7 +72,7 @@ export class TokenGenerators {
         return tokenresponse.data.id_token
     }
 
-    static async generateKeyVaultAccessToken(keyvault: any) {
+    static async generateKeyVaultAccessToken() {
         var config = {
             method: 'POST',
             url: `https://login.microsoftonline.com/${process.env.tenantId}/oauth2/v2.0/token`,

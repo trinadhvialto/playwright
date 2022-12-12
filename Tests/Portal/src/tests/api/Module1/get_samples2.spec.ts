@@ -1,6 +1,6 @@
 
-const { test, expect } = require('@playwright/test');
-const { ApiHelper } = require('../../../helpers/api-helpers.js')
+import { test, expect } from '@playwright/test';
+import { ApiHelper } from '../../../helpers/api-helpers.js'
 var OR = require("../../../../resources/OR.json");
 const { request } = require('http');
 

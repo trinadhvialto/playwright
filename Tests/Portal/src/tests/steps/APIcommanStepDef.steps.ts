@@ -1,5 +1,5 @@
 
-const { test, expect } = require('@playwright/test');
+import { test, expect } from '@playwright/test';
 const { ApiHelper } = require('../../../helpers/api-helpers.js')
 var OR = require("../../../resources/OR.json");
 var OR_Header = require("../../../resources/headers.json");
@@ -29,7 +29,7 @@ test.describe("Viewing Activation Key in WebUI", function () {
 
 
 
-         Given('with all api details {string},{string} and {string}', async function (uri, S1_service_Headers, S1_input_Parameters) {
+         Given('with all api details {string},{string} and {string}', async function (uri: string, S1_service_Headers: string, S1_input_Parameters: any) {
            // Write code here that turns the phrase above into concrete actions
            let url = OR+"."+uri;
 
@@ -45,14 +45,14 @@ test.describe("Viewing Activation Key in WebUI", function () {
 
 
 
-         When('user execute create service {string} and {string}', function (string, string2) {
+         When('user execute create service {string} and {string}', function (string: any, string2: any) {
            // Write code here that turns the phrase above into concrete actions
            return 'pending';
          });
 
 
 
-         Then('api should be successful {string} and {string}', function (string, string2) {
+         Then('api should be successful {string} and {string}', function (string: any, string2: any) {
            // Write code here that turns the phrase above into concrete actions
            return 'pending';
          });

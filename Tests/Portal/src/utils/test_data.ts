@@ -1,4 +1,4 @@
-// const cosmosClient = require("@azure/cosmos").CosmosClient;
+const cosmosClient = require("@azure/cosmos").CosmosClient;
 const sql = require('mssql');
 
 export class TestData {
@@ -28,7 +28,7 @@ export class TestData {
         return conn;
 
     }
-    static async executeSqlQuery(pool1, queryString) {
+    static async executeSqlQuery(pool1: { connect: () => any; on: (arg0: string, arg1: (err: any) => void) => void; request: () => any; close: () => void; }, queryString: any) {
         var pool1Connect = await pool1.connect();
         pool1.on('error', err => {
             console.log(err);
@@ -60,7 +60,7 @@ export class TestData {
 
     }
 
-    static async getUTCTimeCustom24hrs(localTime) {
+    static async getUTCTimeCustom24hrs(localTime: string) {
 
         console.log(localTime);
         var localDate = new Date();
@@ -74,12 +74,12 @@ export class TestData {
 
     }
     
-    static async waitFortimeOut(waitTime) {
-        const sleep = (waitTimeInMs) => new Promise(resolve => setTimeout(resolve, waitTimeInMs));
+    static async waitFortimeOut(waitTime : any) {
+        const sleep = (waitTimeInMs : any) => new Promise(resolve => setTimeout(resolve, waitTimeInMs));
         await sleep(waitTime);
     }
-    static async executeCosmosQuery(queryString){
-        var endpoint = process.env.cosmosConfig.endpoint;
+    static async executeCosmosQuery(queryString : any){
+        /*var endpoint = process.env.cosmosConfig.endpoint;
         var key = process.env.cosmosConfig.key;
         var databaseId = process.env.cosmosConfig.databaseId;
         var containerId = process.env.cosmosConfig.containerId;
@@ -96,10 +96,10 @@ export class TestData {
 
         // read all items in the Items container
         var {resources: items}  = await container.items.query(querySpec).fetchAll();
-        return items;      
+        return items;*/     
     }
 
-    static async getUTCTimeCustom(localTime) {
+    static async getUTCTimeCustom(localTime : any) {
 
         console.log(localTime);
         var localDate = new Date();

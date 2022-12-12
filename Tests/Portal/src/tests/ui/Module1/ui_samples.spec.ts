@@ -1,7 +1,7 @@
-const { TestData } = require("../../../utils/test_data.js");
-const { TokenGenerators } = require("../../../utils/token_generators.js");
-const { test, expect } = require("@playwright/test");
-const { IotHubMethods } = require("../../../utils/iothub_methods.js");
+import { TestData } from "../../../utils/test_data";
+import { TokenGenerators } from "../../../utils/token_generators";
+import { test, expect } from "@playwright/test";
+import { IotHubMethods } from "../../../utils/iothub_methods";
 const { ApiHelper } = require("../../../helpers/api-helpers.js");
 var OR = require("../../../../resources/OR.json");
 var activationKeyHypervDeviceId = process.env.activationKeyHypervDeviceId;

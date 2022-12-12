@@ -2,7 +2,7 @@ import { TokenGenerators } from './token_generators'
 var apiVersion = 'api-version=2020-09-30'
 import { TestData } from '../utils/test_data';
 
-exports.IotHubMethods = class IotHubMethods{
+export class IotHubMethods{
     
     static async getModuleTwin(iothub: string, deviceId: string, moduleId: string, sastoken: any){
         var iothubConfig = {  
