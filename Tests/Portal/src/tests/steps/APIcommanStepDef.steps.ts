@@ -1,4 +1,5 @@
 
+import { Given, Then, When } from '@cucumber/cucumber';
 import { test, expect } from '@playwright/test';
 const { ApiHelper } = require('../../../helpers/api-helpers.js')
 var OR = require("../../../resources/OR.json");

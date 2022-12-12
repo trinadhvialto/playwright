@@ -96,7 +96,7 @@ export class TestData {
 
         // read all items in the Items container
         var {resources: items}  = await container.items.query(querySpec).fetchAll();
-        return items;*/     
+        return items;*/
     }
 
     static async getUTCTimeCustom(localTime : any) {

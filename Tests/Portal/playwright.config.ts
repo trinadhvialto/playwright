@@ -58,7 +58,7 @@ const config = {
     ['allure-playwright'],
     ['json', {  outputFile: 'testresults/'+process.env.customReportName+'.json' }],
     ['junit',{  outputFile: 'testresults/'+process.env.customReportName+'-junit-xml.xml' }],
-    ['./customReportGenerator.js',{ outputFile: process.env.customReportName, environment: 'windows 10+ chrome' }]
+    ['./customReportGenerator.ts',{ outputFile: process.env.customReportName, environment: 'windows 10+ chrome' }]
   ],
   
 };
