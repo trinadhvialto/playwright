@@ -12,12 +12,12 @@
     "preserveOutput": "always",
     "projects": [
       {
-        "outputDir": "c:/VIaltoProjects/playwright/Tests/Portal/test-results",
+        "outputDir": "c:/VialtoProjects/playwright/Tests/Portal/test-results",
         "repeatEach": 1,
         "retries": 0,
         "id": "chromium",
         "name": "chromium",
-        "testDir": "c:/VIaltoProjects/playwright/Tests/Portal",
+        "testDir": "c:/VialtoProjects/playwright/Tests/Portal",
         "testIgnore": [],
         "testMatch": [
           "**/?(*.)@(spec|test).*"
@@ -25,12 +25,12 @@
         "timeout": 660000
       },
       {
-        "outputDir": "c:/VIaltoProjects/playwright/Tests/Portal/test-results",
+        "outputDir": "c:/VialtoProjects/playwright/Tests/Portal/test-results",
         "repeatEach": 1,
         "retries": 0,
         "id": "firefox",
         "name": "firefox",
-        "testDir": "c:/VIaltoProjects/playwright/Tests/Portal",
+        "testDir": "c:/VialtoProjects/playwright/Tests/Portal",
         "testIgnore": [],
         "testMatch": [
           "**/?(*.)@(spec|test).*"
@@ -38,12 +38,12 @@
         "timeout": 660000
       },
       {
-        "outputDir": "c:/VIaltoProjects/playwright/Tests/Portal/test-results",
+        "outputDir": "c:/VialtoProjects/playwright/Tests/Portal/test-results",
         "repeatEach": 1,
         "retries": 0,
         "id": "webkit",
         "name": "webkit",
-        "testDir": "c:/VIaltoProjects/playwright/Tests/Portal",
+        "testDir": "c:/VialtoProjects/playwright/Tests/Portal",
         "testIgnore": [],
         "testMatch": [
           "**/?(*.)@(spec|test).*"
@@ -57,7 +57,7 @@
         null
       ],
       [
-        "c:\\VIaltoProjects\\playwright\\Tests\\Portal\\node_modules\\allure-playwright\\dist\\index.js",
+        "c:\\VialtoProjects\\playwright\\Tests\\Portal\\node_modules\\allure-playwright\\dist\\index.js",
         null
       ],
       [
@@ -73,7 +73,7 @@
         }
       ],
       [
-        "c:\\VIaltoProjects\\playwright\\Tests\\Portal\\customReportGenerator.ts",
+        "c:\\VialtoProjects\\playwright\\Tests\\Portal\\customReportGenerator.ts",
         {
           "environment": "windows 10+ chrome"
         }
@@ -83,8 +83,8 @@
       "max": 5,
       "threshold": 15000
     },
-    "configFile": "c:\\VIaltoProjects\\playwright\\Tests\\Portal\\playwright.config.ts",
-    "rootDir": "c:/VIaltoProjects/playwright/Tests/Portal",
+    "configFile": "c:\\VialtoProjects\\playwright\\Tests\\Portal\\playwright.config.ts",
+    "rootDir": "c:/VialtoProjects/playwright/Tests/Portal",
     "quiet": false,
     "shard": null,
     "updateSnapshots": "missing",
@@ -93,6 +93,219 @@
     "webServer": null
   },
   "suites": [
+    {
+      "title": "src\\tests\\api\\Module1\\get_samples.spec.ts",
+      "file": "src/tests/api/Module1/get_samples.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Viewing Activation Key in WebUI",
+          "file": "src/tests/api/Module1/get_samples.spec.ts",
+          "line": 9,
+          "column": 6,
+          "specs": [
+            {
+              "title": "API-sample API test @api",
+              "ok": true,
+              "tags": [
+                "api"
+              ],
+              "tests": [
+                {
+                  "timeout": 660000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 116,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [
+                        {
+                          "text": "(node:21344) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node.EXE --trace-warnings ...` to show where the warning was created)\n"
+                        }
+                      ],
+                      "retry": 0,
+                      "steps": [
+                        {
+                          "title": "Verify the fields ",
+                          "duration": 6
+                        }
+                      ],
+                      "startTime": "2022-12-13T08:09:35.122Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "415c0519c1238d75a605-9263194e7a28fc976125",
+              "file": "src/tests/api/Module1/get_samples.spec.ts",
+              "line": 14,
+              "column": 3
+            },
+            {
+              "title": "API-sample API test2 @api2",
+              "ok": true,
+              "tags": [
+                "api2"
+              ],
+              "tests": [
+                {
+                  "timeout": 660000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 5576,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2022-12-13T08:09:35.249Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "415c0519c1238d75a605-5744e1bf7db3267dff3f",
+              "file": "src/tests/api/Module1/get_samples.spec.ts",
+              "line": 37,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "src\\tests\\api\\Module1\\get_samples2.spec.ts",
+      "file": "src/tests/api/Module1/get_samples2.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Viewing Activation Key in WebUI",
+          "file": "src/tests/api/Module1/get_samples2.spec.ts",
+          "line": 7,
+          "column": 6,
+          "specs": [
+            {
+              "title": "API-sample API test333 @api",
+              "ok": false,
+              "tags": [
+                "api"
+              ],
+              "tests": [
+                {
+                  "timeout": 660000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "status": "failed",
+                      "duration": 320,
+                      "error": {
+                        "message": "\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"name\"\u001b[39m\nReceived: \u001b[31mundefined\u001b[39m",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"name\"\u001b[39m\nReceived: \u001b[31mundefined\u001b[39m\n    at c:\\VialtoProjects\\playwright\\Tests\\Portal\\src\\tests\\api\\Module1\\get_samples2.spec.ts:29:32"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "c:\\VialtoProjects\\playwright\\Tests\\Portal\\src\\tests\\api\\Module1\\get_samples2.spec.ts",
+                            "column": 32,
+                            "line": 29
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"name\"\u001b[39m\nReceived: \u001b[31mundefined\u001b[39m\n\n\u001b[90m   at \u001b[39msrc\\tests\\api\\Module1\\get_samples2.spec.ts:29\n\n  27 |     expect(response.status).toBe(200)\n  28 |\n> 29 |     expect(response.data.name).toBe(\"name\")\n     |                                ^\n  30 |\n  31 |\n  32 |\n\n\u001b[2m    at c:\\VialtoProjects\\playwright\\Tests\\Portal\\src\\tests\\api\\Module1\\get_samples2.spec.ts:29:32\u001b[22m"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "{\n  page: \u001b[33m2\u001b[39m,\n  per_page: \u001b[33m6\u001b[39m,\n  total: \u001b[33m12\u001b[39m,\n  total_pages: \u001b[33m2\u001b[39m,\n  data: [\n    {\n      id: \u001b[33m7\u001b[39m,\n      email: \u001b[32m'michael.lawson@reqres.in'\u001b[39m,\n      first_name: \u001b[32m'Michael'\u001b[39m,\n      last_name: \u001b[32m'Lawson'\u001b[39m,\n      avatar: \u001b[32m'https://reqres.in/img/faces/7-image.jpg'\u001b[39m\n    },\n    {\n      id: \u001b[33m8\u001b[39m,\n      email: \u001b[32m'lindsay.ferguson@reqres.in'\u001b[39m,\n      first_name: \u001b[32m'Lindsay'\u001b[39m,\n      last_name: \u001b[32m'Ferguson'\u001b[39m,\n      avatar: \u001b[32m'https://reqres.in/img/faces/8-image.jpg'\u001b[39m\n    },\n    {\n      id: \u001b[33m9\u001b[39m,\n      email: \u001b[32m'tobias.funke@reqres.in'\u001b[39m,\n      first_name: \u001b[32m'Tobias'\u001b[39m,\n      last_name: \u001b[32m'Funke'\u001b[39m,\n      avatar: \u001b[32m'https://reqres.in/img/faces/9-image.jpg'\u001b[39m\n    },\n    {\n      id: \u001b[33m10\u001b[39m,\n      email: \u001b[32m'byron.fields@reqres.in'\u001b[39m,\n      first_name: \u001b[32m'Byron'\u001b[39m,\n      last_name: \u001b[32m'Fields'\u001b[39m,\n      avatar: \u001b[32m'https://reqres.in/img/faces/10-image.jpg'\u001b[39m\n    },\n    {\n      id: \u001b[33m11\u001b[39m,\n      email: \u001b[32m'george.edwards@reqres.in'\u001b[39m,\n      first_name: \u001b[32m'George'\u001b[39m,\n      last_name: \u001b[32m'Edwards'\u001b[39m,\n      avatar: \u001b[32m'https://reqres.in/img/faces/11-image.jpg'\u001b[39m\n    },\n    {\n      id: \u001b[33m12\u001b[39m,\n      email: \u001b[32m'rachel.howell@reqres.in'\u001b[39m,\n      first_name: \u001b[32m'Rachel'\u001b[39m,\n      last_name: \u001b[32m'Howell'\u001b[39m,\n      avatar: \u001b[32m'https://reqres.in/img/faces/12-image.jpg'\u001b[39m\n    }\n  ],\n  support: {\n    url: \u001b[32m'https://reqres.in/#support-heading'\u001b[39m,\n    text: \u001b[32m'To keep ReqRes free, contributions towards server costs are appreciated!'\u001b[39m\n  }\n}\n"
+                        },
+                        {
+                          "text": "{\n  page: \u001b[33m2\u001b[39m,\n  per_page: \u001b[33m6\u001b[39m,\n  total: \u001b[33m12\u001b[39m,\n  total_pages: \u001b[33m2\u001b[39m,\n  data: [\n    {\n      id: \u001b[33m7\u001b[39m,\n      email: \u001b[32m'michael.lawson@reqres.in'\u001b[39m,\n      first_name: \u001b[32m'Michael'\u001b[39m,\n      last_name: \u001b[32m'Lawson'\u001b[39m,\n      avatar: \u001b[32m'https://reqres.in/img/faces/7-image.jpg'\u001b[39m\n    },\n    {\n      id: \u001b[33m8\u001b[39m,\n      email: \u001b[32m'lindsay.ferguson@reqres.in'\u001b[39m,\n      first_name: \u001b[32m'Lindsay'\u001b[39m,\n      last_name: \u001b[32m'Ferguson'\u001b[39m,\n      avatar: \u001b[32m'https://reqres.in/img/faces/8-image.jpg'\u001b[39m\n    },\n    {\n      id: \u001b[33m9\u001b[39m,\n      email: \u001b[32m'tobias.funke@reqres.in'\u001b[39m,\n      first_name: \u001b[32m'Tobias'\u001b[39m,\n      last_name: \u001b[32m'Funke'\u001b[39m,\n      avatar: \u001b[32m'https://reqres.in/img/faces/9-image.jpg'\u001b[39m\n    },\n    {\n      id: \u001b[33m10\u001b[39m,\n      email: \u001b[32m'byron.fields@reqres.in'\u001b[39m,\n      first_name: \u001b[32m'Byron'\u001b[39m,\n      last_name: \u001b[32m'Fields'\u001b[39m,\n      avatar: \u001b[32m'https://reqres.in/img/faces/10-image.jpg'\u001b[39m\n    },\n    {\n      id: \u001b[33m11\u001b[39m,\n      email: \u001b[32m'george.edwards@reqres.in'\u001b[39m,\n      first_name: \u001b[32m'George'\u001b[39m,\n      last_name: \u001b[32m'Edwards'\u001b[39m,\n      avatar: \u001b[32m'https://reqres.in/img/faces/11-image.jpg'\u001b[39m\n    },\n    {\n      id: \u001b[33m12\u001b[39m,\n      email: \u001b[32m'rachel.howell@reqres.in'\u001b[39m,\n      first_name: \u001b[32m'Rachel'\u001b[39m,\n      last_name: \u001b[32m'Howell'\u001b[39m,\n      avatar: \u001b[32m'https://reqres.in/img/faces/12-image.jpg'\u001b[39m\n    }\n  ],\n  support: {\n    url: \u001b[32m'https://reqres.in/#support-heading'\u001b[39m,\n    text: \u001b[32m'To keep ReqRes free, contributions towards server costs are appreciated!'\u001b[39m\n  }\n}\n"
+                        }
+                      ],
+                      "stderr": [
+                        {
+                          "text": "(node:7416) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node.EXE --trace-warnings ...` to show where the warning was created)\n"
+                        }
+                      ],
+                      "retry": 0,
+                      "startTime": "2022-12-13T08:09:35.856Z",
+                      "attachments": [],
+                      "errorLocation": {
+                        "file": "c:\\VialtoProjects\\playwright\\Tests\\Portal\\src\\tests\\api\\Module1\\get_samples2.spec.ts",
+                        "column": 32,
+                        "line": 29
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "235b7eae913b1c4431ed-e3d3fc1312c1ff8e4096",
+              "file": "src/tests/api/Module1/get_samples2.spec.ts",
+              "line": 12,
+              "column": 3
+            },
+            {
+              "title": "API-sample API test23 @api2",
+              "ok": true,
+              "tags": [
+                "api2"
+              ],
+              "tests": [
+                {
+                  "timeout": 660000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "status": "passed",
+                      "duration": 3203,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [
+                        {
+                          "text": "(node:18692) Warning: Setting the NODE_TLS_REJECT_UNAUTHORIZED environment variable to '0' makes TLS connections and HTTPS requests insecure by disabling certificate verification.\n(Use `node.EXE --trace-warnings ...` to show where the warning was created)\n"
+                        }
+                      ],
+                      "retry": 0,
+                      "startTime": "2022-12-13T08:09:37.752Z",
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "235b7eae913b1c4431ed-364d04d9bebf26c147d8",
+              "file": "src/tests/api/Module1/get_samples2.spec.ts",
+              "line": 35,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
     {
       "title": "src\\tests\\ui\\Module1\\ui_samples.spec.ts",
       "file": "src/tests/ui/Module1/ui_samples.spec.ts",
@@ -121,12 +334,12 @@
                     {
                       "workerIndex": 0,
                       "status": "passed",
-                      "duration": 14235,
+                      "duration": 12343,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2022-12-12T08:03:10.747Z",
+                      "startTime": "2022-12-13T08:09:58.192Z",
                       "attachments": []
                     }
                   ],
@@ -136,6 +349,67 @@
               "id": "6a558cdcdb6cf43face5-7558d06f72a110b8edbd",
               "file": "src/tests/ui/Module1/ui_samples.spec.ts",
               "line": 24,
+              "column": 3
+            },
+            {
+              "title": "sample UI test Failure",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 660000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "status": "failed",
+                      "duration": 1371,
+                      "error": {
+                        "message": "page.goto: url: expected string, got undefined",
+                        "stack": "page.goto: url: expected string, got undefined\n    at c:\\VialtoProjects\\playwright\\Tests\\Portal\\src\\tests\\ui\\Module1\\ui_samples.spec.ts:52:16\n    at c:\\VialtoProjects\\playwright\\Tests\\Portal\\node_modules\\@playwright\\test\\lib\\workerRunner.js:376:15\n    at TestInfoImpl._runFn (c:\\VialtoProjects\\playwright\\Tests\\Portal\\node_modules\\@playwright\\test\\lib\\testInfo.js:146:7)\n    at c:\\VialtoProjects\\playwright\\Tests\\Portal\\node_modules\\@playwright\\test\\lib\\workerRunner.js:331:26\n    at TimeoutManager.runWithTimeout (c:\\VialtoProjects\\playwright\\Tests\\Portal\\node_modules\\@playwright\\test\\lib\\timeoutManager.js:62:7)\n    at TestInfoImpl._runWithTimeout (c:\\VialtoProjects\\playwright\\Tests\\Portal\\node_modules\\@playwright\\test\\lib\\testInfo.js:135:26)\n    at WorkerRunner._runTest (c:\\VialtoProjects\\playwright\\Tests\\Portal\\node_modules\\@playwright\\test\\lib\\workerRunner.js:312:5)\n    at WorkerRunner.runTestGroup (c:\\VialtoProjects\\playwright\\Tests\\Portal\\node_modules\\@playwright\\test\\lib\\workerRunner.js:192:11)\n    at process.<anonymous> (c:\\VialtoProjects\\playwright\\Tests\\Portal\\node_modules\\@playwright\\test\\lib\\worker.js:74:5)"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "c:\\VialtoProjects\\playwright\\Tests\\Portal\\src\\tests\\ui\\Module1\\ui_samples.spec.ts",
+                            "column": 16,
+                            "line": 52
+                          },
+                          "message": "page.goto: url: expected string, got undefined\n\n\u001b[90m   at \u001b[39msrc\\tests\\ui\\Module1\\ui_samples.spec.ts:52\n\n  50 |   //US#177412\n  51 |   test(\"sample UI test Failure\", async function ({ page }) {\n> 52 |     await page.goto(process.env.baseURL);\n     |                ^\n  53 |     await page.getByRole(\"cell\").nth(1).click();\n  54 |     await page\n  55 |       .locator(\"#ctl00_phCenter_txtEMAIL\")\n\n\u001b[2m    at c:\\VialtoProjects\\playwright\\Tests\\Portal\\src\\tests\\ui\\Module1\\ui_samples.spec.ts:52:16\u001b[22m\n\u001b[2m    at c:\\VialtoProjects\\playwright\\Tests\\Portal\\node_modules\\@playwright\\test\\lib\\workerRunner.js:376:15\u001b[22m\n\u001b[2m    at TestInfoImpl._runFn (c:\\VialtoProjects\\playwright\\Tests\\Portal\\node_modules\\@playwright\\test\\lib\\testInfo.js:146:7)\u001b[22m\n\u001b[2m    at c:\\VialtoProjects\\playwright\\Tests\\Portal\\node_modules\\@playwright\\test\\lib\\workerRunner.js:331:26\u001b[22m\n\u001b[2m    at TimeoutManager.runWithTimeout (c:\\VialtoProjects\\playwright\\Tests\\Portal\\node_modules\\@playwright\\test\\lib\\timeoutManager.js:62:7)\u001b[22m\n\u001b[2m    at TestInfoImpl._runWithTimeout (c:\\VialtoProjects\\playwright\\Tests\\Portal\\node_modules\\@playwright\\test\\lib\\testInfo.js:135:26)\u001b[22m\n\u001b[2m    at WorkerRunner._runTest (c:\\VialtoProjects\\playwright\\Tests\\Portal\\node_modules\\@playwright\\test\\lib\\workerRunner.js:312:5)\u001b[22m\n\u001b[2m    at WorkerRunner.runTestGroup (c:\\VialtoProjects\\playwright\\Tests\\Portal\\node_modules\\@playwright\\test\\lib\\workerRunner.js:192:11)\u001b[22m\n\u001b[2m    at process.<anonymous> (c:\\VialtoProjects\\playwright\\Tests\\Portal\\node_modules\\@playwright\\test\\lib\\worker.js:74:5)\u001b[22m"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2022-12-13T08:10:10.542Z",
+                      "attachments": [
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "c:\\VialtoProjects\\playwright\\Tests\\Portal\\test-results\\src-tests-ui-Module1-ui_samples-Viewing-Activation-Key-in-WebUI-sample-UI-test-Failure-chromium\\video.webm"
+                        },
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "c:\\VialtoProjects\\playwright\\Tests\\Portal\\test-results\\src-tests-ui-Module1-ui_samples-Viewing-Activation-Key-in-WebUI-sample-UI-test-Failure-chromium\\test-failed-1.png"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "c:\\VialtoProjects\\playwright\\Tests\\Portal\\src\\tests\\ui\\Module1\\ui_samples.spec.ts",
+                        "column": 16,
+                        "line": 52
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "6a558cdcdb6cf43face5-ffa92067937607f0a54a",
+              "file": "src/tests/ui/Module1/ui_samples.spec.ts",
+              "line": 51,
               "column": 3
             }
           ]
