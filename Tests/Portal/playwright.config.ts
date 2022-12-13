@@ -1,6 +1,6 @@
 // playwright.config.js
 // @ts-check
-const { devices } = require('@playwright/test');
+const { devices } = require('@playwright/test');    //Donot change to import module. Breaks the flow.
 
 /** @type {import('@playwright/test').PlaywrightTestConfig} */
 const config = {
