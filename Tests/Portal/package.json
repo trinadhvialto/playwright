@@ -11,6 +11,7 @@
     "@types/node": "18.11.9",
     "@types/pixelmatch": "5.2.4",
     "@types/pngjs": "6.0.1",
+    "@types/qs": "^6.9.7",
     "@typescript-eslint/eslint-plugin": "5.43.0",
     "@typescript-eslint/parser": "5.43.0",
     "allure-commandline": "^2.20.1",

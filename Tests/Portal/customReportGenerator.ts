@@ -2,13 +2,15 @@ var fs = require('fs');
 var counter = 0;
 var environment = '';
 class CustomReportGenerator {
+    resultHistory: any[];
+    outputFile: string;
     constructor(){
         this.resultHistory = []
         this.outputFile = 'customjson.json'
         counter = 0;   
     }
     
-    onBegin(config, suite) {
+    onBegin(config : any, suite : any) {
       for(let rep of config.reporter){
           if(rep[0].includes('customReportGenerator')){
             this.outputFile = rep[1].outputFile;
@@ -17,21 +19,21 @@ class CustomReportGenerator {
       }
     }
     
-    onTestBegin(test) {
+    onTestBegin(test : any) {
     }
   
-    onTestEnd(test, result) {
+    onTestEnd(test : any, result : any) {
       this.resultHistory.push(specBuilder(test,result));     
 
     }
   
-    onEnd(result) {
+    onEnd(result : any) {
       var json = JSON.stringify(this.resultHistory, undefined, '\t');    
       jsonWriter(this.outputFile,json,"TESTS");
     }  
 }
 
-function specBuilder(test, result){
+function specBuilder(test : any, result : any){
     let tempObj ={
       id: "Spec"+(++counter),
       endTime: null,
@@ -59,7 +61,7 @@ function specBuilder(test, result){
     return tempObj;
 }
 
-function jsonWriter(outputFile,json,prefix){ 
+function jsonWriter(outputFile: string,json: string,prefix: string){ 
   fs.writeFileSync('./testresults/'+prefix+'-'+outputFile+'.json', json, function (err) {
     if (err) {
       console.log('Cannot write JSON\n\t' + err.message);

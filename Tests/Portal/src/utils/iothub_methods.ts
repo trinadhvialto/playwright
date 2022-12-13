@@ -1,10 +1,10 @@
-const { TokenGenerators } = require('./token_generators.js')
+import { TokenGenerators } from './token_generators'
 var apiVersion = 'api-version=2020-09-30'
-const { TestData } = require('../utils/test_data.js');
+import { TestData } from '../utils/test_data';
 
-exports.IotHubMethods = class IotHubMethods{
+export class IotHubMethods{
     
-    static async getModuleTwin(iothub, deviceId, moduleId, sastoken){
+    static async getModuleTwin(iothub: string, deviceId: string, moduleId: string, sastoken: any){
         var iothubConfig = {  
             method: 'post',
             url: 'https://'+iothub+'.azure-devices.net/devices/query?api-version=2020-05-31-preview',
@@ -16,7 +16,7 @@ exports.IotHubMethods = class IotHubMethods{
         return iothubResponse;
     }
 
-    static async getDevicesOnStatus(iothub, sastoken){ 
+    static async getDevicesOnStatus(iothub: string, sastoken: any){ 
         var iothubConfig = {  
             method: 'post',
             url: 'https://'+iothub+'.azure-devices.net/devices/query?api-version=2020-05-31-preview',
@@ -27,7 +27,7 @@ exports.IotHubMethods = class IotHubMethods{
         return iothubResponse;
     }
 
-    static async invokeMethod(iothub,deviceId,moduleId,methodName,payload,sastoken){
+    static async invokeMethod(iothub: string,deviceId: string,moduleId: string,methodName: any,payload: any,sastoken: any){
         console.log(deviceId)
         // console.log('https://'+iothub+'.azure-devices.net/twins/'+deviceId+'/modules/'+moduleId+'/methods?api-version=2020-05-31-preview')
         console.log('https://'+iothub+'.azure-devices.net/twins/'+deviceId+'/modules/'+moduleId+'/methods?'+apiVersion)
@@ -46,7 +46,7 @@ exports.IotHubMethods = class IotHubMethods{
         return iothubResponse;
     }
 
-    static async updateModuleTwinProperties(iothub, deviceId, moduleId, sastoken,payload){
+    static async updateModuleTwinProperties(iothub: string, deviceId: string, moduleId: string, sastoken: any,payload: any){
         var iothubConfig = {  
             method: 'patch',
             url: 'https://'+iothub+'.azure-devices.net/twins/'+deviceId+'/modules/'+moduleId+'?api-version=2020-05-31-preview',
@@ -58,7 +58,7 @@ exports.IotHubMethods = class IotHubMethods{
         return iothubResponse;
     }
 
-    static async getDeviceTwin(iothub, deviceId, sastoken){
+    static async getDeviceTwin(iothub: string, deviceId: string, sastoken: any){
         var iothubConfig = {  
             method: 'post',
             url: 'https://'+iothub+'.azure-devices.net/devices/query?api-version=2020-05-31-preview',

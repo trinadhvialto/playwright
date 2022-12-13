@@ -1,6 +1,6 @@
-const { config } = require('./config.js');
-const { Before, After, BeforeAll, AfterAll, Status, setDefaultTimeout } = require('@cucumber/cucumber');
-const {
+import { config } from './config';
+import { Before, After, BeforeAll, AfterAll, Status, setDefaultTimeout } from '@cucumber/cucumber';
+import {
   chromium,
   ChromiumBrowser,
   firefox,
@@ -9,12 +9,13 @@ const {
   WebKitBrowser,
   ConsoleMessage,
   request,
-} = require ('@playwright/test');
-const { ITestCaseHookParameter } = require('@cucumber/cucumber/lib/support_code_library_builder/types');
-const { ensureDir } = require('fs-extra');
-// const { default: test } = require('node:test');
+} from '@playwright/test';
+import { ITestCaseHookParameter } from '@cucumber/cucumber/lib/support_code_library_builder/types';
+import { ensureDir } from 'fs-extra';
+import { test } from 'node:test';
 
-let browser= ChromiumBrowser;
+let browser: ChromiumBrowser | FirefoxBrowser | WebKitBrowser;
+let browserName : string = "chrome";
 const tracesDir = 'traces';
 
 // declare global {
@@ -25,13 +26,13 @@ const tracesDir = 'traces';
 setDefaultTimeout(process.env.PWDEBUG ? -1 : 60 * 1000);
 
 BeforeAll(async function () {
-  switch ("chrome") {
-    case 'firefox':
+  switch (browserName) {
+    /*case 'firefox':
       browser = await firefox.launch(config.browserOptions);
       break;
     case 'webkit':
       browser = await webkit.launch(config.browserOptions);
-      break;
+      break;*/
     default:
       browser = await chromium.launch();
   }

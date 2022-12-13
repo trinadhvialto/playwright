@@ -1,16 +1,16 @@
-const { test, expect } = require("@playwright/test");
-const { ApiHelper } = require("../../../src/helpers/api-helpers.js");
+import { test, expect } from "@playwright/test";
+import { ApiHelper } from "../../../src/helpers/api-helpers";
 var OR = require("../../OR.json");
 var OR_Header = require("../../headers.json");
 var OR_payload = require("../../payloads.json");
-const {Comparisions }= require("..//../../src/utils/comparisions.js");
+import {Comparisions } from "..//../../src/utils/comparisions";
 
 
-const { Given, When, Then } = require("@cucumber/cucumber");
+import { Given, When, Then } from "@cucumber/cucumber";
 
-const { request } = require("http");
+import { request } from "http";
 
-var response;
+var response: { status: any; data: { [x: string]: any; }; };
 
 
 
@@ -54,7 +54,7 @@ Then(
       expect(areEqual).not.toContain(false);
 
     } else {
-      expect.soft(response).toHaveText(string);
+      expect.soft(response).toContain(string);
     }
   }
 );

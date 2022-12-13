@@ -3,7 +3,7 @@ const { BlobServiceClient } = require("@azure/storage-blob");
 const excludePackage = require("../resources/foss-package-to-exclude.json")
 
 exports.LicensesUtil = class LicensesUtil {
-    static async streamToText(readable) {
+    static async streamToText(readable : any) {
         readable.setEncoding('utf8');
         let data = '';
         for await (const chunk of readable) {
@@ -54,7 +54,7 @@ exports.LicensesUtil = class LicensesUtil {
         return license;
     }
 
-    static getLicenseString(pkgDetails) {
+    static getLicenseString(pkgDetails : any) {
         let licenseString = '';
         for (let license of pkgDetails) {
             if (license.spdxId === undefined && license.licenses.length === 0) {
@@ -72,7 +72,7 @@ exports.LicensesUtil = class LicensesUtil {
         return licenseString;
     }
 
-    static getTotalPackages(fossLicenseContent, packages) {
+    static getTotalPackages(fossLicenseContent : any, packages : any) {
         let count = 0;
         for (const item of packages) {
             if (fossLicenseContent.indexOf(`${item.componentName} ${item.componentVersionName}`) !== -1
@@ -84,7 +84,7 @@ exports.LicensesUtil = class LicensesUtil {
         return count;
     }
 
-    static getPackageDescription(fossLicenseContent, startIndex) {
+    static getPackageDescription(fossLicenseContent : any, startIndex : any) {
         let endIndex = 0;
         for (let i = startIndex; fossLicenseContent.charAt(i) !== '\n'; i++) {
             endIndex = i;
@@ -93,7 +93,7 @@ exports.LicensesUtil = class LicensesUtil {
         return fossLicenseContent.substring(startIndex, endIndex + 1);
     }
 
-    static isCopyrightTextPresent(fossLicenseContent, startIndex) {
+    static isCopyrightTextPresent(fossLicenseContent : any, startIndex : any) {
         if (startIndex == -1)
             return false;
 

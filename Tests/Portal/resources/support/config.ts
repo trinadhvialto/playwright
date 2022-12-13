@@ -1,6 +1,6 @@
 // playwright.config.js
 // @ts-check
-const { devices } = require('@playwright/test');
+import { devices } from '@playwright/test';
 
 /** @type {import('@playwright/test').PlaywrightTestConfig} */
 const config = {
@@ -58,9 +58,10 @@ const config = {
     ['allure-playwright'],
     ['json', {  outputFile: 'testresults/'+process.env.customReportName+'.json' }],
     ['junit',{  outputFile: 'testresults/'+process.env.customReportName+'-junit-xml.xml' }],
-    ['./customReportGenerator.js',{ outputFile: process.env.customReportName, environment: 'windows 10+ chrome' }]
+    ['./customReportGenerator.ts',{ outputFile: process.env.customReportName, environment: 'windows 10+ chrome' }]
   ],
   
 };
 
-module.exports = config;
+//module.exports = config;
+export {config};
