@@ -4,15 +4,14 @@ const { devices } = require('@playwright/test');    //Donot change to import mod
 
 /** @type {import('@playwright/test').PlaywrightTestConfig} */
 const config = {
-  testDir: 'C:\\Users\\vtpr271\\Automation\\playwright\\Tests\\Portal\\src\\tests\\ui\\Traveller',
   forbidOnly: !!process.env.forbidOnly,
   workers: 1,// workers will be take from Pipeline variable given by user
   retries: 0,
 
   use: {
     trace: 'on-first-retry',
-    actionTimeout: 120 * 10000,
-    navigationTimeout: 120 * 1000,
+    actionTimeout: 5 * 10000,
+    navigationTimeout: 60 * 1000,
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
     locale: process.env.locale,
@@ -40,7 +39,10 @@ const config = {
     {
       name: 'chromium',
 
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome']
+      },
+
     },
     // {
     //   name: 'firefox',
@@ -57,7 +59,7 @@ const config = {
     timeout: 12 * 10000,
   },
   reporter: [
-    ['dot'],
+    ['line'],
     ['allure-playwright'],
     ['json', { outputFile: 'testresults/' + process.env.customReportName + '.json' }],
     ['junit', { outputFile: 'testresults/' + process.env.customReportName + '-junit-xml.xml' }],

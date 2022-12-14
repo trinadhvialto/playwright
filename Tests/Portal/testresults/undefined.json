@@ -27,7 +27,7 @@
     ],
     "reporter": [
       [
-        "dot",
+        "line",
         null
       ],
       [
@@ -95,12 +95,12 @@
                     {
                       "workerIndex": 0,
                       "status": "passed",
-                      "duration": 4459,
+                      "duration": 8271,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2022-12-14T16:05:15.981Z",
+                      "startTime": "2022-12-14T18:16:43.134Z",
                       "attachments": []
                     }
                   ],
@@ -127,12 +127,12 @@
                     {
                       "workerIndex": 0,
                       "status": "passed",
-                      "duration": 5799,
+                      "duration": 4655,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2022-12-14T16:05:41.307Z",
+                      "startTime": "2022-12-14T18:17:04.164Z",
                       "attachments": []
                     }
                   ],
@@ -159,12 +159,12 @@
                     {
                       "workerIndex": 0,
                       "status": "passed",
-                      "duration": 419,
+                      "duration": 200,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2022-12-14T16:05:47.108Z",
+                      "startTime": "2022-12-14T18:17:08.820Z",
                       "attachments": []
                     }
                   ],
@@ -191,12 +191,12 @@
                     {
                       "workerIndex": 0,
                       "status": "passed",
-                      "duration": 26528,
+                      "duration": 9942,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2022-12-14T16:05:47.528Z",
+                      "startTime": "2022-12-14T18:17:09.022Z",
                       "attachments": []
                     }
                   ],

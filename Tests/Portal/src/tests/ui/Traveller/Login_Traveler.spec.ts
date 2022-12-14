@@ -58,7 +58,7 @@ test.describe("Login to Traveler and book a trip", function () {
         expect(await homePage.isSignOutPresent()).toBe(true);
     });
 
-    test("Create a trip with Home and Destination with valid dates ", async () => {
+    test("Create a trip with Home and Destination with valid dates", async () => {
         await homePage.openFromDropdownAndSelectOptionFromDrp("India");
         await homePage.openFromDropdownAndSelectOptionToDrp("Singapore");
         await homePage.clickOnAssessMyDropDown("India", "Singapore");
@@ -68,6 +68,8 @@ test.describe("Login to Traveler and book a trip", function () {
         await homePage.setDestinationDepartureDate("05/01/2023 10:20 PM");
         await homePage.setHomeArrivalDate("06/01/2023 10:20 PM");
         await homePage.clickOnSaveAndContinueBtn();
+        await homePage.clickOnContinueToHomeBtn();
+        expect(await homePage.waitForTravelerPage()).toBe(true);
     })
 
 });

@@ -14,7 +14,9 @@
         "destinationdepertureDateBox": "#Trip_TripSegments_1__DepartureDate",
         "homedarrivalDateBox": "#Trip_TripSegments_1__ArrivalDate",
         "destinationarrivalDateBox": "#Trip_TripSegments_0__ArrivalDate",
-        "saveAndContinueBtn": "btnSave",
-        "enterTripDetailPageHeader": ".page-heading"
+        "saveAndContinueBtn": "#btnSave",
+        "enterTripDetailPageHeader": ".page-heading",
+        "continueToHomeBtn": "#btnExit",
+        "modifyTripBtn": "#btnModifyTrip"
     }
 }
