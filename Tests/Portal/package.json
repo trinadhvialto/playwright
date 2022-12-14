@@ -2,7 +2,7 @@
   "scripts": {
     "test": "npx playwright test",
     "lint": "eslint . --ext js,ts",
-    "cucumbertest": "npx cucumber-js --require './bddframework/api/features/APIcommanStepDef.feature'"
+    "cucumbertest": "npx cucumber-js"
   },
   "devDependencies": {
     "@types/chai": "^4.3.4",
