@@ -4,9 +4,10 @@ const { devices } = require('@playwright/test');    //Donot change to import mod
 
 /** @type {import('@playwright/test').PlaywrightTestConfig} */
 const config = {
+  testDir: 'C:\\Users\\vtpr271\\Automation\\playwright\\Tests\\Portal\\src\\tests\\ui\\Traveller',
   forbidOnly: !!process.env.forbidOnly,
-  workers: 2,// workers will be take from Pipeline variable given by user
-  retries: 1,
+  workers: 1,// workers will be take from Pipeline variable given by user
+  retries: 0,
   
   use: {
     trace: 'on-first-retry',
@@ -18,8 +19,8 @@ const config = {
     headless: false,    
     // browserName: 'chromium',
     channel: process.env.browser,
-    viewport: null,
-       launchOptions: {
+    // viewport: null,
+    launchOptions: {
       args: ['--start-maximized']
     },
     extraHTTPHeaders: {
@@ -39,14 +40,14 @@ const config = {
       
       use: { ...devices['Desktop Chrome'] },
     },
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
+    // {
+    //   name: 'firefox',
+    //   use: { ...devices['Desktop Firefox'] },
+    // },
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'] },
+    // },
   ],
   globalTimeout: 120 * 100 * 1000,
   timeout: 11 * 60 * 1000,
