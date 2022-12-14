@@ -1,7 +1,7 @@
 import { TokenGenerators } from "../utils/token_generators";
 
 export class UIHelper {
-    page: any;
+     page: any;
     
     constructor(page: any) {
         this.page = page;
@@ -58,9 +58,24 @@ export class UIHelper {
     }
 
 
-     async isElementPresent(locator: any) {
+    async isElementPresent(locator: any) {
+        // console.log(typeof locator.toString());
+        let type= typeof locator;
+        if(type === "string"){
+            await this.page.locator(locator).scrollIntoViewIfNeeded();
+            return await this.page.locator(locator).isVisible();
+        }else if(type === "object"){
+            return await locator.isVisible();
+        }
+       
+        console.log(type);
+        console.log(type.toString());
+
+    }
+
+    async isElementEnabled(locator: any) {
         await this.page.locator(locator).scrollIntoViewIfNeeded();
-        return await this.page.locator(locator).isVisible();
+        return await this.page.locator(locator).isEnabled();
 
     }
 

@@ -8,36 +8,38 @@ const config = {
   forbidOnly: !!process.env.forbidOnly,
   workers: 1,// workers will be take from Pipeline variable given by user
   retries: 0,
-  
+
   use: {
     trace: 'on-first-retry',
-    actionTimeout: 5 * 5000,
-    navigationTimeout: 60 * 1000,
+    actionTimeout: 120 * 10000,
+    navigationTimeout: 120 * 1000,
     screenshot: 'only-on-failure',
-    video : 'retain-on-failure',
+    video: 'retain-on-failure',
     locale: process.env.locale,
-    headless: false,    
+    headless: false,
     // browserName: 'chromium',
     channel: process.env.browser,
-    // viewport: null,
-    launchOptions: {
-      args: ['--start-maximized']
-    },
+    // use: {
+    //   viewport: { width: 1920, height: 1080 },
+    // },
+    // launchOptions: {
+    //   args: ['--start-maximized']
+    // },
     extraHTTPHeaders: {
       // We set this header per GitHub guidelines.
       'Accept': 'application/vnd.github.v3+json',
     },
-    
-    
+
+
   },
 
 
 
-  
+
   projects: [
     {
       name: 'chromium',
-      
+
       use: { ...devices['Desktop Chrome'] },
     },
     // {
@@ -52,16 +54,16 @@ const config = {
   globalTimeout: 120 * 100 * 1000,
   timeout: 11 * 60 * 1000,
   expect: {
-    timeout: 10 * 1000,
+    timeout: 12 * 10000,
   },
   reporter: [
     ['dot'],
     ['allure-playwright'],
-    ['json', {  outputFile: 'testresults/'+process.env.customReportName+'.json' }],
-    ['junit',{  outputFile: 'testresults/'+process.env.customReportName+'-junit-xml.xml' }],
-    ['./customReportGenerator.ts',{ outputFile: process.env.customReportName, environment: 'windows 10+ chrome' }]
+    ['json', { outputFile: 'testresults/' + process.env.customReportName + '.json' }],
+    ['junit', { outputFile: 'testresults/' + process.env.customReportName + '-junit-xml.xml' }],
+    ['./customReportGenerator.ts', { outputFile: process.env.customReportName, environment: 'windows 10+ chrome' }]
   ],
-  
+
 };
 
 module.exports = config;

@@ -5,10 +5,10 @@ export class BasePage extends UIHelper{
      
 
     async navigateToUrl() {
-       var username = process.env.username
-       var  password = process.env.password
+       const username = process.env.username
+       const  password = process.env.password
 
-       var url = process.env.url;
+       const url = process.env.url;
         await this.page.goto(url);
 
         // console.log("Test is executing with user:- " + username);
@@ -28,7 +28,7 @@ export class BasePage extends UIHelper{
         // await this.waitTillElementIsVisible(userButton)
         // var loadSpinner = 'xpath=' + OR.locators.customerListPage.loadSpinner
         // await this.waitTillElementIsInvisible(loadSpinner)
-        await this.page.waitForTimeout(10000);
+        // await this.page.waitForTimeout(10000);
 
     }
 

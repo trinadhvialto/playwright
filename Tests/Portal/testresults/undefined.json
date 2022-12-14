@@ -75,14 +75,14 @@
       "specs": [],
       "suites": [
         {
-          "title": "Login to Traveler",
+          "title": "Login to Traveler and book a trip",
           "file": "Login_Traveler.spec.ts",
-          "line": 11,
+          "line": 13,
           "column": 6,
           "specs": [
             {
               "title": "Navigate to MyTrips Travelers Page and verify expected elements are displayed",
-              "ok": false,
+              "ok": true,
               "tags": [],
               "tests": [
                 {
@@ -94,54 +94,22 @@
                   "results": [
                     {
                       "workerIndex": 0,
-                      "status": "failed",
-                      "duration": 29106,
-                      "error": {
-                        "message": "Cannot read properties of undefined (reading 'locator')",
-                        "stack": "TypeError: Cannot read properties of undefined (reading 'locator')\n    at C:\\Users\\vtpr271\\Automation\\playwright\\Tests\\Portal\\src\\tests\\ui\\Traveller\\Login_Traveler.spec.ts:37:33"
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "C:\\Users\\vtpr271\\Automation\\playwright\\Tests\\Portal\\src\\tests\\ui\\Traveller\\Login_Traveler.spec.ts",
-                            "column": 33,
-                            "line": 37
-                          },
-                          "message": "TypeError: Cannot read properties of undefined (reading 'locator')\n\n\u001b[90m   at \u001b[39mLogin_Traveler.spec.ts:37\n\n\u001b[0m \u001b[90m 35 |\u001b[39m         \u001b[36mconst\u001b[39m isLoginHeaderVisible \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m basepage\u001b[33m.\u001b[39misElementPresent(loginPageJson\u001b[33m.\u001b[39mtoolbars\u001b[33m.\u001b[39mloginHeader)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 36 |\u001b[39m         expect(isLoginHeaderVisible)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 37 |\u001b[39m         \u001b[36mconst\u001b[39m text \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m page\u001b[33m.\u001b[39mlocator(loginPageJson\u001b[33m.\u001b[39mmainPage\u001b[33m.\u001b[39mloginHelpText)\u001b[33m.\u001b[39mallInnerTexts()\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m                                 \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 38 |\u001b[39m         expect(text)\u001b[33m.\u001b[39mtoEqual(loginText)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 39 |\u001b[39m          \u001b[36mconst\u001b[39m isLoginBoxVisible \u001b[33m=\u001b[39m \u001b[36mawait\u001b[39m basepage\u001b[33m.\u001b[39misElementPresent(loginPageJson\u001b[33m.\u001b[39minputBoxes\u001b[33m.\u001b[39memail)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 40 |\u001b[39m          expect(isLoginBoxVisible)\u001b[33m.\u001b[39mtoBe(\u001b[36mtrue\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\n\u001b[2m    at C:\\Users\\vtpr271\\Automation\\playwright\\Tests\\Portal\\src\\tests\\ui\\Traveller\\Login_Traveler.spec.ts:37:33\u001b[22m"
-                        },
-                        {
-                          "message": "\u001b[31mTest timeout of 660000ms exceeded while tearing down \"context\".\u001b[39m"
-                        }
-                      ],
+                      "status": "passed",
+                      "duration": 4459,
+                      "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2022-12-14T09:46:27.340Z",
-                      "attachments": [
-                        {
-                          "name": "video",
-                          "contentType": "video/webm",
-                          "path": "C:\\Users\\vtpr271\\Automation\\playwright\\Tests\\Portal\\test-results\\Login_Traveler-Login-to-Traveler-Navigate-to-M-4f91c-Page-and-verify-expected-elements-are-displayed-chromium\\video.webm"
-                        },
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "C:\\Users\\vtpr271\\Automation\\playwright\\Tests\\Portal\\test-results\\Login_Traveler-Login-to-Traveler-Navigate-to-M-4f91c-Page-and-verify-expected-elements-are-displayed-chromium\\test-failed-1.png"
-                        }
-                      ],
-                      "errorLocation": {
-                        "file": "C:\\Users\\vtpr271\\Automation\\playwright\\Tests\\Portal\\src\\tests\\ui\\Traveller\\Login_Traveler.spec.ts",
-                        "column": 33,
-                        "line": 37
-                      }
+                      "startTime": "2022-12-14T16:05:15.981Z",
+                      "attachments": []
                     }
                   ],
-                  "status": "unexpected"
+                  "status": "expected"
                 }
               ],
-              "id": "55abc35a740241f7c197-a02e718c70168823539f",
+              "id": "55abc35a740241f7c197-c028354299f76a390c06",
               "file": "Login_Traveler.spec.ts",
-              "line": 29,
+              "line": 27,
               "column": 5
             },
             {
@@ -150,30 +118,30 @@
               "tags": [],
               "tests": [
                 {
-                  "timeout": 0,
+                  "timeout": 660000,
                   "annotations": [],
                   "expectedStatus": "passed",
                   "projectId": "chromium",
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 5799,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2022-12-14T09:47:27.416Z",
+                      "startTime": "2022-12-14T16:05:41.307Z",
                       "attachments": []
                     }
                   ],
-                  "status": "skipped"
+                  "status": "expected"
                 }
               ],
-              "id": "55abc35a740241f7c197-e87d5a0ebd69a2921835",
+              "id": "55abc35a740241f7c197-725a4271a95001e46056",
               "file": "Login_Traveler.spec.ts",
-              "line": 50,
+              "line": 39,
               "column": 5
             },
             {
@@ -182,62 +150,62 @@
               "tags": [],
               "tests": [
                 {
-                  "timeout": 0,
+                  "timeout": 660000,
                   "annotations": [],
                   "expectedStatus": "passed",
                   "projectId": "chromium",
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 419,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2022-12-14T09:47:27.418Z",
+                      "startTime": "2022-12-14T16:05:47.108Z",
                       "attachments": []
                     }
                   ],
-                  "status": "skipped"
+                  "status": "expected"
                 }
               ],
-              "id": "55abc35a740241f7c197-baede43d0db857367cfb",
+              "id": "55abc35a740241f7c197-3f2d9d476f626cfd5da6",
               "file": "Login_Traveler.spec.ts",
-              "line": 68,
+              "line": 52,
               "column": 5
             },
             {
-              "title": "Schcedule a trip from ",
+              "title": "Create a trip with Home and Destination with valid dates ",
               "ok": true,
               "tags": [],
               "tests": [
                 {
-                  "timeout": 0,
+                  "timeout": 660000,
                   "annotations": [],
                   "expectedStatus": "passed",
                   "projectId": "chromium",
                   "projectName": "chromium",
                   "results": [
                     {
-                      "workerIndex": -1,
-                      "status": "skipped",
-                      "duration": 0,
+                      "workerIndex": 0,
+                      "status": "passed",
+                      "duration": 26528,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2022-12-14T09:47:27.420Z",
+                      "startTime": "2022-12-14T16:05:47.528Z",
                       "attachments": []
                     }
                   ],
-                  "status": "skipped"
+                  "status": "expected"
                 }
               ],
-              "id": "55abc35a740241f7c197-2222a3ac8be4d0434ee5",
+              "id": "55abc35a740241f7c197-04bf2ac38dbb232c95c9",
               "file": "Login_Traveler.spec.ts",
-              "line": 84,
+              "line": 61,
               "column": 5
             }
           ]
