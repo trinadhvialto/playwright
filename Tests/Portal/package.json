@@ -2,10 +2,9 @@
   "scripts": {
     "test": "npx playwright test",
     "lint": "eslint . --ext js,ts",
-    "cucumbertest": "npx cucumber-js"
+    "cucumbertest": "npx cucumber-js --require './bddframework/api/features/APIcommanStepDef.feature'"
   },
   "devDependencies": {
-    "@playwright/test": "^1.28.1",
     "@types/chai": "^4.3.4",
     "@types/cucumber": "^7.0.0",
     "@types/expect": "24.3.0",
@@ -50,6 +49,7 @@
     "@cucumber/cucumber": "7.3.1",
     "@cucumber/html-formatter": "11.0.4",
     "@cucumber/pretty-formatter": "1.0.0-alpha.0",
+    "@playwright/test": "^1.28.1",
     "@types/expect": "24.3.0",
     "@types/lodash": "4.14.167",
     "@types/node": "14.14.20",
