@@ -15,9 +15,9 @@
         "outputDir": "C:/Users/vtpr271/Automation/playwright/Tests/Portal/test-results",
         "repeatEach": 1,
         "retries": 0,
-        "id": "chromium",
-        "name": "chromium",
-        "testDir": "C:/Users/vtpr271/Automation/playwright/Tests/Portal/src/tests/ui/Traveller",
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/vtpr271/Automation/playwright/Tests/Portal",
         "testIgnore": [],
         "testMatch": [
           "**/?(*.)@(spec|test).*"
@@ -58,7 +58,7 @@
       "threshold": 15000
     },
     "configFile": "C:\\Users\\vtpr271\\Automation\\playwright\\Tests\\Portal\\playwright.config.ts",
-    "rootDir": "C:/Users/vtpr271/Automation/playwright/Tests/Portal/src/tests/ui/Traveller",
+    "rootDir": "C:/Users/vtpr271/Automation/playwright/Tests/Portal",
     "quiet": false,
     "shard": null,
     "updateSnapshots": "missing",
@@ -68,16 +68,16 @@
   },
   "suites": [
     {
-      "title": "Login_Traveler.spec.ts",
-      "file": "Login_Traveler.spec.ts",
+      "title": "src\\tests\\ui\\Traveller\\Login_Traveler.spec.ts",
+      "file": "src/tests/ui/Traveller/Login_Traveler.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
           "title": "Login to Traveler and book a trip",
-          "file": "Login_Traveler.spec.ts",
-          "line": 13,
+          "file": "src/tests/ui/Traveller/Login_Traveler.spec.ts",
+          "line": 11,
           "column": 6,
           "specs": [
             {
@@ -89,27 +89,27 @@
                   "timeout": 660000,
                   "annotations": [],
                   "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
+                  "projectId": "",
+                  "projectName": "",
                   "results": [
                     {
                       "workerIndex": 0,
                       "status": "passed",
-                      "duration": 8271,
+                      "duration": 4527,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2022-12-14T18:16:43.134Z",
+                      "startTime": "2022-12-15T06:13:44.224Z",
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "55abc35a740241f7c197-c028354299f76a390c06",
-              "file": "Login_Traveler.spec.ts",
-              "line": 27,
+              "id": "0d3a187a7e3e86ed7dc2-0393a4cf7f73d312a80e",
+              "file": "src/tests/ui/Traveller/Login_Traveler.spec.ts",
+              "line": 23,
               "column": 5
             },
             {
@@ -121,27 +121,27 @@
                   "timeout": 660000,
                   "annotations": [],
                   "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
+                  "projectId": "",
+                  "projectName": "",
                   "results": [
                     {
                       "workerIndex": 0,
                       "status": "passed",
-                      "duration": 4655,
+                      "duration": 6588,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2022-12-14T18:17:04.164Z",
+                      "startTime": "2022-12-15T06:14:00.630Z",
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "55abc35a740241f7c197-725a4271a95001e46056",
-              "file": "Login_Traveler.spec.ts",
-              "line": 39,
+              "id": "0d3a187a7e3e86ed7dc2-7047e9d7607a5a3736c7",
+              "file": "src/tests/ui/Traveller/Login_Traveler.spec.ts",
+              "line": 35,
               "column": 5
             },
             {
@@ -153,31 +153,31 @@
                   "timeout": 660000,
                   "annotations": [],
                   "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
+                  "projectId": "",
+                  "projectName": "",
                   "results": [
                     {
                       "workerIndex": 0,
                       "status": "passed",
-                      "duration": 200,
+                      "duration": 266,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2022-12-14T18:17:08.820Z",
+                      "startTime": "2022-12-15T06:14:07.219Z",
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "55abc35a740241f7c197-3f2d9d476f626cfd5da6",
-              "file": "Login_Traveler.spec.ts",
-              "line": 52,
+              "id": "0d3a187a7e3e86ed7dc2-276ee17caf2e319dffc4",
+              "file": "src/tests/ui/Traveller/Login_Traveler.spec.ts",
+              "line": 40,
               "column": 5
             },
             {
-              "title": "Create a trip with Home and Destination with valid dates ",
+              "title": "Create a trip with Home and Destination with valid dates",
               "ok": true,
               "tags": [],
               "tests": [
@@ -185,27 +185,27 @@
                   "timeout": 660000,
                   "annotations": [],
                   "expectedStatus": "passed",
-                  "projectId": "chromium",
-                  "projectName": "chromium",
+                  "projectId": "",
+                  "projectName": "",
                   "results": [
                     {
                       "workerIndex": 0,
                       "status": "passed",
-                      "duration": 9942,
+                      "duration": 23240,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2022-12-14T18:17:09.022Z",
+                      "startTime": "2022-12-15T06:14:07.486Z",
                       "attachments": []
                     }
                   ],
                   "status": "expected"
                 }
               ],
-              "id": "55abc35a740241f7c197-04bf2ac38dbb232c95c9",
-              "file": "Login_Traveler.spec.ts",
-              "line": 61,
+              "id": "0d3a187a7e3e86ed7dc2-221ad026efc9fb672973",
+              "file": "src/tests/ui/Traveller/Login_Traveler.spec.ts",
+              "line": 49,
               "column": 5
             }
           ]

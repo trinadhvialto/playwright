@@ -3,18 +3,14 @@ import { TravelHomePage } from '../../../pages/travelerPage/travelerMainPage';
 import { LoginPage } from './../../../pages/loginPage';
 
 
-
 let basepage: any;
 let homePage: any;
 let page: Page;
 let noOfTimesLaunched = 0;
 
-
 test.describe("Login to Traveler and book a trip", function () {
     test.describe.configure({ mode: 'serial' });
-
     test.beforeAll(async function ({ browser }) {
-
         if (!page && !noOfTimesLaunched) {
             page = await browser.newPage();
             basepage = new LoginPage(page);
@@ -37,15 +33,7 @@ test.describe("Login to Traveler and book a trip", function () {
     });
 
     test("Login into MyTrips application with Traveler account", async () => {
-        await basepage.setTextInEmailBox("traveler1@mytripqa.com");
-        await basepage.clickOnGetStartedoRSignBtn();
-        await basepage.waitForPasswordBox();
-        expect(await basepage.IsPasswordBoxPresent()).toBe(true);
-        expect(await basepage.isGetStartedoRSignBtnPresent()).toBe(true);
-        expect(await basepage.isGetStartedoRSignBtnEnabled()).toBe(true);
-        expect(await basepage.getStartedButtonText()).toBe("Sign in");
-        await basepage.setTextInPasswordBox("Test@1234");
-        await basepage.clickOnGetStartedoRSignBtn();
+        basepage.loginIntoMyTripApplication();
         expect(await homePage.waitForTravelerPage()).toBe(true);
     });
 
@@ -67,9 +55,9 @@ test.describe("Login to Traveler and book a trip", function () {
         await homePage.setDestinationArrivalDate("03/01/2023 10:20 PM");
         await homePage.setDestinationDepartureDate("05/01/2023 10:20 PM");
         await homePage.setHomeArrivalDate("06/01/2023 10:20 PM");
-        await homePage.clickOnSaveAndContinueBtn();
-        await homePage.clickOnContinueToHomeBtn();
-        expect(await homePage.waitForTravelerPage()).toBe(true);
+        // await homePage.clickOnSaveAndContinueBtn();
+        // await homePage.clickOnContinueToHomeBtn();
+        // expect(await homePage.waitForTravelerPage()).toBe(true);
     })
 
 });

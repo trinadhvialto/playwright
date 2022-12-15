@@ -53,17 +53,10 @@ export class TravelHomePage extends BasePage {
     }
 
     async setHomeDepartureDate(fillData: String) {
-        // await this.filltheData(tHomePageJson.mainPage.homedepertureDateBox, "");
-        // await this.page.waitForTimeout(2000);
-        // await this.clickonWebElement(tHomePageJson.mainPage.enterTripDetailPageHeader);
-        // await this.filltheData(tHomePageJson.mainPage.homedepertureDateBox, fillData);
-        // await this.page.waitForTimeout(2000);
-        // expect(await this.getHomeDepartureDate()).toBe(fillData);
-        // await this.clickonWebElement(tHomePageJson.mainPage.enterTripDetailPageHeader);
-        await this.page.locator('#Trip_TripSegments_0__DepartureDate').click();
-        await this.page.getByRole('cell', { name: ' Next Month' }).click();
-        await this.page.getByRole('row', { name: '1 2 3 4 5 6 7' }).getByRole('cell', { name: '3' }).click();
-        await this.page.getByRole('cell', { name: '' }).locator('a').click();
+        await this.page.locator(tHomePageJson.mainPage.homedepertureDateBox).clear();
+        await this.filltheData(tHomePageJson.mainPage.homedepertureDateBox, fillData);
+        expect(await this.getHomeDepartureDate()).toBe(fillData);
+        await this.clickonWebElement(tHomePageJson.mainPage.enterTripDetailPageHeader);
     }
 
     async getHomeDepartureDate() {
@@ -71,13 +64,10 @@ export class TravelHomePage extends BasePage {
     }
 
     async setDestinationArrivalDate(fillData: String) {
-        // await this.filltheData(tHomePageJson.mainPage.destinationarrivalDateBox, "");
-        // await this.filltheData(tHomePageJson.mainPage.destinationarrivalDateBox, fillData);
-        // expect(await this.getDestinationArrivalDate()).toBe(fillData);
-        // await this.clickonWebElement(tHomePageJson.mainPage.enterTripDetailPageHeader);
-        await this.page.locator('#Trip_TripSegments_0__ArrivalDate').click();
-        await this.page.getByRole('row', { name: '1 2 3 4 5 6 7' }).getByRole('cell', { name: '4' }).click();
-        await this.page.getByRole('cell', { name: '' }).locator('a').click();
+        await this.page.locator(tHomePageJson.mainPage.destinationarrivalDateBox).clear();
+        await this.filltheData(tHomePageJson.mainPage.destinationarrivalDateBox, fillData);
+        expect(await this.getDestinationArrivalDate()).toBe(fillData);
+        await this.clickonWebElement(tHomePageJson.mainPage.enterTripDetailPageHeader);
     }
 
     async getDestinationArrivalDate() {
@@ -85,18 +75,24 @@ export class TravelHomePage extends BasePage {
     }
 
     async setDestinationDepartureDate(fillData: String) {
-        // await this.filltheData(tHomePageJson.mainPage.destinationdepertureDateBox, fillData);
-        // await this.clickonWebElement(tHomePageJson.mainPage.enterTripDetailPageHeader);
-        await this.page.locator('#Trip_TripSegments_1__DepartureDate').click();
-        await this.page.getByRole('row', { name: '1 2 3 4 5 6 7' }).getByRole('cell', { name: '7' }).click();
-        await this.page.getByRole('cell', { name: '' }).locator('a').click();
+        await this.page.locator(tHomePageJson.mainPage.destinationdepertureDateBox).clear();
+        await this.filltheData(tHomePageJson.mainPage.destinationdepertureDateBox, fillData);
+        expect(await this.getDestinationDepartureDate()).toBe(fillData);
+        await this.clickonWebElement(tHomePageJson.mainPage.enterTripDetailPageHeader);
+    }
+
+    async getDestinationDepartureDate() {
+        return await this.page.inputValue(tHomePageJson.mainPage.destinationdepertureDateBox);
     }
     async setHomeArrivalDate(fillData: String) {
-        await this.page.locator('#Trip_TripSegments_1__ArrivalDate').click();
-        await this.page.getByRole('row', { name: '8 9 10 11 12 13 14' }).getByRole('cell', { name: '8' }).click();
-        await this.page.getByRole('cell', { name: '' }).locator('a').click();
-        // await this.filltheData(tHomePageJson.mainPage.homedarrivalDateBox, fillData);
-        // await this.clickonWebElement(tHomePageJson.mainPage.enterTripDetailPageHeader);
+        await this.page.locator(tHomePageJson.mainPage.homedarrivalDateBox).clear();
+        await this.filltheData(tHomePageJson.mainPage.homedarrivalDateBox, fillData);
+        expect(await this.getHomeArrivalDate()).toBe(fillData);
+        await this.clickonWebElement(tHomePageJson.mainPage.enterTripDetailPageHeader);
+    }
+
+    async getHomeArrivalDate() {
+        return await this.page.inputValue(tHomePageJson.mainPage.homedarrivalDateBox);
     }
     async clickOnSaveAndContinueBtn() {
         await this.clickonWebElement(tHomePageJson.mainPage.saveAndContinueBtn);

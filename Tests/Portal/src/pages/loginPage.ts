@@ -1,3 +1,4 @@
+import { expect } from '@playwright/test';
 import loginPageJson from './../../resources/pageLocators/vialtoLoginPage.json';
 import { BasePage } from './base_page';
 
@@ -45,6 +46,18 @@ export class LoginPage extends BasePage {
 
     async setTextInPasswordBox(fillData: String) {
         await this.filltheData(loginPageJson.inputBoxes.password, fillData);
+    }
+
+    async loginIntoMyTripApplication() {
+        await this.setTextInEmailBox(process.env.localuser);
+        await this.clickOnGetStartedoRSignBtn();
+        await this.waitForPasswordBox();
+        expect(await this.IsPasswordBoxPresent()).toBe(true);
+        expect(await this.isGetStartedoRSignBtnPresent()).toBe(true);
+        expect(await this.isGetStartedoRSignBtnEnabled()).toBe(true);
+        expect(await this.getStartedButtonText()).toBe("Sign in");
+        await this.setTextInPasswordBox(process.env.localpassword);
+        await this.clickOnGetStartedoRSignBtn();
     }
 
 }
