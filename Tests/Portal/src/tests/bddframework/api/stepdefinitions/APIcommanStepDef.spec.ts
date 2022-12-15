@@ -1,10 +1,9 @@
 
 import { Given, Then, When } from '@cucumber/cucumber';
 import { test, expect } from '@playwright/test';
-//const { ApiHelper } = require('../../../helpers/api-helpers.js')
-const { ApiHelper } = require('../../../src/helpers/api-helpers.ts');
-var OR = require("../../../resources/OR.json");
-var OR_Header = require("../../../resources/headers.json");
+const { ApiHelper } = require('../../../../helpers/api-helpers')
+var OR = require("../../../../../resources/OR.json");
+var OR_Header = require("../../../../../resources/headers.json");
 
 const { request } = require('http');
 
