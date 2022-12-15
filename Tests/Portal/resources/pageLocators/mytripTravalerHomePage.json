@@ -1,0 +1,22 @@
+{
+    "toolbar": {
+        "vialtoLogo": ".vialto-logo",
+        "myTripsLogo": ".mytrips-logo",
+        "signOut": "#btnSignOut"
+    },
+    "mainPage":{
+        "homePage": "#confirmHomeForm",
+        "fromDropDown": "#select2-assessment-select-from-container",
+        "toDropDown": "#select2-assessment-select-to-container",
+        "comboInputBox": ".select2-search--dropdown input",
+        "dateSelectionPage": "#WorkPermissionAssessmentForm",
+        "homedepertureDateBox": "#Trip_TripSegments_0__DepartureDate",
+        "destinationdepertureDateBox": "#Trip_TripSegments_1__DepartureDate",
+        "homedarrivalDateBox": "#Trip_TripSegments_1__ArrivalDate",
+        "destinationarrivalDateBox": "#Trip_TripSegments_0__ArrivalDate",
+        "saveAndContinueBtn": "#btnSave",
+        "enterTripDetailPageHeader": ".page-heading",
+        "continueToHomeBtn": "#btnExit",
+        "modifyTripBtn": "#btnModifyTrip"
+    }
+}
