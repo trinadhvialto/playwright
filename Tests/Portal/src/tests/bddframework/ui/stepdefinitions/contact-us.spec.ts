@@ -1,20 +1,20 @@
 import { test, expect, Page } from "@playwright/test";
 import { Given, Then } from '@cucumber/cucumber';
 
-Given('User visits {string}', async function (url: string) {
+Given('User visits {string}', async (url: string) => {
     async (page:Page) => {
         await page.goto('https://${url}');
     }
 });
 
-Then('User navigates to {string}', async function (solutionsurl : string) {
+Then('User navigates to {string}', async (solutionsurl : string) => {
     async (page:Page) => {
         await page.locator('span:has-text("Solutions")').click();
         await expect(page).toHaveURL('https://${url}');
     }
 });
 
-Then(/^User submits '([^']*)'$/, async function (text : string) {
+Then(/^User submits '([^']*)'$/, async (text : string) => {
    async (page:Page) => {
     await page.getByRole("link", { name: "Contact Us" }).click();
     await page.getByPlaceholder("First Name").click();
