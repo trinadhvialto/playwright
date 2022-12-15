@@ -17,11 +17,14 @@ var activationKey,
   customer,
   activationStatus;
 
+  var samePageObj;
+
 test.describe("Viewing Activation Key in WebUI", function () {
   test.beforeAll(async function () {});
 
   //US#177412
   test("sample UI test", async function ({ page }) {
+    samePageObj = page
     await page.goto("https://vialtopartners.com");
     // Click div:has-text("SolutionsTechnologyInsightsAbout UsCareersClient LoginContact Us") >> nth=3
     // await page.locator('div:has-text("SolutionsTechnologyInsightsAbout UsCareersClient LoginContact Us")').nth(3).click();

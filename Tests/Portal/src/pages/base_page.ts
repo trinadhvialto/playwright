@@ -1,26 +1,22 @@
 var OR = require('../../resources/OR.json');
 import { UIHelper } from '../helpers/ui-helpers';
 
-export class BasePage {
-    page: any;
-
-    constructor(page: any) {
-        this.page = page;
-    }
+export class BasePage extends UIHelper{
+     
 
     async navigateToUrl() {
-       var username = process.env.username
-       var  password = process.env.password
+       const username = process.env.username
+       const  password = process.env.password
 
-       var url = process.env.adminAppBaseURL;
+       const url = process.env.url;
         await this.page.goto(url);
 
-        console.log("Test is executing with user:- " + username);
-        var usernameElement = 'id=' + OR.locators.loginPage.usernameInput
-        await UIHelper.waitTillElementIsVisible(usernameElement)
-        await this.page.locator('id=' + OR.locators.loginPage.usernameInput).fill(username);
+        // console.log("Test is executing with user:- " + username);
+        // var usernameElement = 'id=' + OR.locators.loginPage.usernameInput
+        // await UIHelper.waitTillElementIsVisible(usernameElement)
+        // await this.page.locator('id=' + OR.locators.loginPage.usernameInput).fill(username);
 
-                await this.page.locator('id=' + OR.locators.loginPage.signInButton).click();
+        //         await this.page.locator('id=' + OR.locators.loginPage.signInButton).click();
 
         // await this.page.locator('id=' + OR.locators.loginPage.passwordInput).fill(password);
 
@@ -32,7 +28,7 @@ export class BasePage {
         // await this.waitTillElementIsVisible(userButton)
         // var loadSpinner = 'xpath=' + OR.locators.customerListPage.loadSpinner
         // await this.waitTillElementIsInvisible(loadSpinner)
-        await this.page.waitForTimeout(10000);
+        // await this.page.waitForTimeout(10000);
 
     }
 

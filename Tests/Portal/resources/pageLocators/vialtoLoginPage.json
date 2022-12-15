@@ -1,0 +1,15 @@
+{
+    "inputBoxes":{
+        "email": "#loginForm #ReturningUserEmail",
+        "password": "#loginForm #Password"
+    },
+    "buttons":{
+        "getStartedSigninBtn": "#btnAuthenticateUser"
+    },
+    "toolbars":{
+        "loginHeader": ".login-header"
+    },
+    "mainPage":{
+        "loginHelpText": "#loginForm h4"
+    }
+}
