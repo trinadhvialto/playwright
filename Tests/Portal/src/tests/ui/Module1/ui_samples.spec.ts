@@ -1,5 +1,5 @@
 import { TestData } from "../../../utils/test_data";
-import { TokenGenerators } from "../../../utils/token_generators";
+import { TokenGenerators } from "../../../utils/api_axios";
 import { test, expect } from "@playwright/test";
 import { IotHubMethods } from "../../../utils/iothub_methods";
 const { ApiHelper } = require("../../../helpers/api-helpers.js");

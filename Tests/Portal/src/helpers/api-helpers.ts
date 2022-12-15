@@ -1,4 +1,4 @@
-import { TokenGenerators } from '../utils/token_generators';
+import { TokenGenerators } from '../utils/api_axios';
 
 export class ApiHelper {
 
@@ -7,7 +7,7 @@ export class ApiHelper {
             method: 'post',
             url: url,
             headers: header,
-            body: payload
+            data: payload
         };
 
         var response = await TokenGenerators.request(config);
@@ -30,7 +30,7 @@ export class ApiHelper {
             method: 'put',
             url: url,
             headers: header,
-            body: payload
+            data: payload
         };
 
         var response = await TokenGenerators.request(config);

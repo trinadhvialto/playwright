@@ -1,4 +1,4 @@
-import { TokenGenerators } from './token_generators'
+import { TokenGenerators } from './api_axios'
 
 exports.KeyVaultMethods = class KeyVaultMethods{
     static async getSecrets(secretName: any){

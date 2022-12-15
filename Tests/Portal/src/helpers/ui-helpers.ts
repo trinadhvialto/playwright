@@ -1,4 +1,4 @@
-import { TokenGenerators } from "../utils/token_generators";
+import { TokenGenerators } from "../utils/api_axios";
 
 export class UIHelper {
     page: any;
