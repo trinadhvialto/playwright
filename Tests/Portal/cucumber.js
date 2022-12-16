@@ -8,7 +8,7 @@ var common = [
     '--require ./src/tests/bddframework/**/stepDefinitions/**/*.ts',
     '--require ./src/tests/bddframework/**/stepDefinitions/*.ts',
     '--require ./build/tests/support/*.ts',
-    '--require ./playwright.config.ts',
+    '--require ./test.setup.ts',
     '--publish-quiet'
 ].join(' ');
 

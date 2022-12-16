@@ -1,21 +1,30 @@
-import { test, expect, Page } from "@playwright/test";
+import { test, expect, Page, chromium } from "@playwright/test";
 import { Given, Then } from '@cucumber/cucumber';
+import { OurWorld } from "../../../../../type";
 
-Given('User visits {string}', async (url: string) => {
-    async (page:Page) => {
-        await page.goto('https://${url}');
-    }
+let page : any;
+
+
+Given('User visits {string}', async function (this: OurWorld, url: string) {
+    // async () => {
+    //     const browser = await chromium.launch({
+    //         headless: false
+    //     });
+        // const context = await browser.newContext()
+        // page = await context.newPage();
+        await this.page.goto('https://${url}');
+    // }
 });
 
 Then('User navigates to {string}', async (solutionsurl : string) => {
-    async (page:Page) => {
+    async () => {
         await page.locator('span:has-text("Solutions")').click();
         await expect(page).toHaveURL('https://${url}');
     }
 });
 
 Then(/^User submits '([^']*)'$/, async (text : string) => {
-   async (page:Page) => {
+   async () => {
     await page.getByRole("link", { name: "Contact Us" }).click();
     await page.getByPlaceholder("First Name").click();
     await page.getByPlaceholder("First Name").press("CapsLock");
