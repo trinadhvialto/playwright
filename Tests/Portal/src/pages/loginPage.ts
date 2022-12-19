@@ -1,5 +1,5 @@
 import { expect } from '@playwright/test';
-import loginPageJson from './../../resources/pageLocators/vialtoLoginPage.json';
+import loginPageJson from './../../src/pageLocators/vialtoLoginPage.json';
 import { BasePage } from './base_page';
 
 export class LoginPage extends BasePage {

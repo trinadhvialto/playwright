@@ -1,6 +1,6 @@
 import { expect } from "@playwright/test";
 import { BasePage } from "../base_page";
-import tHomePageJson from "./../../../resources/pageLocators/mytripTravalerHomePage.json";
+import tHomePageJson from "../../pageLocators/travellerLocators/mytripTravalerHomePage.json";
 
 export class TravelHomePage extends BasePage {
     async waitForTravelerPage() {
