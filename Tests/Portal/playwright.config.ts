@@ -11,7 +11,7 @@ const config = {
 
   use: {
     trace: 'on-first-retry',
-    actionTimeout: 5 * 1000,
+    actionTimeout:  60* 1000,
     navigationTimeout: 60 * 1000,
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
@@ -19,6 +19,10 @@ const config = {
     headless: false,
     browserName: process.env.browser,
     channel: process.env.browser,
+    acceptDownloads: true,
+    args: ['--start-maximized'],
+    viewport: null,
+
     // use: {
     //   viewport: { width: 1920, height: 1080 },
     // },
@@ -71,5 +75,4 @@ const config = {
   ],
 
 };
-
-module.exports = config;
+export default config;

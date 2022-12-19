@@ -1,7 +1,8 @@
 {
   "scripts": {
     "test": "npx playwright test",
-    "lint": "eslint . --ext js,ts"
+    "lint": "eslint . --ext js,ts",
+    "ctest": "npx cucumber-js -p test_runner"
   },
   "devDependencies": {
     "@playwright/test": "^1.28.1",
