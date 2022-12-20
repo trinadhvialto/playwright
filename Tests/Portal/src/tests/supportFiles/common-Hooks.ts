@@ -9,6 +9,8 @@ import {
   webkit,
   WebKitBrowser,
   ConsoleMessage,
+  BrowserContext,
+  Page
 } from '@playwright/test';
 import { ITestCaseHookParameter } from '@cucumber/cucumber/lib/support_code_library_builder/types';
 import { ensureDir } from 'fs-extra';
@@ -17,6 +19,8 @@ import { TravelHomePage } from '../../pages/travelerPage/travelerMainPage';
 
 let browser: ChromiumBrowser | FirefoxBrowser | WebKitBrowser;
 const tracesDir = 'traces';
+let proxyContext: BrowserContext;
+let proxyPage: Page;
 
 declare global {
   // eslint-disable-next-line no-var
@@ -37,35 +41,29 @@ BeforeAll(async function () {
       browser = await chromium.launch(config.use);
   }
   await ensureDir(tracesDir);
+  proxyContext = await browser.newContext(config.use);
+
+  await proxyContext.tracing.start({ screenshots: true, snapshots: true });
+  proxyPage = await proxyContext.newPage();
 
 });
 
 
 Before(async function (this: ICustomWorld, { pickle }: ITestCaseHookParameter) {
+  this.context = proxyContext;
+  this.page = proxyPage;
   this.startTime = new Date();
   this.testName = pickle.name.replace(/\W/g, '-');
   // customize the [browser context](https://playwright.dev/docs/next/api/class-browser#browsernewcontextoptions)
-  this.context = await browser.newContext(config.use);
-
-  await this.context.tracing.start({ screenshots: true, snapshots: true });
-  this.page = await this.context.newPage();
-  this.page.on('console', async (msg: ConsoleMessage) => {
-    if (msg.type() === 'log') {
-      await this.attach(msg.text());
-    }
-  });
   this.feature = pickle;
   this.loginPage = new LoginPage(this.page);
   this.homePage = new TravelHomePage(this.page);
-  this.feature = pickle;
 
 });
 
 After(async function (this: ICustomWorld, { result }: ITestCaseHookParameter) {
-  console.log(result);
   if (result) {
     await this.attach(`Status: ${result?.status}. Duration:${result.duration?.seconds}s`);
-
     if (result.status !== Status.PASSED) {
       const image = await this.page?.screenshot();
       image && (await this.attach(image, 'image/png'));
