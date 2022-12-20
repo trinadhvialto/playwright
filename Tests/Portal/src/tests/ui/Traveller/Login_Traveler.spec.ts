@@ -15,7 +15,7 @@ test.describe("Login to Traveler and book a trip", function () {
             page = await browser.newPage();
             loginpage = new LoginPage(page);
             homePage = new TravelHomePage(page);
-            page.goto(process.env.mytripsUrl);
+            loginpage.navigateToMyTripsPage();
             noOfTimesLaunched = noOfTimesLaunched + 1;
         }
     });
