@@ -2,7 +2,8 @@
   "scripts": {
     "test": "npx playwright test",
     "lint": "eslint . --ext js,ts",
-    "ctest": "npx cucumber-js -p test_runner"
+    "ctest": "npx cucumber-js -p test_runner",
+    "allure": "allure serve reports/allure-results"
   },
   "devDependencies": {
     "@playwright/test": "^1.28.1",
@@ -16,7 +17,7 @@
     "@typescript-eslint/eslint-plugin": "5.43.0",
     "@typescript-eslint/parser": "5.43.0",
     "allure-commandline": "^2.20.1",
-    "allure-cucumberjs": "2.0.0-beta.19",
+    "allure-cucumberjs": "2.0.0-beta.21",
     "allure-playwright": "^2.0.0-beta.20",
     "axios": "^0.27.2",
     "chromedriver": "104.0.0",

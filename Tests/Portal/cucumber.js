@@ -7,11 +7,13 @@ const options = [
 ].join(' ');
 const format = [
     // 'message:e2e/reports/cucumber-report.ndjson',
-    'json:reports/cucumber-report.json',
-    'html:reports/report.html',
+    '--format ./src/tests/supportFiles/reporters/allure-reporter.ts',
+    '--format json:reports/cucumber-report.json',
+    '--format json:allure-results/cucumber-report.json',
+    '--format html:reports/report.html',
     'summary',
-    'progress-bar',
-    '/reporters/allure-reporter.ts'
+    'progress-bar'
+
 ].join(' ');
 const run_feature = [
     './resources/features/ui/',
