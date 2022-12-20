@@ -1,8 +1,8 @@
 import { expect } from "@playwright/test";
-import { BasePage } from "../base_page";
+import { UIHelper } from "../../helpers/ui-helpers";
 import tHomePageJson from "../../pageLocators/travellerLocators/mytripTravalerHomePage.json";
 
-export class TravelHomePage extends BasePage {
+export class  TravelHomePage extends UIHelper {
     async waitForTravelerPage() {
         await this.waitTillElementIsVisible(tHomePageJson.mainPage.homePage);
         return await this.isElementPresent(tHomePageJson.mainPage.homePage);

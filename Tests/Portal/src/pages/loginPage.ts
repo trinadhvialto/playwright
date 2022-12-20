@@ -1,8 +1,8 @@
 import { expect } from '@playwright/test';
+import { UIHelper } from '../helpers/ui-helpers';
 import loginPageJson from './../../src/pageLocators/vialtoLoginPage.json';
-import { BasePage } from './base_page';
 
-export class LoginPage extends BasePage {
+export class LoginPage extends UIHelper {
 
     async IsLoginHeaderPresent() {
         return await this.isElementPresent(loginPageJson.toolbars.loginHeader);
