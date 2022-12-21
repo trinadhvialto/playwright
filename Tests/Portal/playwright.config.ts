@@ -10,6 +10,7 @@ const config = {
   retries: 0,
 
   use: {
+    viewport: null,
     trace: 'on-first-retry',
     actionTimeout: 5 * 1000,
     navigationTimeout: 60 * 1000,
@@ -23,7 +24,6 @@ const config = {
     //   viewport: { width: 1920, height: 1080 },
     // },
     launchOptions: {
-      viewport: null,
       args: ['--start-maximized'],
       slowMo: 1000
     },
