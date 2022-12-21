@@ -1,10 +1,10 @@
 import { test, expect, Page } from '@playwright/test';
-import { TravelHomePage } from '../../../pages/travelerPage/travelerMainPage';
+import { TravelHomePage } from '../../../pages/travelerPage/travelerHomePage';
 import { LoginPage } from './../../../pages/loginPage';
 
 
-let loginpage: any;
-let homePage: any;
+let loginpage: LoginPage;
+let homePage: TravelHomePage;
 let page: Page;
 let noOfTimesLaunched = 0;
 
@@ -15,7 +15,7 @@ test.describe("Login to Traveler and book a trip", function () {
             page = await browser.newPage();
             loginpage = new LoginPage(page);
             homePage = new TravelHomePage(page);
-            loginpage.navigateToUrl();
+            loginpage.navigateToMyTripsPage();
             noOfTimesLaunched = noOfTimesLaunched + 1;
         }
     });

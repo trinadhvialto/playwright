@@ -12,7 +12,7 @@ export class ApiHelper {
 
         var response = await TokenGenerators.request(config);
         return response;
-    }
+    };
 
     static async get(url: any, header: any) {
         var config = {
@@ -23,7 +23,7 @@ export class ApiHelper {
 
         var response = await TokenGenerators.request(config);
         return response;
-    }
+    };
 
     static async put(url: any, header: any, payload: any) {
         var config = {
@@ -35,6 +35,6 @@ export class ApiHelper {
 
         var response = await TokenGenerators.request(config);
         return response;
-    }
+    };
 
 }

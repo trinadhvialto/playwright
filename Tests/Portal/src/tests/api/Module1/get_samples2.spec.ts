@@ -11,7 +11,7 @@ test.describe("Viewing Activation Key in WebUI", function () {
 
   test("API-sample API test333 @api", async function ({ request }) {
     
-    const newIssue = await request.get(OR.APIUrls.sample_Get);
+    const newIssue = await request.get(OR.APIUrls.baseURL.sample_Get);
 
     console.log(await newIssue.json())
 
@@ -36,7 +36,7 @@ test.describe("Viewing Activation Key in WebUI", function () {
     
 
 
-    let url = OR.APIUrls.sample_Get;
+    let url = OR.APIUrls.baseURL.sample_Get;
 
     let header ='';
 

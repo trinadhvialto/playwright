@@ -1,7 +1,6 @@
 import { TestData } from "../../../utils/test_data";
 import { TokenGenerators } from "../../../utils/api_axios";
 import { test, expect } from "@playwright/test";
-import { IotHubMethods } from "../../../utils/iothub_methods";
 const { ApiHelper } = require("../../../helpers/api-helpers.js");
 var OR = require("../../../../resources/OR.json");
 var activationKeyHypervDeviceId = process.env.activationKeyHypervDeviceId;

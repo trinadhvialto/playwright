@@ -1,7 +1,7 @@
 
 import { test, expect } from '@playwright/test';
 import { ApiHelper } from '../../../helpers/api-helpers'
-var OR = require("../../../../resources/OR.json");
+var OR = require('../../../../resources/OR.json');
 const { request } = require('http');
 
 let response : any;
@@ -13,7 +13,7 @@ test.describe("Viewing Activation Key in WebUI", function () {
 
   test("API-sample API test @api", async function ({ request }) {
     
-    let url = OR.APIUrls.sample_Get;
+    let url = OR.APIUrls.baseURL.sample_Get;
 
     let header ='';
 
@@ -38,7 +38,7 @@ test.describe("Viewing Activation Key in WebUI", function () {
     
 
 
-    let url = OR.APIUrls.sample_Get;
+    let url = OR.APIUrls.baseURL.sample_Get;
 
     let header ='';
 
