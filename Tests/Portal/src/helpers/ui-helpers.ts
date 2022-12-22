@@ -1,5 +1,4 @@
-import { TokenGenerators } from "../utils/token_generators";
-var waitTime: any ;
+import { TokenGenerators } from "../utils/api_axios";
 
 export class UIHelper {
     page: any;

@@ -1,7 +1,7 @@
 var DOMParser = require('xmldom').DOMParser;
 import { XmlToJson } from './xmlToJson';
 var CryptoJS = require('crypto-js');
-import { TokenGenerators } from './token_generators'
+import { TokenGenerators } from './api_axios'
 export class AzureStorageMethods{
     static async getblobs(storageAccount: any,containerName: any,storageAccountKey: any, apiMethodName: string,blobFilterName=""){
         var header_date = new Date().toUTCString();

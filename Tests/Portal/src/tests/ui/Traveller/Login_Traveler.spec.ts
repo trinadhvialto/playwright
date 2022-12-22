@@ -3,7 +3,7 @@ import { TravelHomePage } from '../../../pages/travelerPage/travelerMainPage';
 import { LoginPage } from './../../../pages/loginPage';
 
 
-let basepage: any;
+let loginpage: any;
 let homePage: any;
 let page: Page;
 let noOfTimesLaunched = 0;
@@ -13,27 +13,31 @@ test.describe("Login to Traveler and book a trip", function () {
     test.beforeAll(async function ({ browser }) {
         if (!page && !noOfTimesLaunched) {
             page = await browser.newPage();
-            basepage = new LoginPage(page);
+            loginpage = new LoginPage(page);
             homePage = new TravelHomePage(page);
-            basepage.navigateToUrl();
+            loginpage.navigateToUrl();
             noOfTimesLaunched = noOfTimesLaunched + 1;
         }
     });
 
     test('Navigate to MyTrips Travelers Page and verify expected elements are displayed', async () => {
         const loginText = "Enter your email address to get started with myTrips.  If you have not registered with us yet, we will guide you through the process."
-        expect(await basepage.IsLoginHeaderPresent()).toBe(true);
-        expect(await basepage.loginHelperText()).toEqual(loginText);
-        expect(await basepage.IsLoginHeaderPresent()).toBe(true);
-        expect(await basepage.IsLoginEmailBoxPresent()).toBe(true);
-        expect(await basepage.isGetStartedoRSignBtnPresent()).toBe(true);
-        expect(await basepage.isGetStartedoRSignBtnEnabled()).toBe(true);
-        expect(await basepage.getStartedButtonText()).toBe("Get started");
+        expect.soft(await loginpage.IsLoginHeaderPresent()).toBe(true);
+        test.step('Steps1', async () => {
+            expect(await loginpage.loginHelperText()).toEqual(loginText);
+            expect(await loginpage.IsLoginHeaderPresent()).toBe(true);
+        });
+        expect(await loginpage.loginHelperText()).toEqual(loginText);
+        expect(await loginpage.IsLoginHeaderPresent()).toBe(true);
+        expect(await loginpage.IsLoginEmailBoxPresent()).toBe(true);
+        expect(await loginpage.isGetStartedoRSignBtnPresent()).toBe(true);
+        expect(await loginpage.isGetStartedoRSignBtnEnabled()).toBe(true);
+        expect(await loginpage.getStartedButtonText()).toBe("Get started");
 
     });
 
     test("Login into MyTrips application with Traveler account", async () => {
-        basepage.loginIntoMyTripApplication();
+        loginpage.loginIntoMyTripApplication();
         expect(await homePage.waitForTravelerPage()).toBe(true);
     });
 
