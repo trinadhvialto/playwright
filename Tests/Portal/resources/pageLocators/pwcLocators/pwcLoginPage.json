@@ -1,0 +1,5 @@
+{
+    "PageTitle" : "//h1[contains(text(),'Log In')]",
+    "EmailTextBox" : "//input[@type='email']",
+    "LoginButton" : "//input[@type='submit']"
+}

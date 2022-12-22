@@ -20,6 +20,7 @@ const config = {
     headless: false,
     browserName: process.env.browser,
     channel: process.env.browser,
+    ignoreHTTPSErrors: true,
     // use: {
     //   viewport: { width: 1920, height: 1080 },
     // },

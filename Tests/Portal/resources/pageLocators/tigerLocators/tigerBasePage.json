@@ -1,0 +1,6 @@
+{
+    "menuButton" : "//a[@id='menu']",
+    "createNew" : "//a//span[text()='create new']",
+    "newAssignee" : "//li//a[text()='Assignee']",
+    "newEngagement" : "//li//a[text()='Engagement']"
+}
