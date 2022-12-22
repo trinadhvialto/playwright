@@ -1,0 +1,9 @@
+{
+    "inputBoxes":{
+        "email": "#ctl00_phCenter_txtEMAIL"
+       
+    },
+    "buttons":{
+        "logInBtn": "#ctl00_phCenter_btnSubmitx"
+    }
+}

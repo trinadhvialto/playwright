@@ -1,12 +1,12 @@
-var OR = require('../../resources/OR.json');
-import { UIHelper } from '../helpers/ui-helpers';
+var OR = require('../../../resources/OR.json');
+import { UIHelper } from '../../helpers/ui-helpers';
 
 export class BasePage extends UIHelper{
      
 
     async navigateToUrl() {
        const username = process.env.username
-       const  password = process.env.password
+       //const  password = process.env.password
 
        const url = process.env.url;
         await this.page.goto(url);
