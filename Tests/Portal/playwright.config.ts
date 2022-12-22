@@ -12,7 +12,7 @@ const config = {
   use: {
     viewport: null,
     trace: 'on-first-retry',
-    actionTimeout: 5 * 1000,
+    actionTimeout: 15 * 1000,
     navigationTimeout: 60 * 1000,
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
@@ -30,7 +30,8 @@ const config = {
     },
     extraHTTPHeaders: {
       // We set this header per GitHub guidelines.
-      'Accept': 'application/vnd.github.v3+json',
+      //'Accept': 'application/vnd.github.v3+json',
+      'Accept' : '*/*',
     },
 
 
