@@ -1,0 +1,3 @@
+{
+    "AcceptAllCookiesButton" : "//button[text()='Accept All Cookies']"
+}

@@ -1,0 +1,19 @@
+{
+    "DismissButton" : "//button[text()='Dismiss']",
+    "PageHeader" : "//h1",
+    "ClientTextBox" : "//input[@id='client_name']",
+    "EngagementTextBox" : "//input[@id='engagement_name']",
+    "PracticeTypeDropdown" : "//span[@id='practice_type']",
+    "PracticeTypeChoice" : "//span[@id='practice_type']//li[text()='Tax']",
+    "CoordinatingOfficeDropdown" : "//span[@id='coordinating_office_country']",
+    "CoordinatingOfficeChoice" : "//span[@id='coordinating_office_country']//li[text()='India']",
+    "CityDropdown" : "//span[@id='coordinating_office_office']",
+    "CityChoice" : "//span[@id='coordinating_office_office']//li[text()='Hyderabad']",
+    "PrimaryContactDropdown" : "//span[@id='contact_0_office']",
+    "PrimaryContactChoice" : "//span[@id='contact_0_office']//li[text()='Hyderabad, IN']",
+    "PrimaryContactPersonTextBox" : "//input[@id='contact_0']",
+    "EngagmentAdministratorDropdown" : "//span[@id='admin1_office']",
+    "EngagmentAdminsitratorChoice" : "//span[@id='admin1_office']//li[text()='Hyderabad, IN']",
+    "EngagmentAdministratorTextBox" : "//input[@id='admin1']",
+    "CreateEngagmentButton" : "//button[@id='save_engagement_button']"
+}
