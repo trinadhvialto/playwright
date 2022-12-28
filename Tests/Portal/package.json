@@ -2,8 +2,9 @@
   "scripts": {
     "test": "npx playwright test",
     "lint": "eslint . --ext js,ts",
-    "ctest": "npx cucumber-js -p test_runner",
-    "allure": "allure serve reports/allure-results"
+    "ctest": "cucumber-js",
+    "allure": "allure serve reports/allure-results",
+    "test:parallel": "npx cucumber-js --parallel=2"
   },
   "devDependencies": {
     "@playwright/test": "^1.28.1",

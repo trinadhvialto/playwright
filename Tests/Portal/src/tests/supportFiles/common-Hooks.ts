@@ -42,18 +42,21 @@ BeforeAll(async function () {
   }
   await ensureDir(tracesDir);
   proxyContext = await browser.newContext(config.use);
-
-  await proxyContext.tracing.start({ screenshots: true, snapshots: true });
-  proxyPage = await proxyContext.newPage();
-
+  // proxyPage = await proxyContext.newPage();
 });
 
 
 Before(async function (this: ICustomWorld, { pickle }: ITestCaseHookParameter) {
-  this.context = proxyContext;
-  this.page = proxyPage;
+  this.context = await browser.newContext(config.use);
+  await this.context.tracing.start({ screenshots: true, snapshots: true });
+  this.page = await this.context.newPage();
   this.startTime = new Date();
   this.testName = pickle.name.replace(/\W/g, '-');
+  this.page.on('console', async (msg: ConsoleMessage) => {
+    if (msg.type() === 'log') {
+      await this.attach(msg.text());
+    }
+  });
   // customize the [browser context](https://playwright.dev/docs/next/api/class-browser#browsernewcontextoptions)
   this.feature = pickle;
   this.loginPage = new LoginPage(this.page);
@@ -64,17 +67,19 @@ Before(async function (this: ICustomWorld, { pickle }: ITestCaseHookParameter) {
 After(async function (this: ICustomWorld, { result }: ITestCaseHookParameter) {
   if (result) {
     await this.attach(`Status: ${result?.status}. Duration:${result.duration?.seconds}s`);
+
     if (result.status !== Status.PASSED) {
       const image = await this.page?.screenshot();
       image && (await this.attach(image, 'image/png'));
       await this.context?.tracing.stop({
-        path: `${tracesDir}/${this.testName}-${this.startTime?.toISOString().split('.')[0]
-          }trace.zip`,
+        path: `${tracesDir}/${this.testName}-${
+          this.startTime?.toISOString().split('.')[0]
+        }trace.zip`,
       });
     }
   }
-  await this.page?.close();
-  await this.context?.close();
+   await this.page?.close();
+   await this.context?.close();
 });
 
 AfterAll(async function () {

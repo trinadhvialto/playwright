@@ -29,7 +29,7 @@ const config = {
     launchOptions: {
       viewport: null,
       args: ['--start-maximized'],
-      slowMo: 1000
+      // slowMo: 1000
     },
     extraHTTPHeaders: {
       // We set this header per GitHub guidelines.
