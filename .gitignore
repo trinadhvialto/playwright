@@ -4,3 +4,4 @@ Tests/Portal/node_modules/*
 Tests/Portal/test-results/*
 Tests/Portal/testresults/*
 Tests/Portal/allure-results/*
+Tests/Portal/reports/*

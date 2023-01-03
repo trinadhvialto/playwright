@@ -44,7 +44,7 @@ export class TravelHomePage extends BasePage {
     }
 
     async clickOnAssessMyDropDown(from: String, to: String) {
-        await this.page.getByRole('button', { name: "Create my trip from " + from + " to " + to }).click();
+        await this.page.getByRole('button', { name: "Assess my trip from " + from + " to " + to }).click();
     }
 
     async waitForDateSelectionPage() {
