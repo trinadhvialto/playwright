@@ -1,0 +1,19 @@
+{
+    "MFileResponses" : {
+        "RetrieveDocuments" : {
+            "GetResponse" : {
+                "DocumentID": "US-{EB9D0087-37E2-4268-80B2-5CCF3A121E78}-1018",
+                "Name": "testupload5",
+                "Client": 23,
+                "Engagement": 52277,
+                "Assignee": 577474,
+                "WorkRecord": 580730,
+                "Class": "CL.AssigneeTaxDocumentWorkRecord",
+                "PracticeType": "Tax",
+                "Country": "US",
+                "Year": "2021",
+                "TaxDocumentType": "Supplied Data"
+            }
+        }
+    }
+}

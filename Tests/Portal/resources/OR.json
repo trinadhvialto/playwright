@@ -16,5 +16,9 @@
       "loginheader": ".login-header",
       "loginForm": "#loginForm h4"
     }
+  },
+
+  "MFilesAPI" : {
+    "RetrieveDocuments" : "/RetrieveDocuments"
   }
 }
