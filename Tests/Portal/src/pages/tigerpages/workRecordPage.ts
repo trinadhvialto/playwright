@@ -1,5 +1,5 @@
 import { expect } from "@playwright/test";
-import { BasePage } from "./base_page";
+import { BasePage } from "./basePage";
 import * as homePageJson from "../../../resources/pageLocators/tigerHomePage.json";
 import * as wrPageJson from "../../../resources/pageLocators/tigerWorkRecod.json";
 

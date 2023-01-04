@@ -1,26 +1,22 @@
-import { chromium, test, expect, Page } from '@playwright/test';
+import {  test, expect, Page } from '@playwright/test';
 import { TigerHomePage } from '../../../pages/tigerpages/tigerHomePage';
 import { LoginPage } from '../../../pages/tigerpages/loginPage';
-import {WorkRecordPage} from '../../../pages/tigerpages/workRecordPage';
-
+import { TigerAssigneePage } from '../../../pages/tigerpages/assigneePage';
 
 let loginpage: any;
 let homePage: any;
 let page: Page;
-let wrPage: any;
+let assigneePage: any;
 let noOfTimesLaunched = 0;
 
-
-test.describe("Login to Tiger and create Work Record", function() {
-    // test.describe.configure({ mode: 'serial' });
+test.describe("Login to Tiger and search data", function() {
+test.describe.configure({});
     test.beforeAll(async function ({ browser }) {
         if (!page && !noOfTimesLaunched) {
-            page = await browser.newPage();
-            
-        //     await page.goto("https://tiger-stage.vialto.com/#/search-home");
+            page = await browser.newPage();       
             loginpage = new LoginPage(page);
             homePage = new TigerHomePage(page);
-            wrPage = new WorkRecordPage(page);
+            assigneePage = new TigerAssigneePage(page);
             //homePage.waitTime=200000;
             loginpage.navigateToUrl();
             noOfTimesLaunched = noOfTimesLaunched + 1;
@@ -33,8 +29,16 @@ test.describe("Login to Tiger and create Work Record", function() {
         expect(await homePage.waitForTigerPage()).toBe(true);
     });
 
-   
+    test("Search record", async () => {
+        await homePage.isSearchBoxPresent();
+        await homePage.selectSearchType("Assignee");
+        await homePage.enterSearchText("Anupama");
+        await homePage.selectDataRow("576567");
+        expect(await assigneePage.isAssigneeIdPresent()).toContainText("Anupama");
+
+
+
+    
+});
 
 })
-
-

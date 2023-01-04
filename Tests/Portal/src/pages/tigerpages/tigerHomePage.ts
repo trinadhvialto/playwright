@@ -1,7 +1,8 @@
 import { expect } from "@playwright/test";
-import { BasePage } from "./base_page";
+import { BasePage } from "./basePage";
 import * as homePageJson from "../../../resources/pageLocators/tigerHomePage.json";
 import * as wrPageJson from "../../../resources/pageLocators/tigerWorkRecod.json";
+import * as searchPageJson from "../../../resources/pageLocators/tigerSearchPage.json"
 
 
 
@@ -54,7 +55,6 @@ export class TigerHomePage extends BasePage {
     async selectWorkRecordType(type:String) {
         await this.clickonWebElement(wrPageJson.wrPage.work_record_type);
         //await this.page.locator(wrPageJson.wrPage.optionsfromdropdown)
-       //.filter({ has: this.page.locator(`text="${option}"`) }).click();
         //await this.page.locator(wrPageJson.wrPage.optionsfromdropdown).nth(index).click();
         await this.page.locator(wrPageJson.wrPage.ulLocator).locator(wrPageJson.wrPage.liLocator).filter({hasText: `${type}`}).click();
     }
@@ -104,5 +104,27 @@ export class TigerHomePage extends BasePage {
         await this.clickonWebElement(wrPageJson.buttons.acceptAllCookies);
         
     }
+
+    async isSearchBoxPresent() {
+        return await this.isElementPresent(searchPageJson.search.search_text);
+    }
+
+    async selectSearchType(type:String) {
+        await this.clickonWebElement(searchPageJson.search.sreach_type);
+        await this.page.locator(searchPageJson.search.ulLocator).locator(searchPageJson.search.liLocator).filter({hasText: `${type}`}).click();
+    }
+
+    async enterSearchText(text:String) {
+        await this.filltheData(searchPageJson.search.search_text, text);
+        await this.clickonWebElement(searchPageJson.search.search_icon);
+    }
+
+    async selectDataRow(text:String) {
+        //await this.page.locator(searchPageJson.search.search_table).locator('tr:has-text("576567")').click();
+    
+        //await this.page.locator(searchPageJson.search.search_table).locator('tr:{has-text("576567")').click();
+       await this.page.locator(searchPageJson.search.search_table).locator('tr').filter({hasText: `${text}`}).click();
+    }
+
 
 }

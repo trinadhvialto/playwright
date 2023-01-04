@@ -1,6 +1,5 @@
-import { expect } from '@playwright/test';
 import loginPageJson from '../../../resources/pageLocators/tigerLoginPage.json';
-import { BasePage } from './base_page';
+import { BasePage } from './basePage';
 
 export class LoginPage extends BasePage {
 
@@ -16,6 +15,11 @@ export class LoginPage extends BasePage {
         // await this.clickOnLogInBtn();
         await this.page.fill("input[name = 'ctl00$phCenter$txtEMAIL']", "anupama.pandey.tpr@vialto.com");
         await this.page.locator("input[name = 'ctl00$phCenter$btnSubmitx']").click();
+
+        await this.page.waitForTimeout(60000);
+        await this.page.keyboard.press('Enter');
+
+
     }
 
 }
