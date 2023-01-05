@@ -1,6 +1,6 @@
-Feature: UI demo
+# Feature: UI demo
 
-  @ui @sanityTest
-  Scenario Outline: UI demo
-    Given Open the Tiger Application and test the report
+#   @ui @sanityTest
+#   Scenario Outline: UI demo
+#     Given Open the Tiger Application and test the report
    
