@@ -34,6 +34,13 @@
                 "engagement" : 52277,
                 "assignee" : 577474,
                 "workRecord" : 583754
+            },
+
+            "BadRequest" : {
+                "clients" : 23,
+                "engagements" : 52277,
+                "assignees" : 577474,
+                "workRecords" : 580730
             }
         }
     }

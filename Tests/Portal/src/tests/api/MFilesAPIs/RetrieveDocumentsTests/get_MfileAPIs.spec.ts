@@ -22,9 +22,9 @@ test.describe("MFiles API Tests - Retrieve Documents", function () {
 
         let _actualAPIResponse = await _actualResponse.json();
         
-        expect(_actualResponse.ok(), "Verify response received from API call to be true.").toBeTruthy();
-        expect(_actualResponse.status(),"Verify response status to be 200").toBe(200);
-        expect(JsonUtils.areJsonFilesEqual(_actualAPIResponse, _expectedAPIResponse), "Get Response for MFile Retrieve Document API is working as expected.").toBeTruthy();
+        expect.soft(_actualResponse.ok(), "Verify response received from API call to be true.").toBeTruthy();
+        expect.soft(_actualResponse.status(),"Verify response status to be 200").toBe(200);
+        expect.soft(JsonUtils.areJsonFilesEqual(_actualAPIResponse, _expectedAPIResponse), "Get Response for MFile Retrieve Document API is working as expected.").toBeTruthy();
     })
 
     //Pass Incorrect client param
@@ -57,5 +57,13 @@ test.describe("MFiles API Tests - Retrieve Documents", function () {
         _actualResponse = await MFileApiHelpers.retrieveDocuments_Get(request, url, incorrectWorkRecordParam);
         _expectedAPIResponse = responses.MFileResponses.RetrieveDocuments.IncorrectWorkRecord;
         await MFileApiHelpers.retrieveDocuments_IsCorrectAPIResponseReceivedForWrongParamInput(_actualResponse, _expectedAPIResponse);
+    })
+
+    //Pass bad request params
+    test("Retrieve Document API with bad request params passed",async ({request}) => {
+        let _badRequestParams = Params.MFileParams.RetrieveDocuments.BadRequest;
+        _actualResponse = await MFileApiHelpers.retrieveDocuments_Get(request, url, _badRequestParams);
+        expect.soft(_actualResponse.ok(), "Verify response received from API call to be false.").toBeFalsy();
+        expect.soft(_actualResponse.status(),"Verify response status to be 500").toBe(400);
     })
 })
