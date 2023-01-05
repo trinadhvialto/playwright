@@ -9,9 +9,6 @@ const url = process.env.mfileApiBaseUrl + OR.MFilesAPI.RetrieveDocuments
 
 let _retrieveDocumentsParams : any
 let _actualResponse : any
-let _json : any
-let _jsonBodySuccess : any
-let _jsonBodyFailure : any
 let _expectedAPIResponse : any
 
 //Retrieve Documents API Testing
