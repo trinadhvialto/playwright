@@ -36,5 +36,4 @@ export class ApiHelper {
         var response = await TokenGenerators.request(config);
         return response;
     }
-
 }

@@ -1,8 +1,9 @@
 {
     "MFileResponses" : {
         "RetrieveDocuments" : {
-            "GetResponse" : {
-                "DocumentID": "US-{EB9D0087-37E2-4268-80B2-5CCF3A121E78}-1018",
+            "CorrectParams" : {
+                "0" : {
+                "DocumentID": "US-{EB9D0087-37E2-4268-80B2-5CCF3A121E78}-1032",
                 "Name": "testupload5",
                 "Client": 23,
                 "Engagement": 52277,
@@ -13,6 +14,41 @@
                 "Country": "US",
                 "Year": "2021",
                 "TaxDocumentType": "Supplied Data"
+                },
+
+                "1" : {
+                    "DocumentID": "US-{EB9D0087-37E2-4268-80B2-5CCF3A121E78}-1018",
+                    "Name": "testupload5",
+                    "Client": 23,
+                    "Engagement": 52277,
+                    "Assignee": 577474,
+                    "WorkRecord": 580730,
+                    "Class": "CL.AssigneeTaxDocumentWorkRecord",
+                    "PracticeType": "Tax",
+                    "Country": "US",
+                    "Year": "2021",
+                    "TaxDocumentType": "Supplied Data" 
+                }
+            },
+
+            "IncorrectClientID" : {
+                "Country": "US",
+                "Error": "System.Exception: OT.Client with External ID 56 not found."
+            },
+
+            "IncorrectEngagement": {
+                "Country" : "US",
+                "Error": "System.Exception: OT.Engagement with External ID 68243 not found."
+            },
+
+            "IncorrectAssignee": {
+                "Country" : "US",
+                "Error": "System.Exception: OT.Engagement with External ID 68243 not found."
+            },
+
+            "IncorrectWorkRecord" : {
+                "Country": "US",
+                "Error": "System.Exception: OT.Engagement with External ID 68243 not found."
             }
         }
     }
