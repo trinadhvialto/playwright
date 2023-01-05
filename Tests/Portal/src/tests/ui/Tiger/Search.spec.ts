@@ -34,6 +34,8 @@ test.describe.configure({});
         await homePage.selectSearchType("Assignee");
         await homePage.enterSearchText("Anupama");
         await homePage.selectDataRow("576567");
+        await homePage.clickAcceptAllCookies();
+        //await page.locator('#pendo-button-ace439d6').click();
         expect(await assigneePage.isAssigneeIdPresent()).toContainText("Anupama");
 
 
