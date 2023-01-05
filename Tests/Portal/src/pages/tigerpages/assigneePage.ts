@@ -22,11 +22,11 @@ export class TigerAssigneePage extends BasePage {
         
     }
 
-    async clickOnImpersonate() {
-        await this.clickonWebElement(assigneePageJson.assignee_page.impersonate);
-        //expect(await this.waitForTigerPage()).toBe(true);
+    // async clickOnImpersonate() {
+    //     await this.clickonWebElement(assigneePageJson.assignee_page.impersonate);
+    //     //expect(await this.waitForTigerPage()).toBe(true);
         
-    }
+    // }
 
 
 

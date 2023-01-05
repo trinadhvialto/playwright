@@ -1,26 +1,30 @@
 import { chromium, test, expect, Page } from '@playwright/test';
 import { TigerHomePage } from '../../../pages/tigerpages/tigerHomePage';
 import { LoginPage } from '../../../pages/tigerpages/loginPage';
-import {WorkRecordPage} from '../../../pages/tigerpages/workRecordPage';
+import { TigerAssigneePage } from '../../../pages/tigerpages/assigneePage';
+import { Context } from 'vm';
 
 
 let loginpage: any;
 let homePage: any;
 let page: Page;
-let wrPage: any;
+let context: Context;
+let newPage: Page;
+let assigneePage: any;
 let noOfTimesLaunched = 0;
 
-
-test.describe("Login to Tiger and create Work Record", function() {
+test.describe("Login to Tiger and impersonate assignee", function() {
     // test.describe.configure({ mode: 'serial' });
     test.beforeAll(async function ({ browser }) {
         if (!page && !noOfTimesLaunched) {
-            page = await browser.newPage();
+            context = await browser.newContext();
+            page = await context.newPage();
+            
             
         //     await page.goto("https://tiger-stage.vialto.com/#/search-home");
             loginpage = new LoginPage(page);
             homePage = new TigerHomePage(page);
-            wrPage = new WorkRecordPage(page);
+            assigneePage = new TigerAssigneePage(page);
             //homePage.waitTime=200000;
             loginpage.navigateToUrl();
             noOfTimesLaunched = noOfTimesLaunched + 1;
@@ -33,35 +37,22 @@ test.describe("Login to Tiger and create Work Record", function() {
         expect(await homePage.waitForTigerPage()).toBe(true);
     });
 
-    test("Create a new work record", async () => {
+    test("Search assignee and impersonate", async () => {
         test.slow();
-        await homePage.isMenuPresent()
-        await homePage.clickOnMenu();
-        await homePage.clickAcceptAllCookies();
-        await homePage.isCreateNewOptionPresent() 
-        await homePage.clickOnCreateNewOption();
-        await homePage.clickOnWorkRecordOption();
-        await homePage.selectAssignee("Anupama", 1);
-        await homePage.selectEngagement("Hastings - IHC - IHC New Engagement for Tax1");
-        await homePage.selectWorkRecordType("Tax Return");
-        await homePage.selectCountry("Jordan");
-        await homePage.selectPrimaryService("Annual Tax Return");
-        await homePage.selectYear("2022");
-        await homePage.selectQuestionnaire("2022 Jordan");
-        await homePage.selectDueDate("31/01/2023");
-        await homePage.selectQuestionnaireConatct("Anupama");
-        await homePage.clickOnCreateButton();
+        await homePage.isSearchBoxPresent();
+        await homePage.selectSearchType("Assignee");
+        await homePage.enterSearchText("Anupama");
+        await homePage.selectDataRow("576567");
+        //expect(await assigneePage.isAssigneeIdPresent()).toContainText("Anupama");
+        //await assigneePage.clickOnImpersonate();
+        console.log(page.url());
+        [newPage] = await Promise.all([
+            context.waitForEvent('page'),
+            assigneePage.clickOnImpersonate() 
+        ])
+
+        console.log(await newPage.title());
 
     });
 
-    test("Send Questionnaire", async () => {
-            //test.slow();
-            expect(await wrPage.waitForWorkRecordPage()).toBe(true);
-            await wrPage.clickOnSendQuestionnaire();;
-        
-        });
-        
-
 })
-
-

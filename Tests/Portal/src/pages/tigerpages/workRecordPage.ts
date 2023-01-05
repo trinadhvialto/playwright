@@ -12,6 +12,7 @@ export class WorkRecordPage extends BasePage {
         
     }
 
+
     async clickOnSendQuestionnaire() {
         return await this.clickonWebElement(wrPageJson.wrPage.questionnaire_send);
     }
