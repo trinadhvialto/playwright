@@ -37,9 +37,16 @@ export class MFileApiHelpers {
         return documentID;
     }
 
-    static athena_StoreDocuments_VerifyPostWasSuccessful(_response) {
-        expect.soft(_response.statusText, "Verify response received from API call to be \"OK\".").toBe("OK");
-        expect.soft(_response.status, "Verify response status to be 200").toBe(200);
-        this.athena_StoreDocuments_GetNewlyCreatedDocumentID(_response);
+    static athena_StoreDocuments_VerifyPostResponse(_response, isExpectedPostResponseSuccessful = true) {
+        if(isExpectedPostResponseSuccessful) {
+            expect.soft(_response.statusText, "Verify response received from API call to be \"OK\".").toBe("OK");
+            expect.soft(_response.status, "Verify response status to be 200").toBe(200);
+            this.athena_StoreDocuments_GetNewlyCreatedDocumentID(_response);
+        }
+
+        else {
+            expect.soft(_response.statusText, "Verify response received from API call to be \"Internal Server Error\".").toBe("Internal Server Error");
+            expect.soft(_response.status, "Verify response status to be 500").toBe(500);
+        }
     }
 }

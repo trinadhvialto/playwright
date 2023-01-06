@@ -13,6 +13,21 @@
                 "Year": "2022",
                 "TaxDocumentType": "Supplied Data"
             }
+        },
+
+        "IncorrectClient" : {
+            "documentInfo" : {
+                "Name": "testupload9",
+                "Client": 22,
+                "Engagement": 52277,
+                "Assignee": 577474,
+                "WorkRecord": 581002,
+                "ClassIdentifier": "CL.AssigneeTaxDocumentWorkRecord",
+                "PracticeType": "Tax",
+                "Country": "US",
+                "Year": "2022",
+                "TaxDocumentType": "Supplied Data"
+            }
         }
     }
 }
