@@ -7,7 +7,7 @@ export class MFileApiHelpers {
         });
     }
 
-    static async retrieveDocuments_IsCorrectAPIResponseReceivedForWrongParamInput(_response, _expectedResponse) {
+    static async retrieveDocuments_IsCorrectAPIResponseReceivedForWrongParamInput(_response, _expectedJson) {
         
         let _actualResponseReceived = await _response.json();
         let _successBody = _actualResponseReceived.Success[0];
@@ -17,7 +17,7 @@ export class MFileApiHelpers {
         expect(_response.ok(), "Verify response received from API call to be false.").toBeFalsy();
         expect(_response.status(), "Verify response status to be 500").toBe(500);
 
-        expect(_failureBody.Country, "Verify Country tag in Failure Body to be " + _expectedResponse.Country).toBe(_expectedResponse.Country);
-        expect(_failureBody.Error, "Verify Country tag in Failure Body to be " + _expectedResponse.Error).toContain(_expectedResponse.Error);
+        expect(_failureBody.Country, "Verify Country tag in Failure Body to be " + _expectedJson.Country).toBe(_expectedJson.Country);
+        expect(_failureBody.Error, "Verify Country tag in Failure Body to be " + _expectedJson.Error).toContain(_expectedJson.Error);
     }
 }
