@@ -24,7 +24,7 @@ const config = {
     },
     extraHTTPHeaders: {
       // We set this header per GitHub guidelines.
-      'Accept': 'application/vnd.github.v3+json',
+      'Accept': '*/*',
     },
     
     

@@ -1,0 +1,10 @@
+{
+   
+    "mainPage":{
+        "menu": "#menu",
+        "createNew": "text=create new",
+        
+        "workRecord": "//a[text()='Work Record']"
+        
+    }
+}

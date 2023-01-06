@@ -26,6 +26,7 @@ export class UIHelper {
     }
 
     async getInnerHTML(locator: any) {
+        
         await this.waitTillElementIsVisible(locator);
         await this.page.locator(locator).scrollIntoViewIfNeeded();
         return await this.page.innerHTML(locator);
@@ -88,5 +89,7 @@ export class UIHelper {
         await this.page.locator(locator).scrollIntoViewIfNeeded();
         return await this.page.inputValue();
     }
+
+    
 
 }

@@ -1,0 +1,17 @@
+{
+    "search": {
+        "sreach_type": "#quick_search_type",
+        "ulLocator": "div.jspPane",
+        "liLocator": "li",
+        "search_text": "#quick_search_query",
+        "search_icon": ".search-button",
+        "search_table": "#search_result_table"
+        
+    },
+
+    "assignee_page": {
+        "assignee_name": "#assignee_name"
+
+
+    }
+}

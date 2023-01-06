@@ -1,0 +1,29 @@
+{
+   
+    "wrPage":{
+        "assignee_name": "#assignee",
+        "assigneeId": "ul.ui-menu",
+        "engagement": "#engagement",
+        "assigneefromdropdown": "ul.ui-menu>li",
+        "optionsfromdropdown": "div.jspPane>ul>li",
+        "ulLocator": "div.jspPane",
+        "liLocator": "li",
+        "work_record_type": "#work_record_type",
+        "country": "#country",
+        "year": "#year",
+        "primary_service": "#primary_service",
+        "question_set": "#question_set",
+        "due_date": "#due_date",
+        "questionnaire_contact": "#questionnaire_contact",
+        "questionnaire_send": "#activate_questionnaire"
+
+       
+        
+    },
+
+    "buttons":{
+        "btnCreate" : "#create_work_record",
+        "acceptAllCookies": "#onetrust-accept-btn-handler"
+    }
+
+}

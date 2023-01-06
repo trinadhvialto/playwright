@@ -11,18 +11,17 @@ const config = {
 
   use: {
     trace: 'on-first-retry',
-    actionTimeout:  60* 1000,
+    actionTimeout: 20 * 1000,
     navigationTimeout: 60 * 1000,
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
     locale: process.env.locale,
     headless: false,
-    browserName: process.env.browser,
-    channel: process.env.browser,
-    acceptDownloads: true,
-    args: ['--start-maximized'],
-    viewport: null,
+    //browserName: 'chromium',
 
+    // channel: 'chrome',//process.env.browser,
+    browserName: process.env.browser,
+    // channel: process.env.browser,
     // use: {
     //   viewport: { width: 1920, height: 1080 },
     // },
@@ -33,7 +32,7 @@ const config = {
     },
     extraHTTPHeaders: {
       // We set this header per GitHub guidelines.
-      'Accept': 'application/vnd.github.v3+json',
+      'Accept': '*/*',
     },
 
 
