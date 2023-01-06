@@ -18,7 +18,8 @@
     }
   },
 
-  "MFilesAPI" : {
-    "RetrieveDocuments" : "/RetrieveDocuments"
+  "AthenaAPI" : {
+    "RetrieveDocuments" : "/RetrieveDocuments",
+    "StoreDocuments" : "/StoreDocument"
   }
 }
