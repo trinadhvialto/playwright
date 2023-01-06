@@ -5,7 +5,7 @@
     "ctest": "cucumber-js",
     "allure": "allure serve reports/allure-results",
     "test:parallel": "npx cucumber-js --parallel=2",
-    "test:mfilesAPI" : "npx playwright test -g \"MFiles API Tests\""
+    "test:mfilesAPI:parallel" : "npx playwright test -g \"MFiles API Tests\" --workers 10"
   },
   "devDependencies": {
     "@playwright/test": "^1.28.1",

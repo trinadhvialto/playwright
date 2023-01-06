@@ -13,6 +13,7 @@ let _expectedAPIResponse : any
 
 //Retrieve Documents API Testing
 test.describe("MFiles API Tests - Retrieve Documents", function () {
+    test.describe.configure({ mode: 'parallel' });
     
     //Pass correct params
     test("Retrieve Document API with correct params passed",async ({request}) => {
