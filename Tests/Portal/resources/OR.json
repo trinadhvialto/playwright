@@ -21,6 +21,7 @@
   "AthenaAPI" : {
     "RetrieveDocuments" : "/RetrieveDocuments",
     "StoreDocuments" : "/StoreDocument",
-    "GetDocuments" : "/GetDocuments"
+    "GetDocuments" : "/GetDocuments",
+    "GetDocument" : "/GetDocument"
   }
 }

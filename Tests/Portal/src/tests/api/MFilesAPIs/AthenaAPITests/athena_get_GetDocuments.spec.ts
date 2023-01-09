@@ -1,8 +1,8 @@
-import { expect, test } from "@playwright/test";
+import { test } from "@playwright/test";
+import { ApiHelper } from "../../../../helpers/api-helpers";
 import { MFileApiHelpers } from "../../../../helpers/mfile-api-helpers";
 import OR from "../../../../../resources/OR.json";
 import Params from "../../../../../resources/params.json"
-import { ApiHelper } from "../../../../helpers/api-helpers";
 
 const url = process.env.athenaBaseUrl + OR.AthenaAPI.GetDocuments
 const header = ""
@@ -31,6 +31,6 @@ test.describe("Athena API Tests - Get Documents", function() {
     test("Verify Athena-\"Get-GetDocuments\" API with status code as 404 when incorrect url  passed.",async ({request}) => {
         _retrieveDocumentsParams = Params.MFileParams.GetDocuments.IncorrectParams;
         _actualResponse = await ApiHelper.get(url + "/incorrect", header, _retrieveDocumentsParams)
-        MFileApiHelpers.athena_VerifyResponse(_actualResponse, "Not Found", 400)
+        MFileApiHelpers.athena_VerifyResponse(_actualResponse, "Not Found", 404)
     })
 })
