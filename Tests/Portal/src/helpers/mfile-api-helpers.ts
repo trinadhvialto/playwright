@@ -37,16 +37,24 @@ export class MFileApiHelpers {
         return documentID;
     }
 
-    static athena_StoreDocuments_VerifyPostResponse(_response, isExpectedPostResponseSuccessful = true) {
-        if(isExpectedPostResponseSuccessful) {
-            expect.soft(_response.statusText, "Verify response received from API call to be \"OK\".").toBe("OK");
-            expect.soft(_response.status, "Verify response status to be 200").toBe(200);
-            this.athena_StoreDocuments_GetNewlyCreatedDocumentID(_response);
-        }
+    static athena_StoreDocuments_VerifyPostResponse(_response, isExpectedPostResponseSuccessful : boolean, expectedStausText : string ,expectedResponseStatus : number) {
+        // if(isExpectedPostResponseSuccessful) {
+        //     expect.soft(_response.statusText, "Verify response received from API call to be \"OK\".").toBe("OK");
+        //     expect.soft(_response.status, "Verify response status to be 200").toBe(expectedResponseStatus);
+        //     this.athena_StoreDocuments_GetNewlyCreatedDocumentID(_response);
+        // }
 
-        else {
-            expect.soft(_response.statusText, "Verify response received from API call to be \"Internal Server Error\".").toBe("Internal Server Error");
-            expect.soft(_response.status, "Verify response status to be 500").toBe(500);
+        // else {
+        //     let expectedStausText = (expectedResponseStatus == 500) ? "Internal Server Error" : "Bad Request";
+        //     expect.soft(_response.statusText, "Verify response received from API call to be \"" + expectedStausText + "\".").toBe(expectedStausText);
+        //     expect.soft(_response.status, "Verify response status to be " + expectedResponseStatus).toBe(expectedResponseStatus);
+        // }
+
+        expect.soft(_response.statusText, "Verify response received from API call to be \"" + expectedStausText + "\".").toBe(expectedStausText);
+        expect.soft(_response.status, "Verify response status to be " + expectedResponseStatus).toBe(expectedResponseStatus);
+
+        if(isExpectedPostResponseSuccessful) {
+            this.athena_StoreDocuments_GetNewlyCreatedDocumentID(_response);
         }
     }
 }

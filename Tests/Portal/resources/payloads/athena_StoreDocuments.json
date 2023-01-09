@@ -3,10 +3,10 @@
         "CorrectPayload" : {
             "documentInfo" : {
                 "Name": "testupload9",
-                "Client": 23,
-                "Engagement": 52277,
-                "Assignee": 577474,
-                "WorkRecord": 581002,
+                "Client": 223,
+                "Engagement": 52301,
+                "Assignee": 577575,
+                "WorkRecord": 581004,
                 "ClassIdentifier": "CL.AssigneeTaxDocumentWorkRecord",
                 "PracticeType": "Tax",
                 "Country": "US",
@@ -18,15 +18,135 @@
         "IncorrectClient" : {
             "documentInfo" : {
                 "Name": "testupload9",
-                "Client": 22,
-                "Engagement": 52277,
-                "Assignee": 577474,
-                "WorkRecord": 581002,
+                "Client": 216,
+                "Engagement": 52301,
+                "Assignee": 577575,
+                "WorkRecord": 581004,
                 "ClassIdentifier": "CL.AssigneeTaxDocumentWorkRecord",
                 "PracticeType": "Tax",
                 "Country": "US",
                 "Year": "2022",
                 "TaxDocumentType": "Supplied Data"
+            }
+        },
+
+        "IncorrectEngagement" : {
+            "documentInfo" : {
+                "Name": "testupload9",
+                "Client": 223,
+                "Engagement": 52876,
+                "Assignee": 577575,
+                "WorkRecord": 581004,
+                "ClassIdentifier": "CL.AssigneeTaxDocumentWorkRecord",
+                "PracticeType": "Tax",
+                "Country": "US",
+                "Year": "2022",
+                "TaxDocumentType": "Supplied Data"
+            }
+        },
+
+        "IncorrectAssignee" : {
+            "documentInfo" : {
+                "Name": "testupload9",
+                "Client": 223,
+                "Engagement": 52301,
+                "Assignee": 5771632,
+                "WorkRecord": 581004,
+                "ClassIdentifier": "CL.AssigneeTaxDocumentWorkRecord",
+                "PracticeType": "Tax",
+                "Country": "US",
+                "Year": "2022",
+                "TaxDocumentType": "Supplied Data"
+            }
+        },
+
+        "IncorrectWorkrecord" : {
+            "documentInfo" : {
+                "Name": "testupload9",
+                "Client": 223,
+                "Engagement": 52301,
+                "Assignee": 577575,
+                "WorkRecord": 581126,
+                "ClassIdentifier": "CL.AssigneeTaxDocumentWorkRecord",
+                "PracticeType": "Tax",
+                "Country": "US",
+                "Year": "2022",
+                "TaxDocumentType": "Supplied Data"
+            }
+        },
+
+        "IncorrectClassIdentifier" : {
+            "documentInfo" : {
+                "Name": "testupload9",
+                "Client": 223,
+                "Engagement": 52301,
+                "Assignee": 577575,
+                "WorkRecord": 581126,
+                "ClassIdentifier": "CL.AssigneeTaxDocumentWorksRecords",
+                "PracticeType": "Tax",
+                "Country": "US",
+                "Year": "2022",
+                "TaxDocumentType": "Supplied Data"
+            }
+        },
+
+        "IncorrectPracticeType" : {
+            "documentInfo" : {
+                "Name": "testupload9",
+                "Client": 223,
+                "Engagement": 52301,
+                "Assignee": 577575,
+                "WorkRecord": 581126,
+                "ClassIdentifier": "CL.AssigneeTaxDocumentWorkRecord",
+                "PracticeType": "Taxes",
+                "Country": "US",
+                "Year": "2022",
+                "TaxDocumentType": "Supplied Data"
+            }
+        },
+
+        "IncorrectCountry" : {
+            "documentInfo" : {
+                "Name": "testupload9",
+                "Client": 223,
+                "Engagement": 52301,
+                "Assignee": 577575,
+                "WorkRecord": 581126,
+                "ClassIdentifier": "CL.AssigneeTaxDocumentWorkRecord",
+                "PracticeType": "Tax",
+                "Country": "JP",
+                "Year": "2022",
+                "TaxDocumentType": "Supplied Data"
+            }
+        },
+
+        "IncorrectYear" : {
+            "documentInfo" : {
+                "Name": "testupload9",
+                "Client": 223,
+                "Engagement": 52301,
+                "Assignee": 577575,
+                "WorkRecord": 581126,
+                "ClassIdentifier": "CL.AssigneeTaxDocumentWorkRecord",
+                "PracticeType": "Tax",
+                "Country": "US",
+                "Year": "2132",
+                "TaxDocumentType": "Supplied Data"
+            }
+        },
+
+        "IncorrectTaxDocumentType" : {
+            "documentInfo" : {
+                "Name": "testupload9",
+                "Client": 223,
+                "Engagement": 52301,
+                "Assignee": 577575,
+                "WorkRecord": 581126,
+                "ClassIdentifier": "CL.AssigneeTaxDocumentWorkRecord",
+                "PracticeType": "Tax",
+                "Country": "US",
+                "Year": "2022",
+                "TaxDocumentType": "Supply Datas"
             }
         }
     }
