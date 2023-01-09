@@ -10,7 +10,7 @@ const header = ""
 let _retrieveDocumentsParams : any
 let _actualResponse : any
 
-test.describe("Athena API Tests - Get Documents - Parameters is an String array of document IDs", function() {
+test.describe("Athena API Tests - Get Documents - Parameter is an String array of document IDs", function() {
     test.describe.configure({ mode: 'parallel' });
 
     //Pass correct params
