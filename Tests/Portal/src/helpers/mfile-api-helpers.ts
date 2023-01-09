@@ -37,24 +37,8 @@ export class MFileApiHelpers {
         return documentID;
     }
 
-    static athena_StoreDocuments_VerifyPostResponse(_response, isExpectedPostResponseSuccessful : boolean, expectedStausText : string ,expectedResponseStatus : number) {
-        // if(isExpectedPostResponseSuccessful) {
-        //     expect.soft(_response.statusText, "Verify response received from API call to be \"OK\".").toBe("OK");
-        //     expect.soft(_response.status, "Verify response status to be 200").toBe(expectedResponseStatus);
-        //     this.athena_StoreDocuments_GetNewlyCreatedDocumentID(_response);
-        // }
-
-        // else {
-        //     let expectedStausText = (expectedResponseStatus == 500) ? "Internal Server Error" : "Bad Request";
-        //     expect.soft(_response.statusText, "Verify response received from API call to be \"" + expectedStausText + "\".").toBe(expectedStausText);
-        //     expect.soft(_response.status, "Verify response status to be " + expectedResponseStatus).toBe(expectedResponseStatus);
-        // }
-
+    static athena_VerifyResponse(_response, expectedStausText : string ,expectedResponseStatus : number) {
         expect.soft(_response.statusText, "Verify response received from API call to be \"" + expectedStausText + "\".").toBe(expectedStausText);
         expect.soft(_response.status, "Verify response status to be " + expectedResponseStatus).toBe(expectedResponseStatus);
-
-        if(isExpectedPostResponseSuccessful) {
-            this.athena_StoreDocuments_GetNewlyCreatedDocumentID(_response);
-        }
     }
 }

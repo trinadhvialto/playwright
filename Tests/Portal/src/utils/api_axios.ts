@@ -5,7 +5,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 export class TokenGenerators {
     static async request(config: AxiosRequestConfig<any>) {
         try {
-            process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+            process.env.NODE_TLS_REJECT_UNAUTHORIZED = '1';
             var response = await axios(config);
             return response;
         } catch (error) {

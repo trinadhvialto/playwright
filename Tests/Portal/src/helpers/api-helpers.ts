@@ -14,11 +14,12 @@ export class ApiHelper {
         return response;
     }
 
-    static async get(url: any, header: any) {
+    static async get(url: any, header: any, parameters? : any) {
         var config = {
             method: 'GET',
             url: url,
-            headers: header
+            headers: header,
+            params : parameters
         };
 
         var response = await TokenGenerators.request(config);

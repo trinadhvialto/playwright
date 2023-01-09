@@ -42,6 +42,16 @@
                 "assignees" : 577474,
                 "workRecords" : 580730
             }
+        },
+
+        "GetDocuments" : {
+            "CorrectParams" : {
+                "documentIds" : "{\"US-{EB9D0087-37E2-4268-80B2-5CCF3A121E78}-1051\", \"US-{EB9D0087-37E2-4268-80B2-5CCF3A121E78}-1050\"}"
+            },
+
+            "IncorrectParams" : {
+                "documentIds" : "{\"US-{EB9D0182-37E2-4268-80B2-5CCF3A121E88}-1051\", \"US-{EB9D0087-37E2-1268-80B2-5CCF3A121E57}-1050\"}"
+            }
         }
     }
 }
