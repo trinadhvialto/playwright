@@ -10,7 +10,7 @@ const header = ""
 let url : string
 let _actualResponse : any
 
-test.describe("Athena API Tests - Get Documents", function() {
+test.describe("Athena API Tests - Get Documents - Parameter is a string with document ID", function() {
     test.describe.configure({ mode: 'parallel' });
 
     //Pass correct document ID
