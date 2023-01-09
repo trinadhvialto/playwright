@@ -37,8 +37,21 @@ export class MFileApiHelpers {
         return documentID;
     }
 
-    static athena_VerifyResponse(_response, expectedStausText : string ,expectedResponseStatus : number) {
-        expect.soft(_response.statusText, "Verify response received from API call to be \"" + expectedStausText + "\".").toBe(expectedStausText);
+    static athena_VerifyResponse(_response, expectedResponseStatus : number, expectedStausText : string, expectedDataMessage : string = null, apiType : string = "Get") {
         expect.soft(_response.status, "Verify response status to be " + expectedResponseStatus).toBe(expectedResponseStatus);
+        expect.soft(_response.statusText, "Verify response received from API call to be \"" + expectedStausText + "\".").toBe(expectedStausText);
+
+        if(Boolean(expectedDataMessage)) {
+            switch(apiType) {
+                case "Get":
+                    expect.soft(_response.data, "Verify message received from API call to be \"" + expectedDataMessage + "\".").toBe(expectedDataMessage);
+                    break;
+                case "Post":
+                    expect.soft(_response.data.Message, "Verify message received from API call to be \"" + expectedDataMessage + "\".").toBe(expectedDataMessage);
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }
