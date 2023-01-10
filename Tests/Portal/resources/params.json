@@ -8,6 +8,13 @@
                 "WorkRecord": 581021
             },
 
+            "CorrectParamsForEndToEndTest" : {
+                "Client": 223,
+                "Engagement": 52301,
+                "Assignee": 577575,
+                "WorkRecord": 581004
+            },
+
             "IncorrectClientID" : {
                 "Client" : 56,
                 "Engagement": 52301,
