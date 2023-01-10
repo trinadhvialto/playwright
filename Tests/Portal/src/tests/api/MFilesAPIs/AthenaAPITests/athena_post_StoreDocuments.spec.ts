@@ -19,7 +19,7 @@ test.describe("Athena API Tests - Store Documents", function () {
     test("Verify Athena-\"Post-StoreDocument\" API with status code as 200 when correct payload is passed.",async () => {
         let payload = Payload.StoreDocuments.CorrectPayload;
         _actualResponse = await MFileApiHelpers.post_Athena_StoreDocuments(filePath, url, header, payload)
-        MFileApiHelpers.athena_VerifyResponse(_actualResponse, 200, "OK", "Post");
+        MFileApiHelpers.athena_VerifyResponse(_actualResponse, 200, "OK");
         MFileApiHelpers.athena_StoreDocuments_GetNewlyCreatedDocumentID(_actualResponse);
     })
 
@@ -62,7 +62,7 @@ test.describe("Athena API Tests - Store Documents", function () {
     test("Verify Athena-\"Post-StoreDocument\" API with status code as 500 when incorrect practice type payload is passed.",async () => {
         let payload = Payload.StoreDocuments.IncorrectPracticeType;
         _actualResponse = await MFileApiHelpers.post_Athena_StoreDocuments(filePath, url, header, payload)
-        MFileApiHelpers.athena_VerifyResponse(_actualResponse, 500, "Internal Server Error", "An error has occurred.", "Post");
+        MFileApiHelpers.athena_VerifyResponse(_actualResponse, 400, "Bad Request", "Vault ({EB9D0087-37E2-4268-80B2-5CCF3A121E78}) did not have a Practice Type matching 'Taxes'");
     })
 
     //Pass incorrect year payload

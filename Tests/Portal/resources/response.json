@@ -3,101 +3,54 @@
         "RetrieveDocuments" : {
             "CorrectParams" : {
                 "0" : {
-                    "DocumentID": "US-{EB9D0087-37E2-4268-80B2-5CCF3A121E78}-1051",
+                    "DocumentID": "US-{EB9D0087-37E2-4268-80B2-5CCF3A121E78}-1285",
                     "Name": "testupload9",
-                    "Client": 23,
-                    "Engagement": 52277,
-                    "Assignee": 577474,
-                    "WorkRecord": 580730,
+                    "Client": 223,
+                    "Engagement": 52301,
+                    "Assignee": 577582,
+                    "WorkRecord": 581021,
                     "Class": "CL.AssigneeTaxDocumentWorkRecord",
                     "PracticeType": "Tax",
                     "Country": "US",
                     "Year": "2022",
-                    "TaxDocumentType": "Supplied Data"
+                    "TaxDocumentType": "Supplied Data",
+                    "ImmigrationDocumentType" : "",
+                    "ManagedServiceDocumentType": "",
+                    "TaxDeliverableType": ""
                 },
 
                 "1" : {
-                    "DocumentID": "US-{EB9D0087-37E2-4268-80B2-5CCF3A121E78}-1050",
+                    "DocumentID": "US-{EB9D0087-37E2-4268-80B2-5CCF3A121E78}-1284",
                     "Name": "testupload9",
-                    "Client": 23,
-                    "Engagement": 52277,
-                    "Assignee": 577474,
-                    "WorkRecord": 580730,
+                    "Client": 223,
+                    "Engagement": 52301,
+                    "Assignee": 577582,
+                    "WorkRecord": 581021,
                     "Class": "CL.AssigneeTaxDocumentWorkRecord",
                     "PracticeType": "Tax",
                     "Country": "US",
                     "Year": "2022",
-                    "TaxDocumentType": "Supplied Data"
+                    "TaxDocumentType": "Supplied Data",
+                    "ImmigrationDocumentType" : "",
+                    "ManagedServiceDocumentType": "",
+                    "TaxDeliverableType": ""
                 },
 
                 "2" : {
-                    "DocumentID": "US-{EB9D0087-37E2-4268-80B2-5CCF3A121E78}-1049",
+                    "DocumentID": "US-{EB9D0087-37E2-4268-80B2-5CCF3A121E78}-1283",
                     "Name": "testupload9",
-                    "Client": 23,
-                    "Engagement": 52277,
-                    "Assignee": 577474,
-                    "WorkRecord": 580730,
+                    "Client": 223,
+                    "Engagement": 52301,
+                    "Assignee": 577582,
+                    "WorkRecord": 581021,
                     "Class": "CL.AssigneeTaxDocumentWorkRecord",
                     "PracticeType": "Tax",
                     "Country": "US",
                     "Year": "2022",
-                    "TaxDocumentType": "Supplied Data"
-                },
-
-                "3" : {
-                    "DocumentID": "US-{EB9D0087-37E2-4268-80B2-5CCF3A121E78}-1048",
-                    "Name": "testupload9",
-                    "Client": 23,
-                    "Engagement": 52277,
-                    "Assignee": 577474,
-                    "WorkRecord": 580730,
-                    "Class": "CL.AssigneeTaxDocumentWorkRecord",
-                    "PracticeType": "Tax",
-                    "Country": "US",
-                    "Year": "2022",
-                    "TaxDocumentType": "Supplied Data"
-                },
-
-                "4" : {
-                    "DocumentID": "US-{EB9D0087-37E2-4268-80B2-5CCF3A121E78}-1047",
-                    "Name": "testupload9",
-                    "Client": 23,
-                    "Engagement": 52277,
-                    "Assignee": 577474,
-                    "WorkRecord": 580730,
-                    "Class": "CL.AssigneeTaxDocumentWorkRecord",
-                    "PracticeType": "Tax",
-                    "Country": "US",
-                    "Year": "2022",
-                    "TaxDocumentType": "Supplied Data"
-                },
-
-                "5" : {
-                    "DocumentID": "US-{EB9D0087-37E2-4268-80B2-5CCF3A121E78}-1032",
-                    "Name": "testupload5",
-                    "Client": 23,
-                    "Engagement": 52277,
-                    "Assignee": 577474,
-                    "WorkRecord": 580730,
-                    "Class": "CL.AssigneeTaxDocumentWorkRecord",
-                    "PracticeType": "Tax",
-                    "Country": "US",
-                    "Year": "2021",
-                    "TaxDocumentType": "Supplied Data"
-                },
-
-                "6" : {
-                    "DocumentID": "US-{EB9D0087-37E2-4268-80B2-5CCF3A121E78}-1018",
-                    "Name": "testupload5",
-                    "Client": 23,
-                    "Engagement": 52277,
-                    "Assignee": 577474,
-                    "WorkRecord": 580730,
-                    "Class": "CL.AssigneeTaxDocumentWorkRecord",
-                    "PracticeType": "Tax",
-                    "Country": "US",
-                    "Year": "2021",
-                    "TaxDocumentType": "Supplied Data" 
+                    "TaxDocumentType": "Supplied Data",
+                    "ImmigrationDocumentType" : "",
+                    "ManagedServiceDocumentType": "",
+                    "TaxDeliverableType": ""
                 }
             },
 

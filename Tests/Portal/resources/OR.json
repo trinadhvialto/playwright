@@ -22,6 +22,7 @@
     "RetrieveDocuments" : "/RetrieveDocuments",
     "StoreDocuments" : "/StoreDocument",
     "GetDocuments" : "/GetDocuments",
-    "GetDocument" : "/GetDocument"
+    "GetDocument" : "/GetDocument",
+    "Test" : "/test"
   }
 }
