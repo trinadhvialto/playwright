@@ -19,10 +19,11 @@
   },
 
   "AthenaAPI" : {
-    "RetrieveDocuments" : "/RetrieveDocuments",
-    "StoreDocuments" : "/StoreDocument",
+    "RetrieveDocument" : "/RetrieveDocuments",
+    "StoreDocument" : "/StoreDocument",
     "GetDocuments" : "/GetDocuments",
     "GetDocument" : "/GetDocument",
-    "Test" : "/test"
+    "Test" : "/test",
+    "RetrieveStructure" : "/RetrieveStructure"
   }
 }

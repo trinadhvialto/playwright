@@ -1,18 +1,17 @@
-import { expect, request, test } from "@playwright/test";
+import { test } from "@playwright/test";
 import path from "path";
 import OR from "../../../../../resources/OR.json";
 import { MFileApiHelpers } from "../../../../helpers/mfile-api-helpers";
 import Payload from "../../../../../resources/payloads/athena_StoreDocuments.json"
-import Response from "../../../../../resources/response.json"
 
 
-const url = process.env.athenaBaseUrl + OR.AthenaAPI.StoreDocuments
-const relativePathToFile = "./../../../../../resources/testupload9.docx";
+const url = process.env.athenaBaseUrl + OR.AthenaAPI.StoreDocument
+const relativePathToFile = "./../../../../../resources/testfile.docx";
 const filePath = path.resolve(__dirname, relativePathToFile);
 const header = null;
 let _actualResponse : any;
 
-test.describe("Athena API Tests - Store Documents", function () {
+test.describe("Athena API Tests - Post Operation - Store Document", function () {
     test.describe.configure({ mode: 'parallel' });
 
     //Pass correct payload
@@ -59,7 +58,7 @@ test.describe("Athena API Tests - Store Documents", function () {
     })
 
     //Pass incorrect practice type payload
-    test("Verify Athena-\"Post-StoreDocument\" API with status code as 500 when incorrect practice type payload is passed.",async () => {
+    test("Verify Athena-\"Post-StoreDocument\" API with status code as 400 when incorrect practice type payload is passed.",async () => {
         let payload = Payload.StoreDocuments.IncorrectPracticeType;
         _actualResponse = await MFileApiHelpers.post_Athena_StoreDocuments(filePath, url, header, payload)
         MFileApiHelpers.athena_VerifyResponse(_actualResponse, 400, "Bad Request", "Vault ({EB9D0087-37E2-4268-80B2-5CCF3A121E78}) did not have a Practice Type matching 'Taxes'");
@@ -94,7 +93,7 @@ test.describe("Athena API Tests - Store Documents", function () {
     })
 
     // This test is not run
-    test.skip('skip this test', async ({ request }) => {
+    test.skip('Dummy test to skip', async () => {
         let payload = Payload.StoreDocuments.IncorrectCountry
         _actualResponse = await MFileApiHelpers.post_Athena_StoreDocuments(filePath, url, header, payload)
         MFileApiHelpers.athena_VerifyResponse(_actualResponse, 500, "Test fail", "Post");

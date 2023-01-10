@@ -5,7 +5,7 @@ import OR from "../../../../../resources/OR.json";
 import Params from "../../../../../resources/params.json"
 import responses from "../../../../../resources/response.json"
 
-const url = process.env.athenaBaseUrl + OR.AthenaAPI.RetrieveDocuments
+const url = process.env.athenaBaseUrl + OR.AthenaAPI.RetrieveDocument
 
 let _retrieveDocumentsParams : any
 let _actualResponse : any
@@ -25,7 +25,7 @@ test.describe("Athena API Tests - Retrieve Documents", function () {
         
         expect.soft(_actualResponse.ok(), "Verify response received from API call to be \"OK\".").toBeTruthy();
         expect.soft(_actualResponse.status(),"Verify response status to be 200").toBe(200);
-        expect.soft(JsonUtils.areJsonFilesEqual(_actualJson, _expectedJson), "Get Response for MFile Retrieve Document API is working as expected.").toBeTruthy();
+        expect.soft(JsonUtils.areJsonFilesEqual(_actualJson, _expectedJson), "Get Response for Athena Retrieve Document API is working as expected.").toBeTruthy();
     })
 
     //Pass Incorrect client param

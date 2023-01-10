@@ -11,10 +11,20 @@ export class MFileApiHelpers {
     }
 
     static async post_Athena_StoreDocuments(filePath : string, url : string, header : JSON, payload : any) {
+        let data = this.appendFilePathAndDocumentInfo(filePath, payload)
+        return await ApiHelper.post(url, header, data)
+    }
+
+    static async put_Athena_StoreDocuments(filePath : string, url : string, header : JSON, payload : any) {
+        let data = this.appendFilePathAndDocumentInfo(filePath, payload)
+        return await ApiHelper.put(url, header, data)
+    }
+
+    static appendFilePathAndDocumentInfo(filePath : string, payload : any) {
         let data = new FormData();
         data.append('file', fs.createReadStream(filePath));
         data.append('documentInfo', JSON.stringify(payload.documentInfo));
-        return await ApiHelper.post(url, header, data)
+        return data;
     }
 
     static async retrieveDocuments_IsCorrectAPIResponseReceivedForWrongParamInput(_response, _expectedJson) {
@@ -48,6 +58,9 @@ export class MFileApiHelpers {
                     break;
                 case "Post":
                     expect.soft(_response.data.Message, "Verify message received from API call to be \"" + expectedDataMessage + "\".").toBe(expectedDataMessage);
+                    break;
+                case "Put":
+                    expect.soft(_response.data, "Verify message received from API call to be \"" + expectedDataMessage + "\".").toBe(expectedDataMessage);
                     break;
                 default:
                     break;

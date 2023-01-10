@@ -2,7 +2,22 @@
     "StoreDocuments" : {
         "CorrectPayload" : {
             "documentInfo" : {
-                "Name": "testupload9",
+                "Name": "testfile",
+                "Client": 223,
+                "Engagement": 52301,
+                "Assignee": 577575,
+                "WorkRecord": 581004,
+                "ClassIdentifier": "CL.AssigneeTaxDocumentWorkRecord",
+                "PracticeType": "Tax",
+                "Country": "US",
+                "Year": "2022",
+                "TaxDocumentType": "Supplied Data"
+            }
+        },
+
+        "CorrectPayloadToUpdate" : {
+            "documentInfo" : {
+                "Name": "updatedtestfile",
                 "Client": 223,
                 "Engagement": 52301,
                 "Assignee": 577575,
@@ -17,7 +32,7 @@
 
         "IncorrectClient" : {
             "documentInfo" : {
-                "Name": "testupload9",
+                "Name": "testfile",
                 "Client": 216,
                 "Engagement": 52301,
                 "Assignee": 577575,
@@ -32,7 +47,7 @@
 
         "IncorrectEngagement" : {
             "documentInfo" : {
-                "Name": "testupload9",
+                "Name": "testfile",
                 "Client": 223,
                 "Engagement": 52876,
                 "Assignee": 577575,
@@ -47,7 +62,7 @@
 
         "IncorrectAssignee" : {
             "documentInfo" : {
-                "Name": "testupload9",
+                "Name": "testfile",
                 "Client": 223,
                 "Engagement": 52301,
                 "Assignee": 5771632,
@@ -62,7 +77,7 @@
 
         "IncorrectWorkrecord" : {
             "documentInfo" : {
-                "Name": "testupload9",
+                "Name": "testfile",
                 "Client": 223,
                 "Engagement": 52301,
                 "Assignee": 577575,
@@ -77,7 +92,7 @@
 
         "IncorrectClassIdentifier" : {
             "documentInfo" : {
-                "Name": "testupload9",
+                "Name": "testfile",
                 "Client": 223,
                 "Engagement": 52301,
                 "Assignee": 577575,
@@ -92,7 +107,7 @@
 
         "IncorrectPracticeType" : {
             "documentInfo" : {
-                "Name": "testupload9",
+                "Name": "testfile",
                 "Client": 223,
                 "Engagement": 52301,
                 "Assignee": 577575,
@@ -107,7 +122,7 @@
 
         "IncorrectCountry" : {
             "documentInfo" : {
-                "Name": "testupload9",
+                "Name": "testfile",
                 "Client": 223,
                 "Engagement": 52301,
                 "Assignee": 577575,
@@ -122,7 +137,7 @@
 
         "IncorrectYear" : {
             "documentInfo" : {
-                "Name": "testupload9",
+                "Name": "testfile",
                 "Client": 223,
                 "Engagement": 52301,
                 "Assignee": 577575,
@@ -137,7 +152,7 @@
 
         "IncorrectTaxDocumentType" : {
             "documentInfo" : {
-                "Name": "testupload9",
+                "Name": "testfile",
                 "Client": 223,
                 "Engagement": 52301,
                 "Assignee": 577575,

@@ -57,6 +57,11 @@
         "GetDocument" : {
             "CorrectDocumentID" : "US-{EB9D0087-37E2-4268-80B2-5CCF3A121E78}-1051",
             "IncorrectDocumentID" : "US-{EB9D0836-37E2-4177-80B2-5CCF3A121E93}-1863"
+        },
+
+        "StoreDocument_Put" : {
+            "CorrectDocumentID" : "/US-{EB9D0087-37E2-4268-80B2-5CCF3A121E78}-1506",
+            "IncorrectDocumentID" : "/US-{EB9D8368-37E2-4492-80B2-5CCF3A121E76}-1506"
         }
     }
 }
