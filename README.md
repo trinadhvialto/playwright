@@ -1,16 +1,24 @@
-# playwright helpers
+# playwright
+
+<details>
+  <summary>playwright helpers</summary><br/>
+
+## playwright helpers
 
 playwright helpers is a helper library for dealing with utilities.
 
-## Installation
+  <details>
+  <summary>excel utilities</summary><br/>
 
-Use the package manager [npm](https://www.npmjs.com/) to install playwright.
+### Installation
+
+Use the package manager [npm](https://www.npmjs.com/) to install xlsx.
 
 ```bash
-npm install playwright
+npm install xlsx
 ```
 
-## Usage
+### Usage
 
 ```typescript
 import path from 'node:path';
@@ -26,18 +34,24 @@ import { DocsReaderHelper } from '../../../helpers/docs-reader-helper';
         console.log(csvData);
     })
 
-# returns 'object'
+#### output(keys are specific to excel file)
 {
   Username: [ '***', '***'],
   Identifier: ['***', '***'],
   'First name': ['***', '***'],
   'Last name': ['***', '***']
 }
+```
+<br />
 
-
-## Contributing
+## Contribution
 
 Pull requests are welcome. For major changes, please open an issue first
 to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
+</details>
+
+</details>
+
+
