@@ -56,22 +56,22 @@
 
             "IncorrectClientID" : {
                 "Country": "US",
-                "Error": "System.Exception: OT.Client with External ID 56 not found."
+                "Error": "MFilesTigerIntegration.Service.Exceptions.BadRequestException: OT.Client with External ID 56 not found."
             },
 
             "IncorrectEngagement": {
                 "Country" : "US",
-                "Error": "System.Exception: OT.Engagement with External ID 68243 not found."
+                "Error": "MFilesTigerIntegration.Service.Exceptions.BadRequestException: OT.Engagement with External ID 68243 not found."
             },
 
             "IncorrectAssignee": {
                 "Country" : "US",
-                "Error": "System.Exception: OT.Assignee with External ID 583429 not found."
+                "Error": "MFilesTigerIntegration.Service.Exceptions.BadRequestException: OT.Assignee with External ID 583429 not found."
             },
 
             "IncorrectWorkRecord" : {
                 "Country": "US",
-                "Error": "System.Exception: OT.WorkRecord with External ID 583754 not found."
+                "Error": "MFilesTigerIntegration.Service.Exceptions.BadRequestException: OT.WorkRecord with External ID 583754 not found."
             }
         },
 

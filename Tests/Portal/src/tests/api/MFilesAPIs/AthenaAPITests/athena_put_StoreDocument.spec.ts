@@ -29,7 +29,7 @@ test.describe("Athena API Tests - Put Operation - Store Document.", function () 
         let incorrectUrl = urlSuffix + Params.MFileParams.StoreDocument_Put.IncorrectDocumentID
         let payload = Payload.StoreDocuments.CorrectPayloadToUpdate;
         _actualResponse = await MFileApiHelpers.put_Athena_StoreDocuments(filePath, incorrectUrl, header, payload)
-        MFileApiHelpers.athena_VerifyResponse(_actualResponse, 400, "Bad Request", "Document ID country code did not match vault guid", "Put")
+        MFileApiHelpers.athena_VerifyResponse(_actualResponse, 400, "Bad Request", "Document ID country code did not match vault guid")
     })
 
     //Pass incorrect client payload
