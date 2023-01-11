@@ -59,19 +59,6 @@ export class MFileApiHelpers {
             else {
                 expect.soft(_response.data, "Verify message received from API call to be \"" + expectedDataMessage + "\".").toBe(expectedDataMessage);
             }
-            // switch(apiType) {
-            //     case "Get":
-            //         expect.soft(_response.data, "Verify message received from API call to be \"" + expectedDataMessage + "\".").toBe(expectedDataMessage);
-            //         break;
-            //     case "Post":
-            //         expect.soft(_response.data.Message, "Verify message received from API call to be \"" + expectedDataMessage + "\".").toBe(expectedDataMessage);
-            //         break;
-            //     case "Put":
-            //         expect.soft(_response.data, "Verify message received from API call to be \"" + expectedDataMessage + "\".").toBe(expectedDataMessage);
-            //         break;
-            //     default:
-            //         break;
-            // }
         }
     }
 }
