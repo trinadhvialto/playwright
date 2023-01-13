@@ -86,17 +86,17 @@ test.describe("Athena API Tests - Post Operation - Store Document", function () 
         MFileApiHelpers.athena_VerifyResponse(_actualResponse, 400, "Bad Request", "Failed to get vault for country '" + payload.documentInfo.Country + "'");
     })
 
-    //This test fails on purpose
-    test("Dummy test to fail",async () => {
-        let payload = Payload.StoreDocuments.IncorrectCountry
-        _actualResponse = await MFileApiHelpers.post_Athena_StoreDocuments(filePath, url, header, payload)
-        MFileApiHelpers.athena_VerifyResponse(_actualResponse, 500, "Test fail");
-    })
+    // //This test fails on purpose
+    // test("Dummy test to fail",async () => {
+    //     let payload = Payload.StoreDocuments.IncorrectCountry
+    //     _actualResponse = await MFileApiHelpers.post_Athena_StoreDocuments(filePath, url, header, payload)
+    //     MFileApiHelpers.athena_VerifyResponse(_actualResponse, 500, "Test fail");
+    // })
 
-    // This test is not run
-    test.skip('Dummy test to skip', async () => {
-        let payload = Payload.StoreDocuments.IncorrectCountry
-        _actualResponse = await MFileApiHelpers.post_Athena_StoreDocuments(filePath, url, header, payload)
-        MFileApiHelpers.athena_VerifyResponse(_actualResponse, 500, "Test fail");
-    });
+    // // This test is not run
+    // test.skip('Dummy test to skip', async () => {
+    //     let payload = Payload.StoreDocuments.IncorrectCountry
+    //     _actualResponse = await MFileApiHelpers.post_Athena_StoreDocuments(filePath, url, header, payload)
+    //     MFileApiHelpers.athena_VerifyResponse(_actualResponse, 500, "Test fail");
+    // });
 })
