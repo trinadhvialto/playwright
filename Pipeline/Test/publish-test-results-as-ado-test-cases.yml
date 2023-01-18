@@ -1,0 +1,280 @@
+# Set createTestCasesInADO = true as pipeline variable to execute for other branches than master
+parameters:
+  testReportFolder: ''
+  teamName: 'HDP - Platform Train\Connectivity Module Team'
+
+steps:
+  - task: DownloadPipelineArtifact@2
+    displayName: 'Download environment artifact'
+    inputs:
+      artifact: 'environment'
+
+  - powershell: |
+      $filePath = Join-Path -Path $env:PIPELINE_WORKSPACE -ChildPath "environment.json"
+      $json = Get-Content $filePath | Out-String | ConvertFrom-Json
+
+      foreach($prop in $json.psobject.properties) {
+        echo $prop.Name $prop.Value
+        Write-Host("##vso[task.setvariable variable=$($prop.Name);isOutput=true]$($prop.Value)")
+      }
+    name: getBuildVariables
+    displayName: 'Set build variables'
+
+  - task: DownloadPipelineArtifact@2
+    condition: |
+        and (
+           succeeded(),
+           eq(variables['isDeviceProvisionTestsEnabled'],'true')
+         )
+    displayName: 'Download pipeline artifacts device management'
+    inputs:
+      artifact: connmodule-devicemanagementinttestreports-$(regionSc)-$(getBuildVariables.artifactVersion)
+
+  - task: ExtractFiles@1
+    condition: |
+        and (
+           succeeded(),
+           eq(variables['isDeviceProvisionTestsEnabled'],'true')
+         )
+    displayName: 'Extract test reports device management'
+    inputs:
+      archiveFilePatterns: |
+        $(Pipeline.Workspace)/connmodule-devicemanagementinttestreports-$(regionSc)-$(getBuildVariables.artifactVersion).zip
+      destinationFolder: $(Pipeline.Workspace)/integrationtests/devicemanagement-json-results-$(regionSc)      
+      cleanDestinationFolder: false
+
+  - task: DownloadPipelineArtifact@2
+    displayName: 'Download pipeline artifacts event processor'
+    inputs:
+      artifact: connmodule-eventprocessorinttestreports-$(regionSc)-$(getBuildVariables.artifactVersion)
+  
+  - task: ExtractFiles@1
+    displayName: 'Extract test reports event processor'
+    inputs:
+      archiveFilePatterns: |
+        $(Pipeline.Workspace)/connmodule-eventprocessorinttestreports-$(regionSc)-$(getBuildVariables.artifactVersion).zip
+      destinationFolder: $(Pipeline.Workspace)/integrationtests/eventprocessor-json-results-$(regionSc)   
+      cleanDestinationFolder: false
+
+  - task: DownloadPipelineArtifact@2
+    displayName: 'Download pipeline artifacts dicomforwarder'
+    inputs:
+      artifact: connmodule-dicomforwarderinttestreports-$(regionSc)-$(getBuildVariables.artifactVersion)
+  
+  - task: ExtractFiles@1
+    displayName: 'Extract test reports dicomforwarder'
+    inputs:
+      archiveFilePatterns: |
+        $(Pipeline.Workspace)/connmodule-dicomforwarderinttestreports-$(regionSc)-$(getBuildVariables.artifactVersion).zip
+      destinationFolder: $(Pipeline.Workspace)/integrationtests/dicomforwarder-json-results-$(regionSc)     
+      cleanDestinationFolder: false
+
+  - task: DownloadPipelineArtifact@2
+    displayName: 'Download pipeline artifacts managementmodulelog'
+    inputs:
+      artifact: connmodule-managementmoduleloginttestreports-$(regionSc)-$(getBuildVariables.artifactVersion)
+  
+  - task: ExtractFiles@1
+    displayName: 'Extract test reports managementmodulelog'
+    inputs:
+      archiveFilePatterns: |
+        $(Pipeline.Workspace)/connmodule-managementmoduleloginttestreports-$(regionSc)-$(getBuildVariables.artifactVersion).zip
+      destinationFolder: $(Pipeline.Workspace)/integrationtests/managementmodulelog-json-results-$(regionSc)      
+      cleanDestinationFolder: false
+
+  - task: DownloadPipelineArtifact@2
+    displayName: 'Download pipeline artifacts managementmodule'
+    inputs:
+      artifact: connmodule-managementmoduleinttestreports-$(regionSc)-$(getBuildVariables.artifactVersion)
+
+  - task: ExtractFiles@1
+    displayName: 'Extract test reports managementmodule'
+    inputs:
+      archiveFilePatterns: |
+        $(Pipeline.Workspace)/connmodule-managementmoduleinttestreports-$(regionSc)-$(getBuildVariables.artifactVersion).zip
+      destinationFolder: $(Pipeline.Workspace)/integrationtests/managementmodule-json-results-$(regionSc)      
+      cleanDestinationFolder: false
+
+  - task: DownloadPipelineArtifact@2
+    displayName: 'Download pipeline artifacts managementmodulestr'
+    inputs:
+      artifact: connmodule-managementmodulestrinttestreports-$(regionSc)-$(getBuildVariables.artifactVersion)
+
+  - task: ExtractFiles@1
+    displayName: 'Extract test reports managementmodulestr'
+    inputs:
+      archiveFilePatterns: |
+        $(Pipeline.Workspace)/connmodule-managementmodulestrinttestreports-$(regionSc)-$(getBuildVariables.artifactVersion).zip
+      destinationFolder: $(Pipeline.Workspace)/integrationtests/managementmodulestorage-json-results-$(regionSc)    
+      cleanDestinationFolder: false
+
+  - task: DownloadPipelineArtifact@2
+    displayName: 'Download pipeline artifacts zvimoudule'
+    inputs:
+      artifact: connmodule-zviinttestreports-$(regionSc)-$(getBuildVariables.artifactVersion)
+
+  - task: ExtractFiles@1
+    displayName: 'Extract test reports zvimoudule'
+    inputs:
+      archiveFilePatterns: |
+        $(Pipeline.Workspace)/connmodule-zviinttestreports-$(regionSc)-$(getBuildVariables.artifactVersion).zip
+      destinationFolder: $(Pipeline.Workspace)/integrationtests/zvimodule-json-results-$(regionSc)      
+      cleanDestinationFolder: false
+  
+  - task: DownloadPipelineArtifact@2
+    displayName: 'Download pipeline artifacts adminportal tests'
+    inputs:
+      artifact: connmodule-adminportalinttestreports-$(regionSc)-$(getBuildVariables.artifactVersion)
+
+  - task: ExtractFiles@1
+    displayName: 'Extract test reports admin portal general api'
+    inputs:
+      archiveFilePatterns: |
+        $(Pipeline.Workspace)/connmodule-adminportalgeneralapiinttestreports-$(regionSc)-$(getBuildVariables.artifactVersion).zip
+      destinationFolder: $(Pipeline.Workspace)/integrationtests/adminportalgeneralapi-json-results-$(regionSc)     
+      cleanDestinationFolder: false
+
+  - task: ExtractFiles@1
+    displayName: 'Extract test reports admin portal l1 user api'
+    inputs:
+      archiveFilePatterns: |
+        $(Pipeline.Workspace)/connmodule-adminportalL1_userapiinttestreports-$(regionSc)-$(getBuildVariables.artifactVersion).zip
+      destinationFolder: $(Pipeline.Workspace)/integrationtests/adminportall1userapi-json-results-$(regionSc)     
+      cleanDestinationFolder: false
+
+  - task: ExtractFiles@1
+    displayName: 'Extract test reports admin portal regular user api'
+    inputs:
+      archiveFilePatterns: |
+        $(Pipeline.Workspace)/connmodule-adminportalregular_userapiinttestreports-$(regionSc)-$(getBuildVariables.artifactVersion).zip
+      destinationFolder: $(Pipeline.Workspace)/integrationtests/adminportalregularuserapi-json-results-$(regionSc)     
+      cleanDestinationFolder: false
+
+  - task: ExtractFiles@1
+    displayName: 'Extract test reports admin portal l1 user ui'
+    inputs:
+      archiveFilePatterns: |
+        $(Pipeline.Workspace)/connmodule-adminportalL1_useruiinttestreports-$(regionSc)-$(getBuildVariables.artifactVersion).zip
+      destinationFolder: $(Pipeline.Workspace)/integrationtests/adminportall1userui-json-results-$(regionSc)      
+      cleanDestinationFolder: false
+
+  - task: ExtractFiles@1
+    displayName: 'Extract test reports admin portal regular user ui'
+    inputs:
+      archiveFilePatterns: |
+        $(Pipeline.Workspace)/connmodule-adminportalregular_useruiinttestreports-$(regionSc)-$(getBuildVariables.artifactVersion).zip
+      destinationFolder: $(Pipeline.Workspace)/integrationtests/adminportalregularuserui-json-results-$(regionSc)      
+      cleanDestinationFolder: false
+
+  - task: ExtractFiles@1
+    displayName: 'Extract test reports admin portal multi lang ES'
+    inputs:
+      archiveFilePatterns: |
+        $(Pipeline.Workspace)/connmodule-adminportales-ESlangtestreports-$(regionSc)-$(getBuildVariables.artifactVersion).zip
+      destinationFolder: $(Pipeline.Workspace)/integrationtests/adminportaluies-json-results-$(regionSc)     
+      cleanDestinationFolder: false
+  
+  - task: ExtractFiles@1
+    displayName: 'Extract test reports admin portal multi lang DE'
+    inputs:
+      archiveFilePatterns: |
+        $(Pipeline.Workspace)/connmodule-adminportalde-DElangtestreports-$(regionSc)-$(getBuildVariables.artifactVersion).zip
+      destinationFolder: $(Pipeline.Workspace)/integrationtests/adminportaluide-json-results-$(regionSc)      
+      cleanDestinationFolder: false
+  
+  - task: ExtractFiles@1
+    displayName: 'Extract test reports admin portal multi lang EN'
+    inputs:
+      archiveFilePatterns: |
+        $(Pipeline.Workspace)/connmodule-adminportalen-ENlangtestreports-$(regionSc)-$(getBuildVariables.artifactVersion).zip
+      destinationFolder: $(Pipeline.Workspace)/integrationtests/adminportaluien-json-results-$(regionSc)      
+      cleanDestinationFolder: false
+
+  - task: ExtractFiles@1
+    condition: |
+        and (
+           succeeded(),
+           eq(variables['isStreamingEnabled'], 'true')
+         )
+    displayName: 'Extract test reports admin portal l1 user api streaming'
+    inputs:
+      archiveFilePatterns: |
+        $(Pipeline.Workspace)/connmodule-adminportalL1_userapistreaminginttestreports-$(regionSc)-$(getBuildVariables.artifactVersion).zip
+      destinationFolder: $(Pipeline.Workspace)/integrationtests/adminportall1userapistreaming-json-results-$(regionSc)      
+      cleanDestinationFolder: false
+
+  - task: ExtractFiles@1
+    condition: |
+        and (
+           succeeded(),
+           eq(variables['isStreamingEnabled'], 'true')
+         )
+    displayName: 'Extract test reports admin portal regular user api streaming'
+    inputs:
+      archiveFilePatterns: |
+        $(Pipeline.Workspace)/connmodule-adminportalregular_userapistreaminginttestreports-$(regionSc)-$(getBuildVariables.artifactVersion).zip
+      destinationFolder: $(Pipeline.Workspace)/integrationtests/adminportalregularuserapistreaming-json-results-$(regionSc)      
+      cleanDestinationFolder: false
+
+  - task: ExtractFiles@1
+    condition: |
+        and (
+           succeeded(),
+           eq(variables['isStreamingEnabled'], 'true')
+         )
+    displayName: 'Extract test reports admin portal l1 user ui streaming'
+    inputs:
+      archiveFilePatterns: |
+        $(Pipeline.Workspace)/connmodule-adminportalL1_useruistreaminginttestreports-$(regionSc)-$(getBuildVariables.artifactVersion).zip
+      destinationFolder: $(Pipeline.Workspace)/integrationtests/adminportall1useruistreaming-json-results-$(regionSc)      
+      cleanDestinationFolder: false
+
+  - task: ExtractFiles@1
+    condition: |
+        and (
+           succeeded(),
+           eq(variables['isStreamingEnabled'], 'true')
+         )
+    displayName: 'Extract test reports admin portal regular user ui streaming'
+    inputs:
+      archiveFilePatterns: |
+        $(Pipeline.Workspace)/connmodule-adminportalregular_useruistreaminginttestreports-$(regionSc)-$(getBuildVariables.artifactVersion).zip
+      destinationFolder: $(Pipeline.Workspace)/integrationtests/adminportalregularuseruistreaming-json-results-$(regionSc)      
+      cleanDestinationFolder: false
+
+  - template: run-ado-import.yml
+    parameters:
+      workingDirectories: [
+        "$(Pipeline.Workspace)/integrationtests/eventprocessor-json-results-$(regionSc)",
+        "$(Pipeline.Workspace)/integrationtests/dicomforwarder-json-results-$(regionSc)",
+        "$(Pipeline.Workspace)/integrationtests/managementmodulelog-json-results-$(regionSc)",
+        "$(Pipeline.Workspace)/integrationtests/managementmodule-json-results-$(regionSc)",
+        "$(Pipeline.Workspace)/integrationtests/managementmodulestorage-json-results-$(regionSc)",
+        "$(Pipeline.Workspace)/integrationtests/zvimodule-json-results-$(regionSc)",
+        "$(Pipeline.Workspace)/integrationtests/adminportalgeneralapi-json-results-$(regionSc)",
+        "$(Pipeline.Workspace)/integrationtests/adminportall1userapi-json-results-$(regionSc)",
+        "$(Pipeline.Workspace)/integrationtests/adminportalregularuserapi-json-results-$(regionSc)",
+        "$(Pipeline.Workspace)/integrationtests/adminportall1userui-json-results-$(regionSc)",
+        "$(Pipeline.Workspace)/integrationtests/adminportalregularuserui-json-results-$(regionSc)",
+        "$(Pipeline.Workspace)/integrationtests/adminportaluien-json-results-$(regionSc)",
+        "$(Pipeline.Workspace)/integrationtests/adminportaluide-json-results-$(regionSc)",
+        "$(Pipeline.Workspace)/integrationtests/adminportaluies-json-results-$(regionSc)"
+      ]
+      testType: integration
+
+  - template: run-ado-import.yml
+    parameters:
+      workingDirectories: [
+        "$(Pipeline.Workspace)/integrationtests/devicemanagement-json-results-$(regionSc)"
+      ]
+      testType: integration
+
+  - template: run-ado-import.yml
+    parameters:
+      workingDirectories: [
+        "$(Pipeline.Workspace)/integrationtests/adminportall1userapistreaming-json-results-$(regionSc)",
+        "$(Pipeline.Workspace)/integrationtests/adminportalregularuserapistreaming-json-results-$(regionSc)",
+        "$(Pipeline.Workspace)/integrationtests/adminportall1useruistreaming-json-results-$(regionSc)",
+        "$(Pipeline.Workspace)/integrationtests/adminportalregularuseruistreaming-json-results-$(regionSc)"
+      ]
+      testType: integration

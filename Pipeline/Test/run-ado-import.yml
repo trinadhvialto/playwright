@@ -1,0 +1,27 @@
+parameters:
+  workingDirectories : []
+  teamName: 'HDP - Platform Train\Connectivity Module Team'
+  testType: ''
+
+steps:
+  - task: Npm@1
+    displayName: 'Install ado-test-case-importer'
+    inputs:
+      command: 'custom'
+      verbose: true
+      customRegistry: 'useFeed'
+      customFeed: 'GEN_Health_Data_Platform/hdp'
+      customCommand: 'install --no-save @hdp/ado-test-case-importer@0.0.6'
+
+  - ${{ each directory in parameters.workingDirectories }}:
+    - task: Bash@3
+      continueOnError: true
+      displayName: 'Create/update ${{ parameters.testType }} test cases in ADO'
+      inputs:
+        targetType: 'inline'
+        script: |
+          npx ado-import -i $(Build.BuildNumber) -f ${{ directory }} -n '${{ parameters.teamName }}' -t ${{ parameters.testType }}
+      env:
+        ADO_IMPORT_TOKEN: $(System.AccessToken)
+        ADO_IMPORT_DEVOPS_URL: $(System.TeamFoundationCollectionUri)
+        ADO_IMPORT_PROJECT: $(System.TeamProject)
