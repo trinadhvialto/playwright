@@ -13,7 +13,7 @@
                     "PracticeType": "Tax",
                     "Country": "US",
                     "Year": "2022",
-                    "TaxDocumentType": "Supplied Data",
+                    "TaxDocumentType": "Work Record Supplied Data",
                     "ImmigrationDocumentType" : "",
                     "ManagedServiceDocumentType": "",
                     "TaxDeliverableType": ""
@@ -30,7 +30,7 @@
                     "PracticeType": "Tax",
                     "Country": "US",
                     "Year": "2022",
-                    "TaxDocumentType": "Supplied Data",
+                    "TaxDocumentType": "Work Record Supplied Data",
                     "ImmigrationDocumentType" : "",
                     "ManagedServiceDocumentType": "",
                     "TaxDeliverableType": ""
@@ -47,7 +47,7 @@
                     "PracticeType": "Tax",
                     "Country": "US",
                     "Year": "2022",
-                    "TaxDocumentType": "Supplied Data",
+                    "TaxDocumentType": "Work Record Supplied Data",
                     "ImmigrationDocumentType" : "",
                     "ManagedServiceDocumentType": "",
                     "TaxDeliverableType": ""
@@ -92,8 +92,8 @@
             "PracticeTypes":["Immigration","Managed Service","Social Security","Tax","Technology"],
             "Countries":["AE","AN","AO","AR","AT","AU","AZ","BD","BE","BG","BR","CA","CG","CH","CL","CN","CO","CR","CZ","DE","DK","EE","EG","ES","FI","FR","GG","GR","HK","HU","ID","IE","IL","IN","IR","IS","IT","JE","JO","JP","KE","KR","KZ","LT","LU","MK","MN","MX","MY","NL","NO","NZ","Other","PA","PE","PH","PL","PR","PT","QA","RO","RU","SA","SE","SG","SI","SK","SV","TH","TN","TR","TT","TW","UA","UG","UK","US","UY","UZ","VE","VN","ZA","ZM"],
             "TaxDeliverableTypes":["Other","Payment Voucher","Tax Equalization for Assignee","Tax Return"],
-            "TaxDocumentTypes":["Correspondence","Deliverables","Supplied Data","Work Papers"],
-            "ImmigrationDocumentTypes":["Correspondence","Deliverables - Assignee","Deliverables - Client","Expenses & Receipts","Final Submissions","Supplied Data","Work Papers","zz_REMOVE-Approvals / Status Documents","zz_REMOVE-Government Correspondence"],
+            "TaxDocumentTypes":["Correspondence","Deliverables","Work Papers","Work Record Supplied Data"],
+            "ImmigrationDocumentTypes":["Correspondence","Deliverables - Assignee","Deliverables - Client","Expenses & Receipts","Final Submissions","Work Papers","Work Record Supplied Data","zz_REMOVE-Approvals / Status Documents","zz_REMOVE-Government Correspondence"],
             "ManagedServiceDocumentTypes":["Correspondence - Others","Immigration","Payroll","Permanent","Relocation","Tax"]
         }
     }
