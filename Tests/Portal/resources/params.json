@@ -67,7 +67,7 @@
         },
 
         "StoreDocument_Put" : {
-            "CorrectDocumentID" : "/US-{EB9D0087-37E2-4268-80B2-5CCF3A121E78}-1506",
+            "CorrectDocumentID" : "/US-{EB9D0087-37E2-4268-80B2-5CCF3A121E78}-1993",
             "IncorrectDocumentID" : "/US-{EB9D8368-37E2-4492-80B2-5CCF3A121E76}-1506"
         }
     }
