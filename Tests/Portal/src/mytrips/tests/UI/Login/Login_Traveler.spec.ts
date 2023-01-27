@@ -1,9 +1,9 @@
 import { test, expect, Page } from '@playwright/test';
 import { TravelHomePage } from '../../../pages/travelerPage/travelerMainPage';
-import { Login_MyTrips_Actions } from './../../../pageActions/Login_mytrips_actions';
+import { LoginPage } from './../../../pages/loginPage';
 
 
-let loginActions: Login_MyTrips_Actions;
+let loginActions: LoginPage;
 let homePage: any;
 let page: Page;
 let noOfTimesLaunched = 0;
@@ -13,7 +13,7 @@ test.describe("Login to Traveler and book a trip", function () {
     test.beforeAll(async function ({ browser }) {
         if (!page && !noOfTimesLaunched) {
             page = await browser.newPage();
-            loginActions = new Login_MyTrips_Actions(page);
+            loginActions = new LoginPage(page);
             homePage = new TravelHomePage(page);
             await loginActions.openMyTripApplication();
             noOfTimesLaunched = noOfTimesLaunched + 1;

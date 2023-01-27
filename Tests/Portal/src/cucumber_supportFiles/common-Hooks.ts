@@ -14,7 +14,7 @@ import {
 } from '@playwright/test';
 import { ITestCaseHookParameter } from '@cucumber/cucumber/lib/support_code_library_builder/types';
 import { ensureDir } from 'fs-extra';
-import { Login_MyTrips_Actions } from '../mytrips/pageActions/Login_mytrips_actions';
+import { LoginPage } from '../mytrips/pages/loginPage';
 import { TravelHomePage } from '../mytrips/pages/travelerPage/travelerMainPage';
 
 let browser: ChromiumBrowser | FirefoxBrowser | WebKitBrowser;
@@ -59,7 +59,7 @@ Before(async function (this: ICustomWorld, { pickle }: ITestCaseHookParameter) {
   });
   // customize the [browser context](https://playwright.dev/docs/next/api/class-browser#browsernewcontextoptions)
   this.feature = pickle;
-  this.loginActions = new Login_MyTrips_Actions(this.page);
+  this.loginActions = new LoginPage(this.page);
   this.homePage = new TravelHomePage(this.page);
 
 });
