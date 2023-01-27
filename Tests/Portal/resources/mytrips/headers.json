@@ -1,0 +1,14 @@
+{
+  "GenericHeaders": {
+    "content-type": "application/json; charset=utf-8"
+  },
+  "GenericHeaders_Cu": {
+    "content-type": "application/json; charset=utf-8"
+  },
+
+  "BydateHeader": {
+    "accept": "text/plain",
+    "x-api-key": "15e2eb62-23c9-47cd-9763-d44e5d8451e1",
+    "Content-Type": "application/json"
+  }
+}

@@ -1,13 +1,13 @@
 require('dotenv').config();
 const options = [
   '--require-module ts-node/register',
-  '--require ./src/tests/steps/*.steps.ts',
-  '--require ./src/tests/supportFiles/*.ts',
+  '--require ./src/mytrips/tests/cucumber_steps/*.steps.ts',
+  '--require ./src/cucumber_supportFiles/*.ts',
   '--format progress',
 ].join(' ');
 const format = [
   // 'message:e2e/reports/cucumber-report.ndjson',
-  '--format ./src/tests/supportFiles/reporters/allure-reporter.ts',
+  '--format ./src/cucumber_supportFiles/reporters/allure-reporter.ts',
   '--format json:reports/cucumber-report.json',
   '--format json:allure-results/cucumber-report.json',
   '--format html:reports/report.html',
@@ -20,7 +20,7 @@ const format = [
 
 ].join(' ');
 const run_feature = [
-  './resources/features/ui/',
+  './resources/mytrips/features/ui/',
   options,
   format
 ].join(' ');
