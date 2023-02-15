@@ -3,31 +3,30 @@ const sql = require('mssql');
 
 export class TestData {
 
-    static async sqlDBConnection() {
-        var server = process.env.subscription + "-conm-" + process.env.env + "-" + process.env.locationshortcut + "-sqlserver-dbs.database.windows.net"
-        var database = "ConnectivityModuleDb"
+       static async sqlDBConnection() {
+        var server = process.env.server;
+        var database =process.env.db;
         var config = {
             server: server,
-            // user: 'mssqladministrator',
-            // password: process.env.sqldbpassword,
+            user: process.env.user,
+            password: process.env.password,
             database: database,
             requestTimeout: 600000,
+            port: 1433,
             options: {
                 encrypt: true // Use this if you're on Windows Azure
             },
             authentication: {
-                type: "azure-active-directory-service-principal-secret",
-                options: {
-                    clientId: process.env.servicePrincipalClientId,
-                    clientSecret: process.env.servicePrincipalClientSecret,
-                    tenantId: process.env.tenantId
-                }
+                // type: "azure-active-directory-service-principal-secret",
+                type: "default"
+               
             }
         };
         var conn = new sql.ConnectionPool(config);
         return conn;
 
     }
+    
     static async executeSqlQuery(pool1: { connect: () => any; on: (arg0: string, arg1: (err: any) => void) => void; request: () => any; close: () => void; }, queryString: any) {
         var pool1Connect = await pool1.connect();
         pool1.on('error', err => {
