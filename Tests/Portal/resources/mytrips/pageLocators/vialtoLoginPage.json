@@ -1,0 +1,28 @@
+{
+    "inputBoxes": {
+        "email": "#loginForm #ReturningUserEmail",
+        "password": "#loginForm #Password"
+    },
+    "buttons": {
+        "getStartedSigninBtn": "#btnAuthenticateUser"
+    },
+    "toolbars": {
+        "loginHeader": ".login-header"
+    },
+    "mainPage": {
+        "loginHelpText": "#loginForm h4"
+    },
+    "errorMessage": {
+        "summary": ".validation-summary-errors",
+        "field": ".field-validation-error"
+    },
+    "troubleLogginDialog": {
+        "dialogLink": "#troubleLoggingInGuide",
+        "dialog": ".ui-dialog",
+        "dialogHeader": ".ui-dialog #ui-id-1",
+        "dialogbodyHeader": ".ui-dialog #optionsId",
+        "dialogBodyText": ".ui-dialog #ddlOptionsId li",
+        "okButton": ".ui-dialog-buttonset #okBtn"
+    },
+    "loginHelpText": "#troubleLoggingInGuide"
+}

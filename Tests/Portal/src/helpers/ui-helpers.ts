@@ -1,4 +1,5 @@
 import { TokenGenerators } from "../utils/api_axios";
+//import robot from "robotjs";
 
 export class UIHelper {
     page: any;
@@ -88,5 +89,11 @@ export class UIHelper {
         await this.page.locator(locator).scrollIntoViewIfNeeded();
         return await this.page.inputValue();
     }
+	
+	// async closeCertificationPopup() {
+    //     await this.page.waitForTimeout(5000);
+    //     robot.moveMouse(400, 20);
+    //     robot.keyTap("enter");
+    // }
 
 }
