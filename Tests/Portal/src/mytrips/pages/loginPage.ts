@@ -115,11 +115,10 @@ export class LoginPage extends BasePage {
         await this.clickOnGetStartedoRSignBtn();
         expect.soft(await this.getErrorMessageText('summary')).toBe("The Email field is not a valid e-mail address.\nWe were unable to log you in. Please check your details and try again.\n");
         expect.soft(await this.getErrorMessageText('field')).toBe("The Email field is not a valid e-mail address.");
-        await this.setTextInEmailBox('prasadtrctauser1@qaprasad.com');
         const user = process.env.mytripsuser;
         const password = process.env.mytripspassword;
         process.env.mytripsuser = "prasadtrctauser1@qaprasad.com";
-        process.env.localpassword = "12345";
+        process.env.mytripspassword = "12345";
         await this.loginIntoMyTripApplication();
         process.env.mytripsuser = user;
         process.env.mytripspassword = password;

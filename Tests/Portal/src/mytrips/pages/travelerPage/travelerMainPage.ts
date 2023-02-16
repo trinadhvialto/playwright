@@ -1,4 +1,5 @@
 import { expect } from "@playwright/test";
+import { Object } from "lodash";
 import { BasePage } from "../base_page";
 import tHomePageJson from "./../../../../resources/mytrips/pageLocators/mytripTravalerHomePage.json";
 
@@ -100,5 +101,36 @@ export class TravelHomePage extends BasePage {
 
     async clickOnContinueToHomeBtn() {
         await this.clickonWebElement(tHomePageJson.mainPage.continueToHomeBtn);
+    }
+
+    async createATrip(numberOfsegs, numberOfStay, futureDated, pastDated) {
+        /*
+        1. create a number segments
+        2. select home country destination country
+        3. calculated number of stay based future or pastdated trip
+        4. enter dates in input boxes
+        5. click on saveAndContinue
+        */
+
+    }
+
+    async VerifyAssessment(assesmentConfiguration: object){
+        /*
+        1. find the type of assessment
+        2. based on assessment type call the appropriate function
+        3. if questionary is enabled call questionary
+        */
+    }
+
+    async fillTheQuestionnaire(questionanaire:object){
+        /*
+        1. fill the questionnaire
+        */
+    }
+
+    async verifyTripAdded(){
+        /*
+        1. verify trip is added
+        */
     }
 }
