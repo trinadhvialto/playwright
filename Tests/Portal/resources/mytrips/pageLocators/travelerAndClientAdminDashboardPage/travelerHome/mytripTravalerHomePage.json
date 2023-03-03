@@ -1,0 +1,40 @@
+{
+    "vialtoLogo": ".vialto-logo",
+    "myTripsLogo": ".navbar-header .mytrips-logo",
+    "tripHistoryLink": "*[href='/TripHistory']",
+    "signOut": "#btnSignOut",
+    "historicalTripCalendarLink": "*[href='/dailytripdetails']",
+    "clientAdminDashboardLink": "[href='/account/switchrole?userType=clientadmin']",
+    "notificationsIcon": ".vialto-notification-bellIcon",
+    "accountSettingsLink": "span:text('Account Settings')",
+    "supportLink":"[href='/support']",
+    "assessMyTripText": ".module-assessment h1",
+    "fromLabel": "[aria-label='from']",
+    "fromDropDown": "#select2-assessment-select-from-container",
+    "toLabel": "[aria-label='to']",
+    "toDropDown": "#select2-assessment-select-to-container",
+    "countrySearchInputBox": ".select2-search--dropdown input",
+    "fromDropdownItems": "#select2-assessment-select-to-results li",
+    "toDropdownItems": "#select2-assessment-select-to-results li",
+    "createOrAssessMyTripBtn": ".module-assessment [role='button']",
+    "tripDetails":{
+        "title": "#travelGridWrapper .page-heading",
+        "departLabel": "*[for='Trip_TripSegments_0__DepartureDate']",
+        "arrivalLabel": "*[for='Trip_TripSegments_0__ArrivalDate']",
+        "fromDepartInputBox": "[data-pwc-val='0'] #Trip_TripSegments_0__DepartureDate",
+        "toArrivalInputBox": "[data-pwc-val='0'] #Trip_TripSegments_0__ArrivalDate",
+        "addSegmentIcon": "[data-pwc-val='0'] .fa-plus",
+        "removeSegmentIcon": "[data-pwc-val='0'] .fa-minus",
+        "passportlabelText": ".trip-segment-passport label",
+        "passportDropdown": ".trip-segment-passport #select2-PassportCountyIdSelected-container",
+        "passportDropdownCountries": ".trip-segment-passport #select2-PassportCountyIdSelected-container li",  
+        "saveAndContinueBtn": "#btnSave",
+        "discardThisTripBtn": "#btnCancel",
+        "saveAsDraftBtn": "#btnSaveClose",
+
+        
+        "enterTripDetailPageHeader": ".page-heading",
+        "continueToHomeBtn": "#btnExit",
+        "modifyTripBtn": "#btnModifyTrip"
+    }
+}

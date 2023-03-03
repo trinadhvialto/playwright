@@ -1,0 +1,37 @@
+{
+    "pageHeader": ".page-heading h1",
+    "generalInformationLinkPage": {
+        "linkRef": "*[href='/Account/MyProfile']",
+        "sectionHeadingText": ".section-heading",
+        "firstNameInputbox": "#FirstName",
+        "lastNameInputbox": "#LastName",
+        "emailAddressInputbox": "#NewEmailAddress",
+        "dateDropdowndropdown": "#select2-ddlCultures-container",
+        "dropdownSearchBox": ".select2-dropdown [role='searchbox']",
+        "timePreferenceDropdown": "#select2-ddlTimeFormatPreferences-container",
+        "updateProfileBtn": "#btnSave"
+    },
+    "travelerProfile": {
+      "linkRef": "a:text('Traveler Profile')",
+      "homeOfficeLocation": "#select2-LocationId-container" 
+    },
+    "changePasswordLink": {
+        "passwordHeadText": "[action='/Account/ChangePassword'] .section-heading",
+        "linkRef": "*[href='/Account/ChangePassword']",
+        "currentPasswordInputbox": "#CurrentPassword",
+        "newPasswordInputbox": "#NewPassword",
+        "confirmNewPassword": "#ConfirmPassword",
+        "changePasswordBtn": "#btnChange"
+    },
+    "securityQuestions":{
+        "headerText": "[action='/Account/ChangeAuthentication']",
+        "linkRef": "*[href='/Account/ChangeAuthentication']",
+        "currentPasswordInputbox": "[action='/Account/ChangeAuthentication'] #Password",
+        "question1Dropdown": "#select2-ddlPassword1-container",
+        "question2Dropdown": "#select2-ddlPassword2-container",
+        "question3Dropdown": "#select2-ddlPassword3-container",
+        "answer1InputBox": "#PasswordQuestionAnswer1",
+        "answer2InputBox": "#PasswordQuestionAnswer2",
+        "answer3InputBox": "#PasswordQuestionAnswer3"
+    }
+}

@@ -1,0 +1,19 @@
+{
+    "notificationsDialog": "#pendingActions",
+    "headerText": "#pendingActions .header",
+    "calender": {
+        "icon": "#pendingActions .vialto-calendar-icon",
+        "title": "#pendingActions .service-name:contains('Calendar')",
+        "message": "#pendingActions .action:contains('calendar')"
+    },
+    "assessment": {
+        "icon": "#pendingActions .vialto-plane",
+        "title": "#pendingActions .service-name:contains('Assessment')",
+        "message": "#pendingActions .action:contains('assessment')"
+    },
+    "WorkPermission": {
+        "icon": "#pendingActions .vialto-work-permit-card",
+        "title": "#pendingActions .service-name:contains('Work Permission')",
+        "message": "#pendingActions .action:contains('work permission')"
+    }
+}

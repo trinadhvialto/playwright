@@ -1,6 +1,7 @@
 // playwright.config.js
 // @ts-check
-const { devices } = require('@playwright/test');    //Donot change to import module. Breaks the flow.
+const { devices } = require('@playwright/test'); 
+ //Donot change to import module. Breaks the flow.
 require('dotenv').config(); // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 
 /** @type {import('@playwright/test').PlaywrightTestConfig} */
@@ -20,6 +21,7 @@ const config = {
     browserName: process.env.browser,
     channel: process.env.browser,
     acceptDownloads: true,
+    downloadsPath:__dirname+process.env.mytripsDownloadPath,
     args: ['--start-maximized'],
     viewport: null,
 
